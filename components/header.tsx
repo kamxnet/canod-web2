@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const nav = [["Home", "/"], ["About", "/about"], ["For brands", "/partners"]];
+const nav = [["Home", "/"], ["Product interests", "/interests"], ["About", "/about"], ["For brands", "/partners"]];
 
 export function Header() {
   return <header className="site-header"><div className="site-container site-header-inner">

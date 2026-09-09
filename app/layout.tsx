@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   title: { default: "CANOD | Thoughtful Goods for Work, Travel & Everyday Life", template: "%s | CANOD" },
   description: "CANOD is a Canadian-owned online retailer focused on useful products for modern work, travel, and everyday life.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  metadataBase: new URL("https://canod.ca"),
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

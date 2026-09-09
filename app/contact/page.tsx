@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Handshake, MessageCircle } from "lucide-react";
 export const metadata: Metadata = { title: "Contact" };
 export default function ContactPage() { return <>
   <section className="page-hero"><div className="site-container"><p className="eyebrow page-kicker">Contact</p><h1 className="page-title">Let’s talk.</h1></div></section>
-  <section className="section-space bg-paper"><div className="site-container grid gap-16 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow text-maple">CANOD</p><p className="mt-6 max-w-md text-lg leading-8 text-ink/65">Questions, product suggestions, or a potential brand partnership? The best way to reach us is by email.</p></div><a className="group border-t border-ink/20 py-8" href="mailto:hello@canod.ca"><div className="flex items-start justify-between gap-6"><div><p className="text-sm font-semibold text-ink/50">Email</p><p className="mt-4 break-all text-[clamp(2rem,5vw,4.5rem)] font-semibold tracking-[-.055em]">hello@canod.ca</p></div><ArrowUpRight className="mt-2 text-maple transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" size={32} /></div></a></div></section>
+  <section className="section-space bg-paper"><div className="site-container"><div className="contact-intro"><p className="eyebrow text-maple">Choose the right inbox</p><p className="prose-large max-w-4xl">Whether you have a product suggestion or represent a brand, your message reaches a real person.</p></div><div className="contact-grid">
+    <a className="contact-card group" href="mailto:hello@canod.ca?subject=Hello%20CANOD"><MessageCircle size={26} strokeWidth={1.6} /><div><p className="eyebrow text-maple">General enquiries</p><h2>hello@canod.ca</h2><p>Questions, product ideas, and customer enquiries.</p></div><ArrowUpRight className="contact-arrow" size={28} /></a>
+    <a className="contact-card group" href="mailto:kam@canod.ca?subject=Brand%20partnership%20with%20CANOD"><Handshake size={26} strokeWidth={1.6} /><div><p className="eyebrow text-maple">Brands & wholesale</p><h2>kam@canod.ca</h2><p>Partnership introductions, catalogues, and wholesale opportunities.</p></div><ArrowUpRight className="contact-arrow" size={28} /></a>
+  </div><p className="mt-8 text-sm leading-6 text-ink/55">CANOD is based in Ontario, Canada. We aim to respond to genuine enquiries within two business days.</p></div></section>
   </>; }

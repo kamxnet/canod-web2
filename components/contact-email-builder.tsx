@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 const inquiryTypes = {
@@ -16,7 +16,7 @@ const inquiryTypes = {
   },
   wholesale: {
     label: "Brand or wholesale introduction",
-    email: "kam@canod.ca",
+    email: "hello@canod.ca",
     subject: "Wholesale partnership with CANOD",
   },
 } as const;
@@ -24,22 +24,18 @@ const inquiryTypes = {
 type InquiryType = keyof typeof inquiryTypes;
 
 export function ContactEmailBuilder() {
-  const [type, setType] = useState<InquiryType>("wholesale");
+  const [type, setType] = useState<InquiryType>("general");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
   const selected = inquiryTypes[type];
-  const body = useMemo(() => {
-    const lines = [
+  const body = [
       "Hello CANOD,",
       "",
       message.trim() || "I would like to connect about:",
       "",
       name.trim() ? `Name: ${name.trim()}` : "",
-    ].filter(Boolean);
-
-    return lines.join("\n");
-  }, [message, name]);
+    ].join("\n");
 
   const href = `mailto:${selected.email}?subject=${encodeURIComponent(selected.subject)}&body=${encodeURIComponent(body)}`;
 
@@ -47,10 +43,10 @@ export function ContactEmailBuilder() {
     <form className="builder-card" onSubmit={(event) => event.preventDefault()}>
       <div>
         <p className="eyebrow text-maple">Email builder</p>
-        <h2 className="mt-4 text-3xl font-semibold">Draft a cleaner first message.</h2>
-        <p className="mt-4 leading-7 text-ink/65">
-          Choose a topic, add the essentials, then open your email app. Nothing is sent from this
-          website automatically.
+        <h2>Start an email.</h2>
+        <p className="builder-description">
+          This builder opens a draft in your email application. It does not submit a message.
+          Your draft is not saved by this website, and nothing is sent automatically.
         </p>
       </div>
 
@@ -78,6 +74,8 @@ export function ContactEmailBuilder() {
           value={name}
           onChange={(event) => setName(event.target.value)}
           placeholder="Optional"
+          maxLength={120}
+          autoComplete="organization"
         />
       </div>
 
@@ -88,7 +86,8 @@ export function ContactEmailBuilder() {
           className="builder-field min-h-36 resize-y"
           value={message}
           onChange={(event) => setMessage(event.target.value)}
-          placeholder="Add product categories, catalogue details, channel notes, or your question."
+          placeholder="What would you like to share?"
+          maxLength={2000}
         />
       </div>
 

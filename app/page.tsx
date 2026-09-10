@@ -1,205 +1,62 @@
-import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowRight,
-  Check,
-  ClipboardCheck,
-  MapPin,
-  PackageCheck,
-  Search,
-  ShieldCheck,
-  Store,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { GuideList } from "@/components/guide-list";
+import { KineticHero } from "@/components/kinetic-hero";
+import { productCategories } from "@/lib/product-categories";
+import { pageMetadata } from "@/lib/metadata";
 
-const selectionStandards = [
-  {
-    icon: PackageCheck,
-    title: "Practical customer value",
-    copy: "Products should solve a recognizable problem or make a daily task simpler.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Dependable product quality",
-    copy: "Materials, construction, packaging, and support need to match the customer promise.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Clear use cases",
-    copy: "The right product has an obvious buyer, a clear reason to exist, and accurate information.",
-  },
-  {
-    icon: MapPin,
-    title: "Canadian online suitability",
-    copy: "Pricing, fulfillment, compliance, and product fit are reviewed for Canadian customers.",
-  },
-];
-
-const partnershipSteps = [
-  "Product and Canadian-market review",
-  "Authorized wholesale purchasing",
-  "Accurate, brand-consistent presentation",
-  "Reliable communication and policy compliance",
-];
+export const metadata = pageMetadata("Practical Products for Canada", "CANOD is a Canadian-owned online retailer exploring practical products for technology, work, travel and everyday life. Read useful buying guides and explore our product interests.", "/");
 
 export default function Home() {
-  return (
-    <>
-      <section className="hero-shell">
-        <Image
-          src="/canod-hero.png"
-          alt="A refined arrangement of practical work and travel accessories"
-          fill
-          priority
-          className="hero-image"
-          sizes="100vw"
-        />
-        <div className="hero-overlay" />
-        <div className="site-container relative z-10 flex min-h-[700px] items-center py-24 md:min-h-[760px]">
-          <div className="hero-intro max-w-[760px] pt-12">
-            <p className="eyebrow text-white/70">Canadian-owned online retailer</p>
-            <h1 className="mt-6 text-[clamp(3.2rem,7.2vw,7rem)] font-semibold leading-[0.9] text-white">
-              Practical products. Thoughtfully selected for Canada.
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
-              CANOD curates useful technology, work, travel, storage, connectivity, and everyday
-              products for Canadian online retail.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link className="button button-light" href="/interests">
-                Explore Our Product Interests <ArrowRight size={17} aria-hidden="true" />
-              </Link>
-              <Link className="button button-ghost" href="/partners">
-                Partner With CANOD
-              </Link>
-            </div>
-            <a className="hero-scroll" href="#standards">
-              <ArrowDown size={16} aria-hidden="true" /> View selection standards
-            </a>
+  return <>
+    <section className="hero-shell">
+      <KineticHero />
+      <div className="site-container hero-content">
+        <div className="hero-intro">
+          <p className="eyebrow">CANOD / Canadian-owned online retail</p>
+          <h1>Practical products. Thoughtfully selected for Canada.</h1>
+          <p className="hero-description">A little more order. A better everyday setup. We look for useful things that make technology, work, travel and daily life feel simpler.</p>
+          <div className="actions">
+            <Link className="button button-dark" href="/interests/">Explore product interests <ArrowRight size={18} aria-hidden="true" /></Link>
+            <Link className="text-link" href="/guides/">Read the buying guides</Link>
           </div>
         </div>
-        <div className="hero-facts">
-          <div className="site-container hero-facts-inner">
-            <span>Canada focused</span>
-            <span>Authorized wholesale</span>
-            <span>Marketplace transparent</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="standards" className="section-space bg-paper">
-        <div className="site-container">
-          <div className="grid gap-12 border-b border-ink/15 pb-16 lg:grid-cols-[0.7fr_1.3fr]">
-            <p className="eyebrow text-maple">What we look for</p>
-            <h2 className="display-heading max-w-4xl">
-              Products should earn their place in the assortment.
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4">
-            {selectionStandards.map(({ icon: Icon, title, copy }, index) => (
-              <article
-                key={title}
-                className={`focus-card reveal ${index > 0 ? "lg:border-l lg:border-ink/15" : ""}`}
-              >
-                <div className="focus-icon">
-                  <Icon size={22} strokeWidth={1.6} />
-                </div>
-                <span className="focus-number">0{index + 1}</span>
-                <h3 className="mt-12 text-3xl font-semibold">{title}</h3>
-                <p className="mt-5 max-w-sm leading-7 text-ink/65">{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-white">
-        <div className="site-container selection-grid">
-          <div className="selection-heading">
-            <p className="eyebrow text-maple">How we work with brands</p>
-            <h2 className="mt-6 text-[clamp(2.6rem,5.2vw,5.4rem)] font-semibold leading-[.98]">
-              Careful sourcing before every listing.
-            </h2>
-            <p className="mt-7 max-w-lg text-lg leading-8 text-ink/65">
-              CANOD seeks authorized wholesale and brand-direct relationships where products,
-              channels, and policies are clear before inventory is purchased.
-            </p>
-          </div>
-          <div className="selection-list">
-            {partnershipSteps.map((title, index) => (
-              <article className="selection-item reveal" key={title}>
-                <span className="selection-index">0{index + 1}</span>
-                <Check size={23} strokeWidth={1.6} />
-                <div>
-                  <h3>{title}</h3>
-                  <p>
-                    {index === 0
-                      ? "We evaluate product fit, category demand, compliance, and Canadian-market suitability."
-                      : index === 1
-                        ? "Purchases are made through approved wholesale or brand-direct channels with proper documentation."
-                        : index === 2
-                          ? "Listings and product information should reflect brand standards and customer expectations."
-                          : "Supplier policies, MAP requirements, and channel boundaries are treated as operating requirements."}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-navy text-white">
-        <div className="site-container channel-panel">
-          <div>
-            <p className="eyebrow text-white/50">Sales channels</p>
-            <h2 className="mt-6 max-w-4xl text-[clamp(2.7rem,5.7vw,5.8rem)] font-semibold leading-[0.98]">
-              Transparent about marketplace activity.
-            </h2>
-          </div>
-          <div className="channel-statement">
-            <Store size={25} strokeWidth={1.6} aria-hidden="true" />
-            <p>
-              CANOD&apos;s online sales channels include Amazon.ca. We disclose marketplace activity
-              during partnership discussions and operate only within approved brand and channel
-              requirements.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-white">
-        <div className="site-container">
-          <div className="partnership-panel">
-            <div>
-              <p className="eyebrow text-maple">For suppliers</p>
-              <h2 className="mt-6 max-w-3xl text-[clamp(2.7rem,5vw,5.2rem)] font-semibold leading-[0.98]">
-                A focused Canadian retail partner for practical products.
-              </h2>
-            </div>
-            <div className="max-w-lg lg:pt-5">
-              <p className="text-lg leading-8 text-ink/65">
-                If your catalogue includes practical technology accessories, organization products,
-                travel essentials, or useful everyday goods, CANOD can review fit through a clear,
-                policy-compliant process.
-              </p>
-              <ul className="partner-points mt-7">
-                <li>
-                  <Search size={16} /> Product and catalogue review
-                </li>
-                <li>
-                  <Check size={16} /> Channel confirmation before listing
-                </li>
-                <li>
-                  <ShieldCheck size={16} /> Brand-consistent presentation
-                </li>
-              </ul>
-              <Link className="button button-dark mt-9" href="/partners">
-                Supplier partnership details <ArrowRight size={17} aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+      </div>
+      <div className="site-container hero-footnote"><p className="image-caption">CANOD / Form study 01</p></div>
+    </section>
+    <section className="section-space bg-paper"><div className="site-container">
+      <div className="section-heading">
+        <div><p className="eyebrow text-maple">Product interests</p><h2>Useful in more ways than one.</h2></div>
+        <p>From a tidier desk to a better-packed bag, our interests follow everyday needs. These are categories we are exploring, not products currently available to buy.</p>
+      </div>
+      <div className="category-overview">
+        {productCategories.map(({ name, description, icon: Icon }, index) => <Link href="/interests/" className="category-item" key={name}>
+          <div className="category-graphic" aria-hidden="true"><span className="category-number">{String(index + 1).padStart(2, "0")}</span><Icon size={32} strokeWidth={1.35} /></div><h3>{name}</h3><p>{description}</p>
+          <span className="category-arrow"><ArrowRight size={19} aria-hidden="true" /><span className="sr-only">Explore {name.toLowerCase()}</span></span>
+        </Link>)}
+      </div>
+    </div></section>
+    <section className="section-space"><div className="site-container">
+      <div className="section-heading">
+        <div><p className="eyebrow text-maple">Buying guides</p><h2>A clearer choice starts here.</h2></div>
+        <p>Practical reading on fit, trade-offs and the details worth checking before you buy.</p>
+      </div>
+      <GuideList />
+    </div></section>
+    <section className="section-space point-of-view"><div className="site-container editorial-split">
+      <div><p className="eyebrow text-maple">Our point of view</p><h2>Good products earn their place in your day.</h2></div>
+      <div className="text-stack">
+        <p>We start with a simple question: what does this make easier? Useful design, understandable details and a good fit for the way people live matter more than a longer feature list.</p>
+        <p>CANOD brings that practical approach to product discovery and responsible sourcing for Canadian online retail.</p>
+        <Link className="text-link" href="/about/">Meet CANOD <ArrowRight size={18} aria-hidden="true" /></Link>
+      </div>
+    </div></section>
+    <section className="supplier-band"><div className="site-container editorial-split">
+      <div><p className="eyebrow">For brands and distributors</p><h2>Have something useful in mind?</h2></div>
+      <div className="text-stack">
+        <p>We welcome conversations with brands and wholesale suppliers whose products fit everyday needs. CANOD&apos;s sales channels include Amazon.ca; marketplace permissions are agreed with suppliers before listing.</p>
+        <Link className="button button-light" href="/partners/">Work with CANOD <ArrowRight size={18} aria-hidden="true" /></Link>
+      </div>
+    </div></section>
+  </>;
 }

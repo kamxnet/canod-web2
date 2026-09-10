@@ -3,20 +3,35 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
-const nav = [["Home", "/"], ["Product interests", "/interests"], ["About", "/about"], ["For brands", "/partners"]];
+const nav = [
+  ["Product interests", "/interests/"], ["Buying guides", "/guides/"],
+  ["For brands", "/partners/"], ["About", "/about/"], ["Contact", "/contact/"],
+] as const;
 
 export function Header() {
   const pathname = usePathname();
+  const menu = useRef<HTMLDetailsElement>(null);
+  const active = (href: string) => pathname.replace(/\/$/, "") === href.replace(/\/$/, "") || pathname.startsWith(href);
 
   return <header className="site-header"><div className="site-container site-header-inner">
     <Link href="/" className="wordmark" aria-label="CANOD home"><span className="wordmark-mark" aria-hidden="true" />CANOD</Link>
-    <nav className="hidden items-center gap-9 md:flex" aria-label="Main navigation">
-      {nav.map(([label, href]) => <Link key={href} className={`nav-link${pathname === href ? " is-active" : ""}`} href={href}>{label}</Link>)}
-      <Link className="nav-link header-contact" href="/contact">Contact</Link>
+    <nav className="desktop-nav" aria-label="Main navigation">
+      {nav.map(([label, href]) => <Link key={href} className="nav-link" aria-current={active(href) ? "page" : undefined} href={href}>{label}</Link>)}
     </nav>
-    <details className="mobile-menu md:hidden"><summary aria-label="Open navigation"><Menu size={21} /><span>Menu</span></summary><nav className="mobile-panel" aria-label="Mobile navigation">
-      {nav.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/contact">Contact</Link>
-    </nav></details>
+    <details ref={menu} className="mobile-menu" onKeyDown={(event) => {
+      if (event.key === "Escape" && menu.current) {
+        menu.current.open = false;
+        menu.current.querySelector("summary")?.focus();
+      }
+    }}>
+      <summary><Menu size={22} aria-hidden="true" /><span>Menu</span></summary>
+      <nav className="mobile-panel" aria-label="Mobile navigation">
+        {nav.map(([label, href]) => <Link key={href} href={href} aria-current={active(href) ? "page" : undefined} onClick={() => {
+          if (menu.current) menu.current.open = false;
+        }}>{label}</Link>)}
+      </nav>
+    </details>
   </div></header>;
 }

@@ -15,95 +15,65 @@ const categories = [
 
 const interests = [
   {
-    id: "storage-connectivity-cases",
-    category: "Storage & connectivity",
-    title: "Keep devices and essentials organized.",
-    name: "Storage and connectivity cases",
-    description:
-      "Practical cases, organizers, and small-format storage products for cables, adapters, drives, and daily carry.",
-    detail: "Compact storage · Clear use cases",
+    "id": "storage-connectivity-cases",
+    "category": "Storage & connectivity",
+    "name": "Drive and cable cases",
+    "description": "Compact cases for portable drives, adapters and spare cables. We look for useful compartment sizes and a fit that is easy to check."
   },
   {
-    id: "connectivity-accessories",
-    category: "Storage & connectivity",
-    title: "Help the right connector stay close.",
-    name: "Connectivity accessories",
-    description:
-      "Useful accessories for organizing or supporting everyday connectivity needs without making unsupported compatibility promises.",
-    detail: "Customer clarity · Useful formats",
+    "id": "connectivity-accessories",
+    "category": "Storage & connectivity",
+    "name": "Home storage and connectivity",
+    "description": "Storage systems, drive enclosures, cables and adapters for everyday files and devices. Clear compatibility information matters."
   },
   {
-    id: "non-powered-tech",
-    category: "Tech accessories",
-    title: "Simple accessories around the devices people already use.",
-    name: "Non-powered technology accessories",
-    description:
-      "Non-powered device-adjacent accessories where material quality, dimensions, and fit can be communicated clearly.",
-    detail: "No electronics claims · Practical utility",
+    "id": "non-powered-tech",
+    "category": "Tech accessories",
+    "name": "Device sleeves and pouches",
+    "description": "Simple sleeves and pouches for the devices you carry. Dimensions, lining and closures help determine a useful fit."
   },
   {
-    id: "device-stands",
-    category: "Tech accessories",
-    title: "Make work surfaces easier to use.",
-    name: "Device stands and supports",
-    description:
-      "Desk-friendly stands, risers, and supports that improve everyday work setups with clear sizing and compatibility information.",
-    detail: "Stable design · Clear dimensions",
+    "id": "device-stands",
+    "category": "Tech accessories",
+    "name": "Device stands and supports",
+    "description": "Laptop risers, tablet stands and phone supports for a comfortable setup. We consider footprint, adjustment and device fit."
   },
   {
-    id: "desk-cable-organization",
-    category: "Desk & cable",
-    title: "Reduce clutter without making the desk feel busy.",
-    name: "Desk and cable organization",
-    description:
-      "Cable clips, trays, wraps, labels, and small desk organizers that keep frequent-use spaces more orderly.",
-    detail: "Small footprint · Repeat use",
+    "id": "desk-cable-organization",
+    "category": "Desk & cable",
+    "name": "Cable clips and wraps",
+    "description": "Clips, ties, sleeves and labels that keep frequently used cables in order, at a desk or inside a bag."
   },
   {
-    id: "workday-organization",
-    category: "Desk & cable",
-    title: "Give small work tools a proper place.",
-    name: "Workday organization",
-    description:
-      "Low-profile organization products for stationery, adapters, notebooks, and small work essentials.",
-    detail: "Easy setup · Everyday routine",
+    "id": "workday-organization",
+    "category": "Desk & cable",
+    "name": "Desk trays and organizers",
+    "description": "Low-profile trays and holders for stationery, small tools and everyday work essentials, without taking over the desk."
   },
   {
-    id: "packing-organization",
-    category: "Travel",
-    title: "Pack with a little more order.",
-    name: "Travel organization",
-    description:
-      "Packing cubes, pouches, toiletry organizers, and travel-ready storage that make movement easier to manage.",
-    detail: "Lightweight · Easy to inspect",
+    "id": "packing-organization",
+    "category": "Travel",
+    "name": "Packing cubes and pouches",
+    "description": "Packing cubes, toiletry bags and flexible pouches to separate what you carry and make unpacking easier."
   },
   {
-    id: "travel-accessory-storage",
-    category: "Travel",
-    title: "Keep the small travel pieces together.",
-    name: "Travel accessory storage",
-    description:
-      "Small organizers for documents, cables, toiletries, and other essentials that need to stay close in transit.",
-    detail: "Versatile sizes · Clear materials",
+    "id": "travel-accessory-storage",
+    "category": "Travel",
+    "name": "Travel tech organizers",
+    "description": "Organizers for chargers, earbuds, adapters and cables. A useful layout balances quick access with space for bulkier items."
   },
   {
-    id: "everyday-practical",
-    category: "Everyday",
-    title: "Make routine errands a little simpler.",
-    name: "Everyday practical products",
-    description:
-      "Useful household, carry, and organization products with simple value, clear instructions, and broad everyday appeal.",
-    detail: "Practical value · Easy to explain",
+    "id": "everyday-practical",
+    "category": "Everyday",
+    "name": "Everyday home organization",
+    "description": "Small bins, drawer dividers and simple storage for the things that need a regular place around the home."
   },
   {
-    id: "packable-carry",
-    category: "Everyday",
-    title: "Room for the unplanned.",
-    name: "Packable carry and organization",
-    description:
-      "Reusable carry and small organization products that are convenient to keep nearby when plans change.",
-    detail: "Packable · Durable utility",
-  },
+    "id": "packable-carry",
+    "category": "Everyday",
+    "name": "Packable bags and carry",
+    "description": "Reusable bags and compact carry accessories that fit into daily errands and fold away when they are not needed."
+  }
 ] as const;
 
 export function ProductInterests() {
@@ -129,24 +99,16 @@ export function ProductInterests() {
           <TabsContent key={category} value={category} className="interest-grid mt-6">
             {interests
               .filter((item) => category === "All" || item.category === category)
-              .map((item, index) => {
+              .map((item) => {
                 const isSelected = selected.includes(item.id);
                 return (
                   <article className={`interest-card${isSelected ? " is-selected" : ""}`} key={item.id}>
-                    <div className="interest-illustration" aria-hidden="true">
-                      <span className="interest-shape" />
-                      <span className="interest-shape" />
-                      <span className="interest-shape" />
-                    </div>
-                    <p className="eyebrow text-maple">
-                      {item.category} / 0{(index % 2) + 1}
-                    </p>
-                    <h2 className="mt-7 text-3xl font-semibold leading-tight">{item.title}</h2>
-                    <p className="mt-5 leading-7 text-ink/75">{item.description}</p>
-                    <p className="mt-5 text-sm leading-6 text-ink/70">{item.detail}</p>
+                    <p className="eyebrow text-maple">{item.category}</p>
+                    <h2>{item.name}</h2>
+                    <p className="interest-card-description">{item.description}</p>
                     <button
                       type="button"
-                      className="interest-toggle mt-7"
+                      className="interest-toggle"
                       aria-pressed={isSelected}
                       aria-label={`${isSelected ? "Remove" : "Add"} ${item.name} ${isSelected ? "from" : "to"} your interests`}
                       onClick={() => toggle(item.id)}
@@ -161,13 +123,13 @@ export function ProductInterests() {
         ))}
       </Tabs>
       <aside className="interest-summary" aria-labelledby="your-interests">
-        <p className="eyebrow text-maple">Share useful categories</p>
+        <p className="eyebrow text-maple">Your selection</p>
         <h2 id="your-interests" className="mt-5 text-3xl font-semibold">
           Your interests
         </h2>
         <p className="mt-3 text-sm leading-6 text-ink/70" aria-live="polite" aria-atomic="true">
           {chosen.length === 0
-            ? "Choose a sourcing area that would be useful in your day."
+            ? "Choose the categories you would like to hear more about."
             : `${chosen.length} ${chosen.length === 1 ? "area" : "areas"} selected. Switching filters keeps your choices.`}
         </p>
         {chosen.length > 0 ? (
@@ -200,12 +162,11 @@ export function ProductInterests() {
           </button>
         )}
         <p className="mt-4 text-sm leading-6 text-ink/70">
-          Opens your email app. Nothing is sent until you send the email. Your selections are not
+          Opens your email app. Nothing is sent automatically. Your selections are not
           saved when you leave this page.
         </p>
         <p className="mt-5 border-t border-ink/15 pt-5 text-sm leading-6 text-ink/75">
-          These are sourcing interests, not current inventory, product listings, confirmed brands,
-          or stock notifications. Prefer a direct conversation?{" "}
+          Prefer a direct conversation?{" "}
           <a className="underline underline-offset-4" href="mailto:hello@canod.ca">
             Email hello@canod.ca
           </a>

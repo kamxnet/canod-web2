@@ -1,21 +1,14 @@
-import type { Metadata } from "next";
 import { ProductInterests } from "@/components/product-interests";
+import { PageIntro } from "@/components/page-intro";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Product Interests",
-  description:
-    "Explore practical product sourcing interests CANOD is evaluating for Canadian online retail.",
-};
+export const metadata = pageMetadata("Product Interests", "Explore the practical product categories CANOD is interested in sourcing. Share your interests by email, from desk organization to travel and technology.", "/interests/");
 
 export default function InterestsPage() {
   return <>
-    <section className="page-hero interests-hero"><div className="site-container">
-      <p className="eyebrow page-kicker">Product interests</p>
-      <h1 className="page-title">Practical categories worth evaluating.</h1>
-      <p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">Explore the sourcing areas CANOD is evaluating for Canadian online retail. These interests guide conversations with customers, brands, and distributors.</p>
-    </div></section>
-    <section className="bg-paper py-12 md:py-20"><div className="site-container">
-      <p className="interest-notice mb-8"><strong>Sourcing interests, not inventory claims.</strong> These are areas CANOD is evaluating, not current product listings, confirmed brands, or available inventory.</p>
+    <PageIntro label="Product interests" title="What would make your day easier?"><p>Explore the categories we are interested in sourcing, and tell us which ones would be useful to you.</p></PageIntro>
+    <section className="section-space bg-paper"><div className="site-container">
+      <p className="interest-notice"><strong>Sourcing interests.</strong> These are categories we are exploring, not products currently available to buy.</p>
       <ProductInterests />
     </div></section>
   </>;

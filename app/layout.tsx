@@ -8,10 +8,18 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   title: { default: "CANOD | Practical Products for Canada", template: "%s | CANOD" },
-  description: "CANOD is a Canadian-owned online retailer seeking authorized wholesale and brand-direct relationships for practical products suited to Canada.",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  description: "CANOD is a Canadian-owned online retailer exploring practical products for technology, work, travel, organization and everyday life.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=3d-c1", type: "image/x-icon", sizes: "16x16 32x32 48x48 64x64 256x256" },
+      { url: "/favicon-3d-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-3d-48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-3d-96.png", type: "image/png", sizes: "96x96" },
+    ],
+    shortcut: "/favicon.ico?v=3d-c1",
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+  },
   metadataBase: new URL("https://canod.ca"),
-  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: "https://canod.ca",
@@ -45,7 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       {
         "@type": "ContactPoint",
         contactType: "brand and wholesale partnerships",
-        email: "kam@canod.ca",
+        email: "hello@canod.ca",
         areaServed: "CA",
       },
     ],

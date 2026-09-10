@@ -1,218 +1,54 @@
-import type { Metadata } from "next";
-import { ArrowRight, Check, PackageSearch, ShieldCheck, Store } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PageIntro } from "@/components/page-intro";
+import { productCategories } from "@/lib/product-categories";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "For Brands & Distributors",
-  description:
-    "Partner with CANOD for authorized wholesale and brand-direct online retail relationships focused on practical products for Canada.",
-};
-
-const productAreas = [
-  "Storage and connectivity products",
-  "Non-powered technology accessories",
-  "Desk and cable organization",
-  "Travel organization",
-  "Everyday practical products",
-];
-
-const offers = [
-  {
-    icon: PackageSearch,
-    title: "Focused catalogue review",
-    copy: "We evaluate products for utility, customer fit, pricing, fulfillment, and Canadian-market suitability before purchase.",
-  },
-  {
-    icon: Store,
-    title: "Marketplace transparency",
-    copy: "CANOD's online sales channels include Amazon.ca, and channel expectations are discussed before listing.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Policy-conscious operation",
-    copy: "Approved channels, MAP requirements, brand presentation, and product documentation are treated as requirements.",
-  },
-];
-
-const process = [
-  "Introduction and catalogue review",
-  "Product, margin, and Canadian-market fit analysis",
-  "Channel authorization and policy confirmation",
-  "Wholesale terms, documents, and order requirements",
-  "Measured purchase order planning",
-  "Accurate online presentation and ongoing communication",
-];
+export const metadata = pageMetadata("For Brands & Distributors", "Explore a retail relationship with CANOD. Thoughtful product selection, accurate presentation and clear communication, with Amazon.ca permissions agreed before listing.", "/partners/");
 
 const faqs = [
-  {
-    question: "Which products are the best fit?",
-    answer:
-      "CANOD is most interested in practical technology accessories, storage and organization, connectivity, work, travel, and everyday products with clear use cases for Canadian customers.",
-  },
-  {
-    question: "Do you sell on Amazon.ca?",
-    answer:
-      "Yes. CANOD's sales channels include Amazon.ca. We disclose marketplace activity during partnership discussions and respect approved channel requirements.",
-  },
-  {
-    question: "What do you need from a supplier?",
-    answer:
-      "Helpful starting information includes a current catalogue, Canadian pricing or landed-cost guidance, case quantities, UPCs, dimensions, shipping terms, warranty notes, and channel policies.",
-  },
-  {
-    question: "Do you buy through authorized channels?",
-    answer:
-      "Yes. CANOD seeks authorized wholesale and brand-direct relationships with proper invoices and clear permission for the intended sales channels.",
-  },
-  {
-    question: "Can you promise volume or placement?",
-    answer:
-      "No. Product selection, order size, and marketplace presentation depend on fit, economics, availability, documentation, and supplier policies.",
-  },
-];
+  ["What products are a good fit?", "Practical products for technology, storage, work, travel and everyday organization. We look for a clear use, understandable specifications and value for Canadian customers."],
+  ["Which sales channels does CANOD use?", "CANOD's sales channels include Amazon.ca. Marketplace permissions are agreed with suppliers before listing. A wholesale account alone is not treated as permission to sell on every channel."],
+  ["What should I include in an introduction?", "A catalogue or product range, Canadian wholesale pricing, minimum order quantities, shipping information and sales-channel policies are useful starting points. Product dimensions, identifiers and warranty details help with a closer review."],
+  ["How do you approach sourcing and brand policies?", "We seek brand-direct and authorized wholesale relationships. Before purchasing, we discuss terms, invoices, permitted channels, brand presentation and any minimum advertised price (MAP) requirements."],
+  ["Can you commit to order volumes or placement?", "We discuss orders after reviewing the products and terms. We do not promise sales volumes, advertising spend, marketplace placement or sales results."],
+] as const;
 
 export default function PartnersPage() {
-  return (
-    <>
-      <section className="page-hero">
-        <div className="site-container">
-          <p className="eyebrow page-kicker">For brands and distributors</p>
-          <h1 className="page-title">Authorized wholesale relationships for practical products.</h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/72">
-            CANOD is a Canadian-owned online retailer seeking brand-direct and authorized wholesale
-            partnerships for products that fit real customer routines.
-          </p>
-        </div>
-      </section>
-
-      <section className="section-space bg-paper">
-        <div className="site-container brand-intro">
-          <p className="eyebrow text-maple">Canadian-market focus</p>
-          <div>
-            <p className="prose-large max-w-5xl">
-              We review practical products through the lens of Canadian online customers:
-              usefulness, clarity, fulfillment fit, pricing discipline, and brand requirements.
-            </p>
-            <p className="mt-10 max-w-3xl text-lg leading-8 text-ink/65">
-              The goal is a clean operating relationship before inventory is purchased, with
-              authorized sourcing, channel clarity, and accurate product presentation agreed up
-              front.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-white">
-        <div className="site-container">
-          <div className="section-heading">
-            <p className="eyebrow text-maple">Product interests</p>
-            <h2 className="display-heading max-w-4xl">Useful categories with clear customer value.</h2>
-          </div>
-          <div className="category-grid">
-            {productAreas.map((area) => (
-              <article className="category-card reveal" key={area}>
-                <Check size={18} strokeWidth={1.8} aria-hidden="true" />
-                <h3>{area}</h3>
-              </article>
-            ))}
-          </div>
-          <p className="policy-note">
-            These are sourcing interests, not inventory claims or commitments to list any specific
-            brand.
-          </p>
-        </div>
-      </section>
-
-      <section className="section-space bg-navy text-white">
-        <div className="site-container channel-panel">
-          <div>
-            <p className="eyebrow text-white/50">Sales channel disclosure</p>
-            <h2 className="mt-6 max-w-4xl text-[clamp(2.7rem,5.7vw,5.8rem)] font-semibold leading-[0.98]">
-              Amazon.ca is part of the conversation from the start.
-            </h2>
-          </div>
-          <div className="channel-statement">
-            <Store size={25} strokeWidth={1.6} aria-hidden="true" />
-            <p>
-              CANOD&apos;s sales channels include Amazon.ca. We do not treat wholesale account approval
-              as blanket marketplace authorization; channel permission and policy requirements are
-              confirmed before listing.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-paper">
-        <div className="site-container">
-          <div className="section-heading">
-            <p className="eyebrow text-maple">What CANOD offers</p>
-            <h2 className="display-heading max-w-4xl">A careful retail process, not a race to list.</h2>
-          </div>
-          <div className="offer-grid">
-            {offers.map(({ icon: Icon, title, copy }) => (
-              <article className="offer-card reveal" key={title}>
-                <Icon size={26} strokeWidth={1.5} aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-white">
-        <div className="site-container process-layout">
-          <div>
-            <p className="eyebrow text-maple">Process</p>
-            <h2 className="mt-6 text-[clamp(2.4rem,5vw,5rem)] font-semibold leading-none">
-              Six steps before a product reaches customers.
-            </h2>
-          </div>
-          <div className="process-grid">
-            {process.map((step, index) => (
-              <article className="process-step reveal" key={step}>
-                <span>0{index + 1}</span>
-                <p>{step}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-paper">
-        <div className="site-container faq-layout">
-          <div>
-            <p className="eyebrow text-maple">FAQs</p>
-            <h2 className="mt-6 text-4xl font-semibold leading-tight">
-              Clear expectations make better partnerships.
-            </h2>
-          </div>
-          <div className="partner-faq">
-            {faqs.map((item, index) => (
-              <details key={item.question} open={index === 0}>
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space bg-navy text-white">
-        <div className="site-container grid gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
-          <div>
-            <p className="eyebrow text-white/45">Start a conversation</p>
-            <h2 className="mt-6 text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[.95]">
-              Share your catalogue with CANOD.
-            </h2>
-          </div>
-          <a
-            className="button button-light w-fit lg:justify-self-end"
-            href="mailto:kam@canod.ca?subject=Wholesale%20partnership%20with%20CANOD"
-          >
-            Email kam@canod.ca <ArrowRight size={17} aria-hidden="true" />
-          </a>
-        </div>
-      </section>
-    </>
-  );
+  return <>
+    <PageIntro label="For brands and distributors" title="Useful products. Thoughtful retail.">
+      <p>CANOD is a Canadian-owned online retailer seeking brand-direct and authorized wholesale relationships. Let&apos;s explore where your products could fit.</p>
+      <a className="button button-light" href="mailto:hello@canod.ca?subject=Wholesale%20partnership%20with%20CANOD">Introduce your brand <ArrowRight size={18} aria-hidden="true" /></a>
+    </PageIntro>
+    <section className="section-space bg-paper"><div className="site-container">
+      <div className="section-heading">
+        <div><p className="eyebrow text-maple">What interests us</p><h2>A practical fit for life in Canada.</h2></div>
+        <p>Useful design, clear product information and sensible value are our starting points. We also consider availability, delivery and support for Canadian customers.</p>
+      </div>
+      <div className="category-overview">
+        {productCategories.map(({ name, description, icon: Icon }) => <div className="category-item" key={name}><Icon size={25} strokeWidth={1.5} aria-hidden="true" /><h3>{name}</h3><p>{description}</p></div>)}
+      </div>
+      <Link className="text-link" href="/interests/">See our sourcing interests <ArrowRight size={18} aria-hidden="true" /></Link>
+    </div></section>
+    <section className="section-space"><div className="site-container editorial-split">
+      <div><p className="eyebrow text-maple">Working together</p><h2>Clear from the first conversation.</h2></div>
+      <div className="text-stack">
+        <p>We begin with your range and the customers it suits. From there, we discuss product details, wholesale terms and how your brand should be presented.</p>
+        <p><strong>CANOD&apos;s sales channels include Amazon.ca.</strong> Marketplace permissions are agreed with suppliers before listing, including any restrictions on products or channels.</p>
+        <ol className="approach-list">
+          <li><h3>Thoughtful selection</h3><p>A clear reason for each product to belong in the range.</p></li>
+          <li><h3>Accurate presentation</h3><p>Product information grounded in the details you provide.</p></li>
+          <li><h3>Clear communication</h3><p>Shared expectations on terms, orders and brand requirements.</p></li>
+        </ol>
+      </div>
+    </div></section>
+    <section className="section-space bg-paper"><div className="site-container editorial-split">
+      <div><p className="eyebrow text-maple">Common questions</p><h2>Before we get started.</h2></div>
+      <div className="partner-faq">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
+    </div></section>
+    <section className="supplier-band"><div className="site-container editorial-split">
+      <div><p className="eyebrow">Start a conversation</p><h2>Tell us about your range.</h2></div>
+      <div className="text-stack"><p>Send a short introduction and a catalogue or product overview to CANOD.</p><a className="text-link" href="mailto:hello@canod.ca?subject=Wholesale%20partnership%20with%20CANOD">hello@canod.ca <ArrowRight size={18} aria-hidden="true" /></a></div>
+    </div></section>
+  </>;
 }

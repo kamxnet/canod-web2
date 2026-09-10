@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { CanodSculpture } from "@/lib/canod-sculpture";
 
@@ -28,18 +28,8 @@ export function KineticHero() {
   useEffect(() => { sculpture.current?.setPaused(paused); }, [paused]);
 
   const toggle = () => setPaused((value) => !value);
-  const handleCommand = (command: string) => {
-    if (command === "left") sculpture.current?.rotate(-.25);
-    if (command === "right") sculpture.current?.rotate(.25);
-    if (command === "reset") sculpture.current?.reset();
-    if (command === "motion") toggle();
-  };
-  const commands = [
-    { id: "left", label: "Rotate sculpture left", icon: ArrowLeft },
-    { id: "motion", label: paused ? "Play animation" : "Pause animation", icon: paused ? Play : Pause },
-    { id: "right", label: "Rotate sculpture right", icon: ArrowRight },
-    { id: "reset", label: "Reset view", icon: RotateCcw },
-  ];
+  const motionLabel = paused ? "Play animation" : "Pause animation";
+  const MotionIcon = paused ? Play : Pause;
 
   return <div className="hero-art" data-scene-status={status} data-paused={paused}>
     <div className="sculpture-fallback" aria-hidden="true"><span>C</span><span>CANOD</span></div>
@@ -50,12 +40,13 @@ export function KineticHero() {
       if (event.key === "Home") sculpture.current?.reset();
       if (event.key === " ") toggle();
     }} />
-    <p id="sculpture-access" className="sr-only">Drag to turn the sculpture. Use the arrow keys to rotate, Space to pause, or Home to reset. The controls below offer the same actions.</p>
-    <TooltipProvider delayDuration={200}><div className="sculpture-controls" role="group" aria-label="Sculpture controls">
-      {commands.map(({ id, label, icon: Icon }) => <Tooltip key={id}>
-        <TooltipTrigger asChild><button type="button" className={id === "motion" ? "sculpture-control sculpture-motion" : "sculpture-control"} aria-label={label} onClick={() => handleCommand(id)} disabled={status !== "ready"}><Icon size={18} aria-hidden="true" /></button></TooltipTrigger>
-        <TooltipContent className="motion-tooltip" sideOffset={8}>{label}</TooltipContent>
-      </Tooltip>)}
+    <p id="sculpture-access" className="sr-only">Drag to turn the sculpture. Use the arrow keys to rotate, Space to pause, or Home to reset.</p>
+    <TooltipProvider delayDuration={200}><div className="sculpture-controls">
+      <p className="sculpture-invitation">Go on. Give it a spin.</p>
+      <Tooltip>
+        <TooltipTrigger asChild><button type="button" className="sculpture-control sculpture-motion" aria-label={motionLabel} onClick={toggle} disabled={status !== "ready"}><MotionIcon size={16} aria-hidden="true" /></button></TooltipTrigger>
+        <TooltipContent className="motion-tooltip" sideOffset={8}>{motionLabel}</TooltipContent>
+      </Tooltip>
     </div></TooltipProvider>
   </div>;
 }

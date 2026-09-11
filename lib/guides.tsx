@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { PillarId } from "./editorial";
 import { dockGuide } from "./dock-guide";
 import { safetyGuide } from "./safety-guide";
+import { wifiRoomGuide } from "./wifi-room-guide";
 
 export type Guide = {
   slug: string;
@@ -122,4 +123,5 @@ export const guides: Guide[] = [
       { title: "Apple: backup disks for Time Machine", url: "https://support.apple.com/en-us/102423" },
     ],
   },
+  wifiRoomGuide,
 ];

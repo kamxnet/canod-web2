@@ -8,6 +8,10 @@ import {
 import { HomeMotion } from "@/components/home/home-motion";
 import { SignalPath } from "@/components/home/illustrations";
 import { pageMetadata } from "@/lib/metadata";
+import { guides } from "@/lib/guides";
+import { HomeJourney } from "@/components/home/journey-provider";
+import { IntentSelector } from "@/components/home/intent-selector";
+import { StartingPoint } from "@/components/home/starting-point";
 import "./home.css";
 
 export const metadata = pageMetadata(
@@ -18,14 +22,16 @@ export const metadata = pageMetadata(
 
 export default function Home() {
   return (
-    <div className="home-story">
+    <HomeJourney>
       <SignalPath />
       <HomeHero />
+      <IntentSelector />
       <HomeInterests />
       <HomeGuides />
+      <StartingPoint guides={guides.map(({ slug, title, description }) => ({ slug, title, description }))} />
       <HomePerspective />
       <HomePartners />
       <HomeMotion />
-    </div>
+    </HomeJourney>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check, Plus, X } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -76,8 +77,24 @@ const interests = [
   }
 ] as const;
 
+function CategoryFilterSync({ onChange }: { onChange: (category: string) => void }) {
+  const category = useSearchParams().get("category");
+  useEffect(() => {
+    onChange(categories.find(item => item === category) ?? "All");
+  }, [category, onChange]);
+  return null;
+}
+
 export function ProductInterests() {
   const [selected, setSelected] = useState<string[]>([]);
+  const [categoryFilter, setCategoryFilter] = useState<string>("All");
+  const filter = (category: string) => {
+    setCategoryFilter(category);
+    const url = new URL(window.location.href);
+    if (category === "All") url.searchParams.delete("category");
+    else url.searchParams.set("category", category);
+    window.history.replaceState(window.history.state, "", url);
+  };
   const chosen = interests.filter((item) => selected.includes(item.id));
   const toggle = (id: string) =>
     setSelected((previous) =>
@@ -87,7 +104,8 @@ export function ProductInterests() {
 
   return (
     <div className="interest-layout">
-      <Tabs defaultValue="All" className="min-w-0">
+      <Suspense fallback={null}><CategoryFilterSync onChange={setCategoryFilter} /></Suspense>
+      <Tabs value={categoryFilter} onValueChange={filter} className="min-w-0">
         <TabsList aria-label="Filter product interests" className="interest-tabs">
           {categories.map((category) => (
             <TabsTrigger className="interest-tab" key={category} value={category}>

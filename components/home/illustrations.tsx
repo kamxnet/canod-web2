@@ -1,16 +1,12 @@
 export function SignalPath() {
-  const route =
-    "M28 0V130Q28 144 16 150Q4 156 4 170V340Q4 354 16 360Q28 366 28 380V570Q28 584 16 590Q4 596 4 610V805Q4 819 16 825Q28 831 28 845V1000";
   return (
     <svg
       className="home-signal"
-      viewBox="0 0 40 1000"
-      preserveAspectRatio="none"
       aria-hidden="true"
       focusable="false"
     >
-      <path className="signal-track" d={route} />
-      <path className="signal-progress" pathLength="1" d={route} />
+      <line className="signal-track" x1="70%" x2="70%" y1="0" y2="100%" />
+      <line className="signal-progress" pathLength="1" x1="70%" x2="70%" y1="0" y2="100%" />
     </svg>
   );
 }
@@ -104,34 +100,21 @@ export function TechnicalScene({ kind, id }: { kind: number; id: string }) {
       )}
       {kind === 2 && (
         <>
-          <path
-            className="scene-cable"
-            d="M49 146h44c31 0 35-77 62-77h18c32 0 18 97 49 97h28c33 0 4-109 43-109h22"
-          />
-          <path
-            className="scene-packet"
-            pathLength="1"
-            d="M49 146h44c31 0 35-77 62-77h18c32 0 18 97 49 97h28c33 0 4-109 43-109h22"
-          />
-          <g className="scene-layer layer-front">
-            <rect
-              x="32"
-              y="133"
-              width="28"
-              height="26"
-              rx="4"
-              fill={`url(#${metal})`}
-            />
-            <rect
-              x="301"
-              y="44"
-              width="28"
-              height="26"
-              rx="4"
-              fill={`url(#${metal})`}
-            />
+          <path d="M30 158h300M51 158v31m258-31v31" />
+          <path className="scene-flow" d="M179 110v64q0 13 13 13h91" />
+          <path className="scene-packet" pathLength="1" d="M179 110v64q0 13 13 13h91" />
+          <g className="scene-layer layer-back">
+            <rect x="101" y="27" width="151" height="87" rx="4" fill={`url(#${metal})`} />
+            <path d="M112 98h129M177 114v29m-26 0h53" />
           </g>
-          <path d="M82 186h193M99 181v10m40-10v10m40-10v10m40-10v10m40-10v10" />
+          <g className="scene-layer layer-mid">
+            <path d="m102 147 7-18h140l7 18z" fill={`url(#${metal})`} />
+            <path d="M122 136h88m9 0h17" />
+          </g>
+          <g className="scene-layer layer-front">
+            <rect x="54" y="111" width="25" height="35" rx="4" fill={`url(#${metal})`} />
+            <rect x="274" y="129" width="23" height="17" rx="4" fill={`url(#${metal})`} />
+          </g>
         </>
       )}
       {kind === 3 && (
@@ -169,6 +152,24 @@ export function TechnicalScene({ kind, id }: { kind: number; id: string }) {
             />
           </g>
           <path d="m40 132 10 10-10 10M232 177h76m-9-9 9 9-9 9" />
+        </>
+      )}
+      {kind === 5 && (
+        <>
+          <path d="M50 31v153M45 31h10m-10 153h10M76 196h220m-220-5v10m220-10v10" />
+          <g className="scene-layer layer-back">
+            <rect x="70" y="25" width="238" height="160" rx="8" fill={`url(#${metal})`} />
+            <rect x="81" y="37" width="216" height="136" rx="4" />
+            <path d="M190 37v136M81 112h109M94 124h81M94 134h81M94 144h81" />
+          </g>
+          <g className="scene-layer layer-mid">
+            <rect x="211" y="59" width="63" height="72" rx="4" />
+            <path d="M231 59V48m23 11V48M224 141h39" />
+          </g>
+          <g className="scene-layer layer-front">
+            <path className="scene-highlight" d="M112 64h38a13 13 0 0 1 0 26h-37a10 10 0 0 1 0-20h34a6 6 0 0 1 0 12h-31" />
+            <path d="M106 62h7v10h-7zM115 78h8v8h-8zM297 103h20v9h-20" />
+          </g>
         </>
       )}
       {kind === 4 && (
@@ -269,6 +270,7 @@ export function BrandNetwork() {
           <span className="wordmark-mark" />
           CANOD
         </span>
+        <span className="network-role">Research</span>
       </span>
       <span className="network-label network-destination">
         Canadian

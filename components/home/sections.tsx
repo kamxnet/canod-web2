@@ -4,6 +4,9 @@ import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { KineticHero } from "@/components/kinetic-hero";
 import { productCategories } from "@/lib/product-categories";
 import { guides } from "@/lib/guides";
+import { categoryHref } from "@/lib/home-navigation";
+import { readingMinutes } from "@/lib/guide-reading";
+import { RecommendationProcess } from "./recommendation-process";
 import {
   BrandNetwork,
   TechnicalScene,
@@ -11,10 +14,10 @@ import {
 } from "./illustrations";
 
 const chapters = [
+  ["Your starting point", "your-start"],
   ["Product interests", "product-interests"],
   ["Buying guides", "buying-guides"],
-  ["Our point of view", "point-of-view"],
-  ["For brands", "for-brands"],
+  ["Find your next step", "starting-point"],
 ] as const;
 
 function ChapterLabel({
@@ -42,6 +45,10 @@ export function HomeHero() {
       <div className="hero-atmosphere" aria-hidden="true">
         <div className="hero-fine-grid" />
       </div>
+      <svg className="hero-signal-lead" viewBox="0 0 1000 550" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
+        <path className="hero-lead-desktop" pathLength="1" d="M840 405v95q0 30-30 30H20q-20 0-20 20" />
+        <path className="hero-lead-mobile" pathLength="1" d="M750 405v95q0 30-30 30H20q-20 0-20 20" />
+      </svg>
       <KineticHero />
       <div className="site-container hero-content">
         <div className="hero-intro">
@@ -95,7 +102,7 @@ export function HomeInterests() {
       <div className="site-container">
         <div className="home-section-heading home-reveal">
           <div>
-            <ChapterLabel number="01">Product interests</ChapterLabel>
+            <ChapterLabel number="02">Product interests</ChapterLabel>
             <h2 id="interests-heading">Useful in more ways than one.</h2>
           </div>
           <p>
@@ -107,7 +114,8 @@ export function HomeInterests() {
         <div className="home-interest-grid">
           {productCategories.map(({ name, description }, index) => (
             <Link
-              href="/interests/"
+              href={categoryHref(index)}
+              id={`interest-${index}`}
               className={`home-module home-reveal module-${index}`}
               key={name}
             >
@@ -139,13 +147,13 @@ export function HomeGuides() {
   return (
     <section
       id="buying-guides"
-      className="home-guides home-light home-section"
+      className="home-guides home-dark home-section"
       data-story-chapter="guides"
       aria-labelledby="guides-heading"
     >
       <div className="site-container home-guides-layout">
         <div className="home-guide-intro home-reveal">
-          <ChapterLabel number="02">Buying guides</ChapterLabel>
+          <ChapterLabel number="03">Buying guides</ChapterLabel>
           <h2 id="guides-heading">A clearer choice starts here.</h2>
           <p>
             Practical reading on fit, trade-offs and the details worth checking
@@ -165,18 +173,19 @@ export function HomeGuides() {
           {guides.map((guide, index) => (
             <article
               id={`home-guide-${guide.slug}`}
-              className={`home-guide home-reveal ${index === 0 ? "home-guide-feature home-dark" : "home-guide-secondary"}`}
+              className={`home-guide home-reveal ${index === 0 ? "home-guide-feature" : "home-guide-secondary"}`}
               key={guide.slug}
             >
               <div className="home-guide-art">
                 <TechnicalScene
-                  kind={index === 0 ? 2 : 0}
+                  kind={index === 0 ? 5 : 0}
                   id={`guide-scene-${index}`}
                 />
               </div>
               <div className="home-guide-copy">
                 <div className="home-guide-meta">
                   <p className="eyebrow">{guide.category}</p>
+                  <span className="guide-reading-time" title="Estimated reading time">~{readingMinutes(guide.sections)} min read</span>
                   <time dateTime={guide.date}>
                     {new Date(`${guide.date}T12:00:00Z`).toLocaleDateString(
                       "en-CA",
@@ -209,22 +218,6 @@ export function HomeGuides() {
   );
 }
 
-const principles = [
-  {
-    title: "Research and sources",
-    description:
-      "Our guides help readers understand a product category and make their own choice.",
-  },
-  {
-    title: "Research is different from testing",
-    description: "Our current guides are research-based.",
-  },
-  {
-    title: "Commercial relationships",
-    description: "Our current buying guides contain no affiliate links.",
-  },
-];
-
 export function HomePerspective() {
   return (
     <section
@@ -236,7 +229,7 @@ export function HomePerspective() {
       <TrustContours />
       <div className="site-container home-perspective-layout">
         <div className="home-perspective-intro home-reveal">
-          <ChapterLabel number="03">Our point of view</ChapterLabel>
+          <ChapterLabel number="05">Our point of view</ChapterLabel>
           <h2 id="perspective-heading">
             Good products earn their place in your day.
           </h2>
@@ -255,25 +248,7 @@ export function HomePerspective() {
             Meet CANOD <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
-        <div className="home-principles">
-          <p className="principles-origin">Canadian-owned online retailer.</p>
-          <ol>
-            {principles.map(({ title, description }, index) => (
-              <li className="home-principle home-reveal" key={title}>
-                <span className="principle-node" aria-hidden="true">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <Link className="text-link" href="/editorial-standards/">
-            Editorial standards <ArrowUpRight size={18} aria-hidden="true" />
-          </Link>
-        </div>
+        <RecommendationProcess />
       </div>
     </section>
   );
@@ -290,13 +265,14 @@ export function HomePartners() {
       >
         <div className="site-container home-partner-layout">
           <div className="home-partner-copy home-reveal">
-            <ChapterLabel number="04">For brands and distributors</ChapterLabel>
+            <ChapterLabel number="06">For brands and distributors</ChapterLabel>
             <p>
               We welcome conversations with brands and wholesale suppliers whose
               products fit everyday needs. CANOD&apos;s sales channels include
               Amazon.ca; marketplace permissions are agreed with suppliers
               before listing.
             </p>
+            <Link className="text-link" href="/partners/">For brands and distributors <ArrowUpRight size={18} aria-hidden="true" /></Link>
           </div>
           <div className="home-reveal">
             <BrandNetwork />
@@ -304,11 +280,12 @@ export function HomePartners() {
         </div>
       </section>
       <section
-        className="home-finale home-light"
+        className="home-finale home-dark"
         data-story-chapter="finale"
         aria-labelledby="finale-heading"
       >
         <div className="site-container home-finale-inner home-reveal">
+          <svg className="finale-signal" viewBox="0 0 1248 120" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M0 0v25q0 24 24 24h1100q24 0 24 24v47" /><circle cx="1148" cy="117" r="3" /></svg>
           <h2 id="finale-heading">Have something useful in mind?</h2>
           <Link className="button button-dark" href="/partners/">
             Work with CANOD <ArrowUpRight size={20} aria-hidden="true" />

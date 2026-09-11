@@ -1,14 +1,19 @@
 import type { ReactNode } from "react";
 import type { PillarId } from "./editorial";
 import { dockGuide } from "./dock-guide";
+import { safetyGuide } from "./safety-guide";
 
 export type Guide = {
   slug: string;
   title: string;
   category: string;
-  pillar: PillarId;
+  pillar: PillarId | "safety";
   description: string;
   date: string;
+  reviewed?: string;
+  scope?: string;
+  methodology?: string;
+  related?: { title: string; href: string }[];
   sections: { id: string; title: string; content: ReactNode }[];
   sources: { title: string; url: string }[];
 };
@@ -20,6 +25,7 @@ const networkSource = "https://www.qnap.com/en-as/how-to/faq/article/what-transf
 const remoteSource = "https://www.qnap.com/en/how-to/faq/article/why-am-i-getting-slow-download-speeds-when-accessing-my-files-from-outside-my-home";
 
 export const guides: Guide[] = [
+  safetyGuide,
   dockGuide,
   {
     slug: "choosing-a-tech-organizer",

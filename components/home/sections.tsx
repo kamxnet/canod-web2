@@ -49,7 +49,7 @@ export function HomeGuides() {
   const guide = guides.find(item => item.slug === "seven-things-usb-c-dock")!;
   return <section id="buying-guides" className="home-guides home-dark home-section" data-story-chapter="guides" aria-labelledby="guides-heading">
     <div className="site-container featured-layout">
-      <div className="featured-intro"><ChapterLabel number="03">The CANOD field guide</ChapterLabel><h2 id="guides-heading">One cable.<br />Seven things to check.</h2><p>A clearer choice starts with the details that a product listing can leave out.</p><Link href={dockGuidePath} className="text-link">Explore the full guide <ArrowRight size={18} aria-hidden="true" /></Link></div>
+      <div className="featured-intro"><ChapterLabel number="03">The CANOD field guide</ChapterLabel><h2 id="guides-heading">One cable.<br />Seven things to check.</h2><p>A clearer choice starts with the details that a product listing can leave out.</p></div>
       <article className="featured-story">
         <div className="featured-art"><EditorialScene kind="work" id="featured-dock" /><span className="featured-seven" aria-hidden="true">07</span></div>
         <div className="featured-meta"><span>Work &amp; connectivity</span><span>~{readingMinutes(guide.sections)} min read</span><span>Research-based</span></div>
@@ -74,7 +74,7 @@ export function HomePerspective() {
   return <section id="point-of-view" className="home-perspective home-dark home-section point-of-view" data-story-chapter="perspective" aria-labelledby="perspective-heading">
     <TrustContours />
     <div className="site-container home-perspective-layout">
-      <div className="home-perspective-intro"><ChapterLabel number="05">How we reach a useful answer</ChapterLabel><h2 id="perspective-heading">Good products earn their place in your day.</h2><div className="text-stack"><p>We start with a simple question: what does this make easier?</p><p>Useful design, understandable details and a good fit for the way people work matter more than a longer feature list.</p><p>Our current guides are research-based, not hands-on product tests. We make that distinction clear.</p></div><Link className="text-link" href="/editorial-standards/">Our editorial standards <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <div className="home-perspective-intro"><ChapterLabel number="06">How we reach a useful answer</ChapterLabel><h2 id="perspective-heading">Good products earn their place in your day.</h2><div className="text-stack"><p>We start with a simple question: what does this make easier?</p><p>Our current guides are research-based, not hands-on product tests. We make that distinction clear.</p></div><Link className="text-link" href="/editorial-standards/">Our editorial standards <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
       <RecommendationProcess />
     </div>
   </section>;
@@ -82,19 +82,16 @@ export function HomePerspective() {
 
 export function HomeReading() {
   return <section className="home-reading home-light home-section" data-story-chapter="reading" aria-labelledby="reading-heading"><div className="site-container">
-    <div className="home-section-heading"><div><ChapterLabel number="06">Keep following your curiosity</ChapterLabel><h2 id="reading-heading">Useful now.<br />More to explore.</h2></div><p>Practical reading on fit, trade-offs and the details worth checking before you buy.</p></div>
-    <div className="reading-grid">{pillars.map(pillar => {
-      const guide = guides.find(item => item.slug === pillar.guide)!;
-      return <article className="reading-card" key={pillar.id}><p className="eyebrow">{pillar.title}</p><h3><Link href={"/guides/" + guide.slug + "/"}>{guide.title}</Link></h3><p>{guide.description}</p><Link className="text-link" href={"/guides/" + guide.slug + "/"} aria-label={"Read the guide: " + guide.title}>Read the guide <ArrowRight size={17} aria-hidden="true" /></Link><div className="reading-next"><span>On our radar</span><p>{pillar.upcoming}</p></div></article>;
-    })}</div>
-    <div id="business" className="business-preview"><p className="eyebrow">Planned coverage / Small business</p><div><h3>Behind the scenes of a working business.</h3><p>Website builders, business email, productivity, scheduling and invoicing. We will introduce software coverage gradually, with the same focus on fit and total cost.</p><Link className="text-link" href="/guides/#business">Start with the essentials <ArrowRight size={17} aria-hidden="true" /></Link></div></div>
+    <div className="home-section-heading"><div><ChapterLabel number="07">Keep following your curiosity</ChapterLabel><h2 id="reading-heading">Useful now.<br />More to explore.</h2></div><p>Practical reading on fit, trade-offs and the details worth checking before you buy.</p></div>
+    <div className="reading-grid">{guides.map(guide => <article className="reading-card" key={guide.slug}><p className="eyebrow">{guide.category}<span>~{readingMinutes(guide.sections)} min</span></p><h3><Link href={"/guides/" + guide.slug + "/"}>{guide.title}<ArrowUpRight size={22} aria-hidden="true" /></Link></h3></article>)}</div>
+    <div id="business" className="business-preview"><p className="eyebrow">Planned coverage / Small business</p><div><p>Website builders, business email, productivity, scheduling and invoicing. The same focus on fit and total cost.</p><Link className="text-link" href="/guides/#business">Start with the essentials <ArrowRight size={17} aria-hidden="true" /></Link></div></div>
   </div></section>;
 }
 
 export function HomeBrief() {
   return <section className="home-brief home-light home-section" data-story-chapter="brief" aria-labelledby="brief-heading"><div className="site-container brief-layout">
     <div className="brief-title"><Mail size={24} strokeWidth={1.25} aria-hidden="true" /><p className="eyebrow">The next useful thing</p><h2 id="brief-heading">Practical Tech Brief</h2></div>
-    <div className="brief-status"><p className="coming-label">Coming soon</p><p>A considered note on practical technology, useful guides and CANOD tools. Subscriptions are not open yet.</p><Link className="text-link" href="/guides/">Read the latest guides <ArrowRight size={17} aria-hidden="true" /></Link></div>
+    <div className="brief-status"><p className="coming-label">Coming soon</p><p>A considered note on practical technology, useful guides and CANOD tools. Subscriptions are not open yet.</p></div>
   </div></section>;
 }
 

@@ -6,7 +6,7 @@
   --home-charcoal: #242827;
   --home-ease: cubic-bezier(.2, .7, .2, 1);
   --home-detail-duration: 350ms;
-  --home-space-lg: 6rem;
+  --home-space-lg: 4.5rem;
   --home-space-md: 4rem;
   --home-space-sm: 2rem;
   --story-progress: 1;
@@ -249,7 +249,7 @@ main:has(.home-story) + .site-footer { background: #2e2e2e; border-top-color: #5
   .home-story .navigator-result { padding-left: 1.5rem; }
 }
 @media (max-width: 600px) {
-  .home-story { --home-space-lg: 3.5rem; --home-space-md: 2.5rem; --signal-x: 13.2px; }
+  .home-story { --home-space-lg: 2.75rem; --home-space-md: 2.5rem; --signal-x: 13.2px; }
   .home-story .site-container { width: calc(100% - 3rem); }
   .home-story .home-signal { width: 16px; left: 2px; }
   .home-story .chapter-label::before { left: -15px; width: 4px; height: 4px; }

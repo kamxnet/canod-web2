@@ -4,6 +4,7 @@ import { dockSources as sources, dockSourceCheckDate, dockToolPath } from "./doc
 
 export const dockGuide: Guide = {
   slug: "seven-things-usb-c-dock",
+  related: [{ title: "Before Buying a Charger in Canada: Seven Safety Checks", href: "/guides/charger-safety-canada/" }, { title: "Canadian Electrical Product Safety Checklist", href: "/tools/canadian-electrical-safety-checklist/" }],
   title: "Seven Things to Check Before Buying a USB-C Dock",
   category: "Work & connectivity",
   pillar: "work",

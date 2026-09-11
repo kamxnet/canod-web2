@@ -9,7 +9,7 @@
 .publication-page .article-header { background: #e4ece3; }
 .publication-page .article-body { font-size: 1.0625rem; }
 .publication-page .article-note { background: transparent; }
-.publication-page .guide-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.publication-page .guide-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .publication-page .guide-card { scroll-margin-top: 2rem; }
 .publication-page .guide-number { color: #6a8572; }
 .business-reading { max-width: 840px; margin-top: 4rem; border-top: 1px solid var(--line); padding-top: 2rem; scroll-margin-top: 2rem; }

@@ -14,7 +14,8 @@ test("exports the public homepage without development-only metadata", async () =
   assert.match(html, /id="starting-point"/);
   assert.match(html, /href="https:\/\/canod.ca\/"/);
   assert.match(html, /https:\/\/canod.ca\/og-canod-publication.png/);
-  assert.match(html, /aria-label="Read the guide: Seven Things/);
+  assert.match(html, /href="\/guides\/seven-things-usb-c-dock\/"/);
+  assert.match(html, /id="buy-safe-canada"/);
   assert.match(html, /aria-label="01: Problem\. Start with the everyday"/);
   assert.doesNotMatch(html, /CANOD \/ Form study 01|hero-orbit/);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);

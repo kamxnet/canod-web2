@@ -13,9 +13,11 @@ import { SignalPath } from "@/components/home/illustrations";
 import { pageMetadata } from "@/lib/metadata";
 import { HomeJourney } from "@/components/home/journey-provider";
 import { IntentSelector } from "@/components/home/intent-selector";
+import { HomeSafety } from "@/components/home/safety-section";
 import "./home.css";
 import "./publication.css";
 import "./tools.css";
+import "./safety.css";
 
 export const metadata = pageMetadata(
   "Practical Technology for Canada",
@@ -32,6 +34,7 @@ export default function Home() {
       <HomeInterests />
       <HomeGuides />
       <HomeDockTool />
+      <HomeSafety />
       <HomePerspective />
       <HomeReading />
       <HomeBrief />

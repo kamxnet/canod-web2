@@ -11,6 +11,7 @@ export function Footer() {
       <nav className="footer-column" aria-label="Explore">
         <p className="eyebrow">Explore</p>
         <Link href="/guides/">Practical guides</Link><Link href="/tools/">CANOD tools</Link><Link href="/about/">About CANOD</Link>
+        <Link href="/guides/charger-safety-canada/">Buy Safe in Canada</Link>
       </nav>
       <div className="footer-column">
         <p className="eyebrow">Get in touch</p>

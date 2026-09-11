@@ -16,12 +16,10 @@ export function RecommendationProcess() {
       {steps.map((step, index) => <li key={step.name} className="process-step" data-process-step>
         <Link className="process-node" href={step.href} aria-label={`0${index + 1}: ${step.name}. ${step.title}`}><span aria-hidden="true">0{index + 1}</span><ArrowUpRight size={15} aria-hidden="true" /></Link>
         <div>
-          <p className="process-stage">{step.name}</p>
-          <h3>{step.title}</h3>
+          <h3>{step.name}</h3>
           <p>{step.description}</p>
         </div>
       </li>)}
     </ol>
-    <Link className="text-link" href="/editorial-standards/">Editorial standards <ArrowUpRight size={18} aria-hidden="true" /></Link>
   </div>;
 }

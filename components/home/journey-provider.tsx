@@ -1,19 +1,18 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { intents, type IntentId } from "@/lib/home-navigation";
+import type { EditorialIntentId } from "@/lib/editorial";
 
-const JourneyContext = createContext<{ intent: IntentId; chooseIntent: (id: IntentId) => void }>({
+const JourneyContext = createContext<{ intent: EditorialIntentId; chooseIntent: (id: EditorialIntentId) => void }>({
   intent: "workspace",
   chooseIntent: () => {},
 });
 
 export function HomeJourney({ children }: { children: ReactNode }) {
-  const [intent, chooseIntent] = useState<IntentId>("workspace");
-  const category = intents.find(item => item.id === intent)!.category;
+  const [intent, chooseIntent] = useState<EditorialIntentId>("workspace");
   return (
     <JourneyContext.Provider value={{ intent, chooseIntent }}>
-      <div className="home-story" data-intent={intent} data-interest={category}>
+      <div className="home-story" data-intent={intent}>
         {children}
       </div>
     </JourneyContext.Provider>

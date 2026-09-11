@@ -3,20 +3,23 @@ import {
   HomeInterests,
   HomeGuides,
   HomePerspective,
-  HomePartners,
+  HomeDockTool,
+  HomeReading,
+  HomeBrief,
+  HomeFinale,
 } from "@/components/home/sections";
 import { HomeMotion } from "@/components/home/home-motion";
 import { SignalPath } from "@/components/home/illustrations";
 import { pageMetadata } from "@/lib/metadata";
-import { guides } from "@/lib/guides";
 import { HomeJourney } from "@/components/home/journey-provider";
 import { IntentSelector } from "@/components/home/intent-selector";
-import { StartingPoint } from "@/components/home/starting-point";
 import "./home.css";
+import "./publication.css";
+import "./tools.css";
 
 export const metadata = pageMetadata(
-  "Practical Products for Canada",
-  "CANOD is a Canadian-owned online retailer exploring practical products for technology, work, travel and everyday life. Read useful buying guides and explore our product interests.",
+  "Practical Technology for Canada",
+  "CANOD helps Canadians choose practical technology that works together. Research-based guides and useful tools for work, storage and portable setups.",
   "/",
 );
 
@@ -28,9 +31,11 @@ export default function Home() {
       <IntentSelector />
       <HomeInterests />
       <HomeGuides />
-      <StartingPoint guides={guides.map(({ slug, title, description }) => ({ slug, title, description }))} />
+      <HomeDockTool />
       <HomePerspective />
-      <HomePartners />
+      <HomeReading />
+      <HomeBrief />
+      <HomeFinale />
       <HomeMotion />
     </HomeJourney>
   );

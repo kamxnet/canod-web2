@@ -3,14 +3,15 @@ import { EB_Garamond, Instrument_Sans, Manrope } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import "./globals.css";
+import "./editorial.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 const ebGaramond = EB_Garamond({ subsets: ["latin"], variable: "--font-eb-garamond", display: "swap" });
 const instrumentSans = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument-sans", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "CANOD | Practical Products for Canada", template: "%s | CANOD" },
-  description: "CANOD is a Canadian-owned online retailer exploring practical products for technology, work, travel, organization and everyday life.",
+  title: { default: "CANOD | Practical Technology for Canada", template: "%s | CANOD" },
+  description: "CANOD helps Canadians choose practical technology that works together, with research-based guides and useful tools for work, storage and life on the move.",
   icons: {
     icon: [
       { url: "/favicon.ico?v=3d-c1", type: "image/x-icon", sizes: "16x16 32x32 48x48 64x64 256x256" },
@@ -26,15 +27,15 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://canod.ca",
     siteName: "CANOD",
-    title: "CANOD | Practical Products for Canada",
-    description: "Practical products. Thoughtfully selected for Canada.",
-    images: [{ url: "/og-canod.png", width: 1200, height: 630, alt: "CANOD - Practical products. Thoughtfully selected for Canada." }],
+    title: "CANOD | Practical Technology for Canada",
+    description: "Technology should work together. Clear Canadian guidance for practical setups.",
+    images: [{ url: "/og-canod-publication.png", width: 1200, height: 630, alt: "CANOD: Technology should work together. Sage three-dimensional C with its red brand mark." }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CANOD | Practical Products for Canada",
-    description: "Practical products. Thoughtfully selected for Canada.",
-    images: ["/og-canod.png"],
+    title: "CANOD | Practical Technology for Canada",
+    description: "Technology should work together. Clear Canadian guidance for practical setups.",
+    images: ["/og-canod-publication.png"],
   },
 };
 

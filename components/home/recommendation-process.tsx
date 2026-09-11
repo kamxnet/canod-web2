@@ -2,24 +2,23 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const steps = [
-  { name: "Problem", title: "Start with the everyday", description: "A pouch that fits the things you carry. A place for the cables on your desk. Storage that makes sense for your household. CANOD is built around ordinary needs that deserve a thoughtful answer.", href: "/about/" },
-  { name: "Research", title: "Research and sources", description: "Our guides help readers understand a product category and make their own choice.", detail: "We use original writing and link technical claims to official documentation, manufacturer specifications or other relevant primary sources.", href: "/editorial-standards/" },
-  { name: "Compare", title: "Research is different from testing", description: "Our current guides are research-based.", detail: "We do not present manufacturer claims as CANOD test results, or suggest that we have used a product when we have not.", href: "/editorial-standards/" },
-  { name: "Calculate", title: "Consider the whole purchase", description: "Before purchasing in Canada, check the seller's return conditions, delivery cost and the total in Canadian dollars.", href: "/guides/choosing-a-tech-organizer/#materials-and-care" },
-  { name: "Recommend", title: "Commercial relationships", description: "Our current buying guides contain no affiliate links.", detail: "If future content includes affiliate links, we will explain the relationship alongside the affected links so readers can identify it before clicking.", href: "/editorial-standards/" },
+  { name: "Problem", title: "Start with the everyday", description: "Define the job: connect a workspace, protect important files or carry a practical kit. A useful answer starts with the need, not the product.", href: "/about/" },
+  { name: "Research", title: "Go to the original sources", description: "We use original writing and link technical claims to official documentation, manufacturer specifications or other relevant primary sources.", href: "/editorial-standards/#research" },
+  { name: "Verify compatibility", title: "Check both ends of the connection", description: "Look at the exact device, software, cables and intended setup. Flag what remains unknown instead of turning assumptions into guarantees.", href: "/guides/seven-things-usb-c-dock/#computer-and-port" },
+  { name: "Calculate total cost", title: "Consider the whole purchase", description: "Include required accessories, ongoing costs, Canadian availability, delivery and return conditions. Compare the total, not just a headline price.", href: "/guides/seven-things-usb-c-dock/#canadian-purchase" },
+  { name: "Explain the decision", title: "Leave room for a simpler answer", description: "Explain who a solution suits, its limitations and when it may not be needed. Suitability comes before commission potential; commercial relationships will be clearly identified.", href: "/affiliate-disclosure/" },
 ];
 
 export function RecommendationProcess() {
   return <div className="recommendation-process">
-    <p className="principles-origin">Canadian-owned online retailer.</p>
+    <p className="principles-origin">The CANOD editorial method</p>
     <ol>
       {steps.map((step, index) => <li key={step.name} className="process-step" data-process-step>
-        <Link className="process-node" href={step.href} aria-label={`${step.name}: ${step.title}`}><span aria-hidden="true">0{index + 1}</span><ArrowUpRight size={15} aria-hidden="true" /></Link>
+        <Link className="process-node" href={step.href} aria-label={`0${index + 1}: ${step.name}. ${step.title}`}><span aria-hidden="true">0{index + 1}</span><ArrowUpRight size={15} aria-hidden="true" /></Link>
         <div>
           <p className="process-stage">{step.name}</p>
           <h3>{step.title}</h3>
           <p>{step.description}</p>
-          {step.detail && <p className="process-detail">{step.detail}</p>}
         </div>
       </li>)}
     </ol>

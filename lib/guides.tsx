@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
+import type { PillarId } from "./editorial";
+import { dockGuide } from "./dock-guide";
 
-type Guide = {
+export type Guide = {
   slug: string;
   title: string;
   category: string;
+  pillar: PillarId;
   description: string;
   date: string;
   sections: { id: string; title: string; content: ReactNode }[];
@@ -17,10 +20,12 @@ const networkSource = "https://www.qnap.com/en-as/how-to/faq/article/what-transf
 const remoteSource = "https://www.qnap.com/en/how-to/faq/article/why-am-i-getting-slow-download-speeds-when-accessing-my-files-from-outside-my-home";
 
 export const guides: Guide[] = [
+  dockGuide,
   {
     slug: "choosing-a-tech-organizer",
     title: "Choosing a Tech Organizer: Size, Layout and Everyday Use.",
     category: "Work & travel",
+    pillar: "travel",
     description: "Find a useful fit for the things you actually carry, from a single charger to a full workday setup.",
     date: "2026-09-10",
     sections: [
@@ -61,6 +66,7 @@ export const guides: Guide[] = [
     slug: "choosing-a-home-nas",
     title: "Choosing a Home NAS: Storage, Backups and Compatibility.",
     category: "Technology & storage",
+    pillar: "storage",
     description: "Understand the full setup before choosing network storage: drives, backups, software and the network between them.",
     date: "2026-09-10",
     sections: [

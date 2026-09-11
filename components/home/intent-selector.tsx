@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Cable, Check, HardDrive, Laptop, Luggage, ShoppingBag } from "lucide-react";
-import { intents, categoryHref } from "@/lib/home-navigation";
-import { productCategories } from "@/lib/product-categories";
+import { ArrowRight, Check, HardDrive, Laptop, Luggage, BriefcaseBusiness } from "lucide-react";
+import { editorialIntents as intents } from "@/lib/editorial";
 import { useJourney } from "./journey-provider";
 
-const icons = [Laptop, HardDrive, Cable, Luggage, ShoppingBag];
+const icons = [Laptop, HardDrive, Luggage, BriefcaseBusiness];
 
 export function IntentSelector() {
   const { chooseIntent } = useJourney();
@@ -38,11 +37,10 @@ export function IntentSelector() {
           </fieldset>
           <div className="intent-results">
             {intents.map(intent => {
-              const category = productCategories[intent.category];
               return <div className="intent-result" id={`intent-result-${intent.id}`} data-intent-result={intent.id} key={intent.id}>
-                <p id={`intent-description-${intent.id}`}>{category.description}</p>
-                <Link href={`#interest-${intent.category}`} className="text-link">Explore {category.name.toLowerCase()} <ArrowRight size={17} aria-hidden="true" /></Link>
-                <Link href={categoryHref(intent.category)} className="intent-direct">View sourcing interests <ArrowRight size={14} aria-hidden="true" /></Link>
+                <p id={`intent-description-${intent.id}`}>{intent.description}</p>
+                <Link href={intent.href} className="text-link">{intent.cta} <ArrowRight size={17} aria-hidden="true" /></Link>
+                <Link href={`#${intent.section}`} className="intent-direct">{intent.secondary} <ArrowRight size={14} aria-hidden="true" /></Link>
               </div>;
             })}
           </div>

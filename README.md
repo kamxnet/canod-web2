@@ -1,93 +1,75 @@
-# vinext-starter
+# CANOD
 
-A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
+A Canadian practical-technology publication built with the Next.js App Router, React, TypeScript and Tailwind/CSS. The production site is a static export hosted on GitHub Pages at https://canod.ca.
 
-## Prerequisites
+## Local Development
 
-- Node.js `>=22.13.0`
-- Linux with `flock`, `curl`, and GNU `timeout`
+Use Node.js 22.13 or newer and npm.
 
-## Sites Lifecycle
-
-The Sites lifecycle CLI runs the locked dependency install before returning this checkout. Edit the source under `app/`, then checkpoint when a coherent milestone is ready to inspect or share. The remote Sites builder runs `npm run build` against the pushed commit. Do not repeat install or build as a normal pre-checkpoint step.
-
-This starter does not use `wrangler.jsonc`.
-
-`install:ci` is intentionally a single, non-retrying `npm ci`. It refuses a concurrent install for the same project, consumes a matching image-seeded npm cache with `--prefer-offline` while retaining registry fallback for a missing cache object, otherwise downloads and verifies the complete vinext tarball recorded in `package-lock.json`, limits npm to one socket, and terminates a stalled install. `build` applies a short timeout. These helpers target Linux and use GNU `timeout`; they are not native macOS scripts.
-
-Scripts that need writable project-scoped home, npm, XDG, and temporary paths use `scripts/sites-env.sh`. The `dev` and `start` scripts honor the caller's runtime environment and keep Wrangler logs inside the checkout. The generated `.sites-runtime/` directory is disposable and ignored by Git.
-
-## Included Shape
-
-- edit site code under `app/`
-- `app/chatgpt-auth.ts` provides optional dispatch-owned ChatGPT sign-in helpers
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/index.ts` reads the D1 binding from the Cloudflare Worker environment
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from `oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive `oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty `name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by `oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```sh
+npm ci
+npx next dev --port 4318
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The inherited Vite/Vinext development scripts remain in the repository for historical compatibility. Use Next.js for the GitHub Pages production path.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs optional or required ChatGPT sign-in:
+## Build and Test
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send anonymous visitors through Sign in with ChatGPT.
-- In a Server Component, start sign-in with `<a href={chatGPTSignInPath(returnTo)} target="_top">`. The auth helper module is server-only; do not import it into a Client Component.
-- Do not use `fetch`, XHR, a client-side router, or a framework link that can prefetch the sign-in route. SIWC must start as a top-level navigation.
-- Never request the AuthAPI authorization endpoint directly. The dispatch-owned `/signin-with-chatgpt` route must start the SIWC flow.
-- Use `chatGPTSignOutPath(returnTo)` for browser sign-out links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because they depend on per-request identity headers.
+```sh
+npm run lint
+npm test
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the OAuth cookies, and identity header injection. Do not implement app routes for those reserved paths. Routes that do not import and call the helper remain anonymous-compatible.
+`npm test` runs the production build and Node tests. To build without running tests:
 
-SIWC establishes identity only; it does not prove workspace membership. Use the Sites hosting platform's access policy controls for workspace-wide restrictions, or enforce explicit server-side membership or allowlist checks.
+```sh
+npm run build:pages
+```
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write actions tied to the current ChatGPT user. Leave public content anonymous.
+`npm run build` is an alias for the same static build. Generated files are in `out/`, with trailing-slash routes and the existing `CNAME`. Preview that directory with a static HTTP server that serves directory `index.html` files. Next.js server features and API routes are not available on GitHub Pages.
 
-## Diagnostic Commands
+Tests cover exported routes and metadata, content links, interactive components, commercial-link gating, reading estimates and the dock checker's 25,200 answer combinations.
 
-- `npm run install:ci`: perform the one bounded lockfile install
-- `npm run dev`: start the Vite/Vinext development server
-- `npm run build`: build the deployable Sites artifact
-- `npm run start`: start the built Vinext application
-- `npm test`: build and verify the rendered development-preview metadata
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## Code Map
 
-Use build commands for targeted diagnosis after a remote failure, not as part of the normal checkpoint path.
+- `app/`: routes, metadata, sitemap and global/page styles.
+- `components/home/`: modular homepage and scroll-linked CANOD signal.
+- `components/kinetic-hero.tsx` and `lib/canod-sculpture.ts`: existing lazy-loaded Three.js sculpture and accessible controls.
+- `components/editorial-scene.tsx`: original lightweight SVG editorial scenes.
+- `components/dock-checker.tsx`: reusable client-side form, guidance and checklist download.
+- `lib/dock-checker.ts`: deterministic educational rules. No hardware detection or compatibility guarantee.
+- `lib/dock-sources.ts` and `lib/dock-guide.tsx`: official references and the USB-C dock guide.
+- `lib/guides.tsx` and `lib/editorial.ts`: guide content, pillars and visitor intents.
+- `lib/commercial-links.ts` and `components/affiliate-disclosure.tsx`: future commercial-link registry and gated disclosure/link components.
+- `app/globals.css`: existing brand/font tokens. `home.css` contains the signal/motion foundation; `publication.css`, `tools.css` and `editorial.css` style the publication experience.
+- `tests/`: Node tests against source and static output.
 
-The timeout defaults can be overridden for a controlled canary with `SITES_INSTALL_TIMEOUT`, `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`. A timeout fails the command; the helpers never retry an unchanged install or build.
+The original organizer and NAS guides, sourcing shortlist, partner information and contact-draft functionality remain available. Newsletter subscriptions and business-software coverage are explicitly planned, not presented as working services.
 
-## Learn More
+## Editorial and Commercial Rules
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Use primary sources for technical claims and record the source-check date. Separate research-based guidance from verified hands-on testing. The checker asks what to verify; it must never claim a dock is compatible without the exact hardware evidence.
+
+There are no approved tracking links in the registry. Pending entries render no commercial link or near-recommendation disclosure. Add a tracking URL only after approval, then explicitly mark the entry approved. Keep disclosure next to the relevant recommendation. Do not add UGREEN affiliate links. Do not claim affiliate-program membership merely because a revenue type exists in the code.
+
+No backend, account, external API or personal-data collection is used by the checker. It computes locally and generates a text-file download. It does not store answers between visits.
+
+## Deployment After Review
+
+The existing workflow is **Deploy CANOD to GitHub Pages**, in `.github/workflows/deploy-pages.yml`.
+
+After reviewing and committing the intended changes on `main`:
+
+```sh
+git push origin main
+```
+
+That push triggers installation, `npm run build:pages`, artifact upload from `out/` and deployment. Do not commit generated `out/` files.
+
+To rerun the workflow for code already pushed to `main`:
+
+```sh
+gh workflow run deploy-pages.yml --repo kamxnet/canod-web2 --ref main
+```
+
+No DNS, domain, email or hosting changes are required. A local build alone does not publish the site.

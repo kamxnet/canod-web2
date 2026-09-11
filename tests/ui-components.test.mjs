@@ -40,7 +40,7 @@ test("emits the homepage interactions and accessible motion alternatives", async
 
   assert.match(css, /\.home-story/);
   assert.match(css, /\.intent-option/);
-  assert.match(css, /\.navigator-result/);
+  assert.match(css, /\.dock-result/);
   assert.match(css, /\.process-step/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /mask-image:/);

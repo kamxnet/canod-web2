@@ -21,7 +21,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const guide = guides.find((item) => item.slug === slug);
   if (!guide) notFound();
   const date = new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(new Date(guide.date));
-  return <article>
+  const jsonLd = { "@context": "https://schema.org", "@type": "Article", headline: guide.title, description: guide.description, datePublished: guide.date, author: { "@type": "Organization", name: "CANOD", url: "https://canod.ca" }, publisher: { "@type": "Organization", name: "CANOD", url: "https://canod.ca" }, mainEntityOfPage: "https://canod.ca/guides/" + guide.slug + "/", inLanguage: "en-CA" };
+  return <article className="publication-page">
     <header className="article-header"><div className="site-container">
       <Link className="breadcrumb" href="/guides/"><ArrowLeft size={17} aria-hidden="true" />All buying guides</Link>
       <p className="eyebrow text-maple">{guide.category}</p>
@@ -43,5 +44,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         </section>
       </div>
     </div>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
   </article>;
 }

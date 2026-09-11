@@ -1,0 +1,70 @@
+.dock-checker { border-block: 1px solid var(--line); }
+.dock-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .7rem 2rem; border-bottom: 1px solid var(--line); padding-block: 1rem; color: var(--muted); font-size: .75rem; }
+.dock-toolbar > span:first-child { display: inline-flex; align-items: center; gap: .7rem; font-weight: 600; }
+.dock-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+.dock-form { padding: 2.5rem 2.5rem 2.5rem 0; position: sticky; top: 2rem; }
+.dock-form fieldset { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 1.2rem; min-width: 0; border: 0; padding: 0; margin: 0; }
+.dock-field { min-width: 0; }
+.dock-field label { display: flex; align-items: start; gap: .5rem; font-size: .8125rem; font-weight: 600; margin-bottom: .6rem; }
+.dock-field label > span { font-weight: 400; font-size: .625rem; color: var(--muted); padding-top: .15rem; }
+.dock-field select { display: block; width: 100%; min-width: 0; min-height: 48px; background: #fffefa; color: #244638; border: 1px solid #6c8d7b; border-radius: 3px; padding: .65rem .5rem; font-size: .8125rem; text-overflow: ellipsis; }
+.dock-field select:disabled { background: #e1e5df; color: #4f6055; cursor: not-allowed; }
+.dock-field-note { color: var(--muted); font-size: .75rem; line-height: 1.5; margin-top: .5rem; }
+.dock-actions { display: flex; align-items: center; gap: .75rem; margin-top: 2rem; }
+.dock-icon-button { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: var(--maple); background: none; border: 0; border-radius: 3px; }
+.dock-icon-button:hover { background: #dce5d9; }
+.dock-form-note { margin-top: 1rem; font-size: .8125rem; line-height: 1.65; color: var(--muted); max-width: 440px; }
+.dock-result { border-left: 1px solid var(--line); padding: 2.5rem 0 2.5rem 2.5rem; min-height: 545px; }
+.dock-result h3 { font-size: 2rem; line-height: 1.15; max-width: 430px; margin-bottom: 1rem; }
+.dock-result > .eyebrow { font-size: .75rem; color: var(--muted); }
+.dock-result > p:not(.eyebrow) { color: var(--muted); font-size: .9375rem; line-height: 1.7; }
+.dock-blueprint { display: flex; align-items: center; margin-block: .5rem 2rem; width: 100%; color: #55836d; }
+.dock-blueprint svg { width: 58px; height: 58px; }
+.dock-blueprint > span { flex: 1; height: 1px; background: #96b29f; min-width: 12px; }
+.dock-promises { list-style: none; margin: 1.5rem 0; padding: 0; }
+.dock-promises li { padding: .55rem 0; border-top: 1px solid var(--line); font-size: .875rem; color: var(--heading); }
+.dock-result .dock-disclaimer { border-left: 2px solid #95563f; padding-left: .8rem; font-size: .8125rem; }
+.dock-result .text-link { margin-top: 1.5rem; font-size: .875rem; }
+.dock-result-label { display: flex; align-items: center; gap: .6rem; }
+.dock-setup { display: flex; flex-wrap: wrap; list-style: none; margin: 1.25rem 0; padding: 0; gap: .35rem 1rem; font-size: .75rem; color: var(--muted); }
+.dock-setup li::before { content: "/"; margin-right: .5rem; color: #95563f; }
+.dock-notes { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.dock-notes li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: .75rem; border-top: 1px solid var(--line); padding-block: 1.2rem; }
+.dock-notes li > span { color: #76513e; font-size: .6875rem; padding-top: .2rem; }
+.dock-notes h4 { font-size: .9375rem; font-weight: 600; line-height: 1.5; color: var(--heading); margin: 0 0 .5rem; }
+.dock-notes p { font-size: .875rem; color: var(--muted); line-height: 1.7; }
+.dock-source { display: flex; align-items: center; gap: .4rem; width: fit-content; font-size: .75rem; line-height: 1.5; color: var(--maple); margin-top: .4rem; min-height: 32px; text-decoration: underline; text-underline-offset: 3px; }
+.dock-download { background: none; padding-inline: 0; border-top: 0; border-right: 0; border-left: 0; }
+.dock-result .dock-download-status { font-size: .75rem; min-height: 1.5em; margin-top: .5rem; }
+.dock-guide-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .875rem; color: var(--maple); text-decoration: underline; text-underline-offset: 4px; }
+.dock-noscript { font-size: .9375rem; padding-block: 1rem; }
+.dock-noscript a { text-decoration: underline; }
+.dock-checker :is(button, select, a):focus-visible { outline: 3px solid var(--maple); outline-offset: 4px; }
+.dock-result h3:focus { outline: 2px solid var(--maple); outline-offset: 5px; }
+.tool-source-note { margin-top: 2rem; max-width: 840px; color: var(--muted); font-size: .875rem; }
+.tool-source-note a { color: var(--maple); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1100px) {
+  .dock-form { padding-right: 1.5rem; }
+  .dock-result { padding-left: 1.5rem; }
+  .dock-form fieldset { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 700px) {
+  .dock-layout { grid-template-columns: 1fr; }
+  .dock-form { position: static; padding: 1.5rem 0 2rem; }
+  .dock-form fieldset { grid-template-columns: 1fr 1fr; }
+  .dock-result { border-left: 0; border-top: 1px solid var(--line); padding: 2rem 0; min-height: 500px; }
+  .dock-field select { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+  .dock-form fieldset { grid-template-columns: 1fr; gap: 1.25rem; }
+  .dock-field label { font-size: .875rem; }
+  .dock-actions .button { flex: 1; font-size: .875rem; padding-inline: .8rem; }
+  .dock-icon-button { flex-shrink: 0; }
+  .dock-toolbar { font-size: .6875rem; }
+  .dock-result h3 { font-size: 2rem; }
+}
+@media print {
+  .dock-form, .dock-toolbar, .dock-download { display: none; }
+  .dock-layout { display: block; }
+  .dock-result { border: 0; padding: 0; }
+}

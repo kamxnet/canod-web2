@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
 const nav = [
-  ["Product interests", "/interests/"], ["Buying guides", "/guides/"],
-  ["For brands", "/partners/"], ["About", "/about/"], ["Contact", "/contact/"],
+  ["Guides", "/guides/"], ["Tools", "/tools/"],
+  ["Our approach", "/editorial-standards/"], ["About", "/about/"], ["Contact", "/contact/"],
 ] as const;
 
 export function Header() {

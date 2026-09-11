@@ -73,6 +73,7 @@ export function KineticHero() {
           height={558}
           alt=""
           preload
+          fetchPriority="high"
           unoptimized
         />
       </div>
@@ -98,7 +99,7 @@ export function KineticHero() {
       </p>
       <TooltipProvider delayDuration={200}>
         <div className="sculpture-controls">
-          <p className="sculpture-invitation">Go on. Give it a spin.</p>
+          <p className="sculpture-invitation">Drag to explore</p>
           <Tooltip>
             <TooltipTrigger asChild>
               <button

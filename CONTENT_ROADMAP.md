@@ -15,7 +15,7 @@ This file is the authoritative topic ledger. Check it before creating an article
 | Order | Topic | Section | Status | Canonical coverage |
 | --- | --- | --- | --- | --- |
 | 1 | Why is my Wi-Fi slow in one room? | Connect | Published | `/guides/wifi-slow-in-one-room/` |
-| 2 | Do I need a router or mesh system? | Connect | Planned | — |
+| 2 | Do I need a router or mesh system? | Connect | Published | `/guides/router-or-mesh-system/` |
 | 3 | Will this USB-C hub support two monitors? | Connect | Covered | `/guides/seven-things-usb-c-dock/#displays` and `/tools/usb-c-dock-checker/` |
 | 4 | Can this charger safely power my laptop? | Power | Covered | `/guides/charger-safety-canada/#output` and `/guides/charger-safety-canada/#usb-c` |
 | 5 | What electrical approval marks should Canadians check? | Understand | Covered | `/guides/charger-safety-canada/#approval` and `/tools/canadian-electrical-safety-checklist/` |

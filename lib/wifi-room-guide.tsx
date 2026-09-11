@@ -41,7 +41,10 @@ export const wifiRoomGuide: Guide = {
   reviewed: "2026-09-11",
   scope: "A practical home-network troubleshooting guide. Results vary with the home, equipment, devices and radio environment; CANOD has not measured your network or tested the products mentioned.",
   methodology: "We reviewed current ISED consumer guidance, Canadian provider troubleshooting, CIRA's Canadian performance test and primary manufacturer documentation. We have not measured a particular home or verified a product for your setup.",
-  related: [{ title: "Separate local network speed from internet speed in the home NAS guide", href: "/guides/choosing-a-home-nas/#network-speed" }],
+  related: [
+    { title: "Decide whether one router or a mesh system fits the home", href: "/guides/router-or-mesh-system/" },
+    { title: "Separate local network speed from internet speed in the home NAS guide", href: "/guides/choosing-a-home-nas/#network-speed" },
+  ],
   sections: [
     { id: "problem", title: "The problem", content: <>
       <p>Video calls or downloads work near the router but stall in one bedroom, office or basement. When the problem follows the room, the wireless path is a stronger suspect than the speed of the internet plan. Distance, walls, furniture, nearby equipment and the band in use can all affect that path.</p>

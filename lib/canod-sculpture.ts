@@ -31,24 +31,33 @@ function createRibbon() {
   });
   geometry.setIndex(groups.flat());
 
+  // The cross-section and arc angles never change; keep them out of the frame loop.
+  const ring = Array.from({ length: RING_SEGMENTS + 1 }, (_, j) => {
+    const angle = j / RING_SEGMENTS * Math.PI * 2;
+    const cosine = Math.cos(angle), sine = Math.sin(angle);
+    return [Math.sign(cosine) * Math.abs(cosine) ** .45 * .61, Math.sign(sine) * Math.abs(sine) ** .45 * .24];
+  });
+  const arc = Array.from({ length: LENGTH_SEGMENTS + 1 }, (_, i) => {
+    const theta = .62 + (Math.PI * 2 - 1.24) * i / LENGTH_SEGMENTS;
+    return [theta, Math.cos(theta), Math.sin(theta)];
+  });
+
   const update = (time: number) => {
     for (let i = 0; i <= LENGTH_SEGMENTS; i++) {
-      const theta = .62 + (Math.PI * 2 - 1.24) * i / LENGTH_SEGMENTS;
+      const [theta, cosine, sine] = arc[i];
       const ripple = Math.sin(theta * 2.2 + time * .6) * .055;
       const twist = Math.sin(theta * 1.3 + time * .24) * .6 + .14;
-      const cx = Math.cos(theta) * (1.76 + ripple);
-      const cy = Math.sin(theta) * (1.95 + ripple);
+      const cx = cosine * (1.76 + ripple);
+      const cy = sine * (1.95 + ripple);
       const cz = Math.sin(theta * 2 + time * .35) * .34;
+      const twistCosine = Math.cos(twist), twistSine = Math.sin(twist);
       for (let j = 0; j <= RING_SEGMENTS; j++) {
-        const angle = j / RING_SEGMENTS * Math.PI * 2;
-        const cosine = Math.cos(angle), sine = Math.sin(angle);
-        const u = Math.sign(cosine) * Math.abs(cosine) ** .45 * .61;
-        const v = Math.sign(sine) * Math.abs(sine) ** .45 * .24;
-        const radial = u * Math.cos(twist) - v * Math.sin(twist);
-        const depth = u * Math.sin(twist) + v * Math.cos(twist);
+        const [u, v] = ring[j];
+        const radial = u * twistCosine - v * twistSine;
+        const depth = u * twistSine + v * twistCosine;
         const index = (i * (RING_SEGMENTS + 1) + j) * 3;
-        positions[index] = cx + Math.cos(theta) * radial;
-        positions[index + 1] = cy + Math.sin(theta) * radial;
+        positions[index] = cx + cosine * radial;
+        positions[index + 1] = cy + sine * radial;
         positions[index + 2] = cz + depth;
       }
     }
@@ -128,12 +137,12 @@ export function createCanodSculpture(canvas: HTMLCanvasElement, onLost: () => vo
   floor.receiveShadow = true;
   scene.add(floor);
 
-  let disposed = false, frame = 0, time = 0, lastTime = 0, paused = false, visible = true;
+  let disposed = false, compiled = false, frame = 0, time = 0, lastTime = 0, paused = false, visible = true;
   const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduced = preference.matches;
 
   const schedule = () => {
-    if (!disposed && !frame && visible && !document.hidden) frame = requestAnimationFrame(draw);
+    if (!disposed && compiled && !frame && visible && !document.hidden) frame = requestAnimationFrame(draw);
   };
   const draw = (now: number) => {
     frame = 0;
@@ -178,9 +187,16 @@ export function createCanodSculpture(canvas: HTMLCanvasElement, onLost: () => vo
   canvas.addEventListener("webglcontextlost", contextLost);
   controls.addEventListener("change", schedule);
   resize();
-  renderer.render(scene, camera);
+  // Allow the GPU to compile physical materials without blocking the main thread.
+  const ready = renderer.compileAsync(scene, camera).then(() => {
+    if (disposed) return;
+    compiled = true;
+    renderer.render(scene, camera);
+    schedule();
+  });
 
   return {
+    ready,
     setPaused(value: boolean) { paused = value; lastTime = 0; schedule(); },
     rotate(angle: number) {
       camera.position.sub(controls.target).applyAxisAngle(new THREE.Vector3(0, 1, 0), angle).add(controls.target);

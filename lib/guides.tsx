@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { PillarId } from "./editorial";
+import { backupStorageGuide } from "./backup-storage-guide";
 import { dockGuide } from "./dock-guide";
 import { routerMeshGuide } from "./router-mesh-guide";
 import { safetyGuide } from "./safety-guide";
@@ -124,6 +125,7 @@ export const guides: Guide[] = [
       { title: "Apple: backup disks for Time Machine", url: "https://support.apple.com/en-us/102423" },
     ],
   },
+  backupStorageGuide,
   wifiRoomGuide,
   routerMeshGuide,
 ];

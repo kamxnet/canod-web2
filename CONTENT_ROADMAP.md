@@ -19,7 +19,7 @@ This file is the authoritative topic ledger. Check it before creating an article
 | 3 | Will this USB-C hub support two monitors? | Connect | Covered | `/guides/seven-things-usb-c-dock/#displays` and `/tools/usb-c-dock-checker/` |
 | 4 | Can this charger safely power my laptop? | Power | Covered | `/guides/charger-safety-canada/#output` and `/guides/charger-safety-canada/#usb-c` |
 | 5 | What electrical approval marks should Canadians check? | Understand | Covered | `/guides/charger-safety-canada/#approval` and `/tools/canadian-electrical-safety-checklist/` |
-| 6 | How much backup storage do I need? | Store & Protect | Planned | — |
+| 6 | How much backup storage do I need? | Store & Protect | Published | `/guides/how-much-backup-storage/` |
 | 7 | Why does one USB-C cable work while another does not? | Connect | Planned | — |
 
 ## Publishing rules

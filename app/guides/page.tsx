@@ -3,7 +3,7 @@ import { PageIntro } from "@/components/page-intro";
 import { GuideList } from "@/components/guide-list";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("Practical Technology Guides", "Research-based Canadian guides to home Wi-Fi, USB-C docks, storage, backups and portable work. Understand compatibility and trade-offs before buying.", "/guides/");
+export const metadata = pageMetadata("Practical Technology Guides", "Research-based Canadian guides to home Wi-Fi, USB-C, portable power, storage and backups. Understand compatibility and trade-offs before buying.", "/guides/");
 
 export default function GuidesPage() {
   return <div className="publication-page">

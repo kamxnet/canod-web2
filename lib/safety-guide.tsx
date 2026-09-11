@@ -13,7 +13,7 @@ export const safetyGuide: Guide = {
   reviewed: safetyReviewDate,
   scope: "Educational buying considerations, not a product certification or legal, regulatory, engineering or professional safety assessment. CANOD is an independent buying resource, not a testing laboratory or approval body.",
   methodology: "We reviewed current federal consumer guidance, Ontario ESA approval information and USB-IF technical explanations. Ontario requirements are identified as provincial, not presented as a rule for every jurisdiction. We have not inspected, tested or approved a charger. This guide cannot establish the condition or compliance of a particular unit.",
-  related: [{ title: "USB-C dock buying guide", href: dockGuidePath }, { title: "Canadian Electrical Product Safety Checklist", href: safetyToolPath }],
+  related: [{ title: "USB-C dock buying guide", href: dockGuidePath }, { title: "Choose a power-bank capacity", href: "/guides/what-size-power-bank-do-i-need/" }, { title: "Canadian Electrical Product Safety Checklist", href: safetyToolPath }],
   sections: [
     { id: "approval", title: "1. Identify Canadian approval information", content: <>
       <p>For an outlet-powered charger, <a href={sources.electrical.url}>Health Canada recommends looking for a recognized Canadian certification mark</a>, with CSA, cUL and cETL among its examples. These names are references, not logos or a complete list. Ask for a clear view of the actual product label and model.</p>

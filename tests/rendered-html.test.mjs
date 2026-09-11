@@ -29,3 +29,14 @@ test("keeps the existing GitHub Pages routes and domain", async () => {
   }
   assert.equal((await readFile(new URL("../out/CNAME", import.meta.url), "utf8")).trim(), "canod.ca");
 });
+
+test("exports the power-bank sizing guide with its required structure", async () => {
+  const html = await readFile(new URL("../out/guides/what-size-power-bank-do-i-need/index.html", import.meta.url), "utf8");
+  assert.match(html, /What Size Power Bank Do I Need\?/);
+  assert.match(html, /https:\/\/canod\.ca\/guides\/what-size-power-bank-do-i-need\//);
+  for (const heading of ["The problem", "The 30-second answer", "What to check", "Step-by-step solution", "Common mistakes", "Canadian compatibility or safety note", "Recommended specifications", "Where to check suitable products"]) {
+    assert.ok(html.includes(heading), heading);
+  }
+  assert.match(html, /65% to 80% usable-energy range/);
+  assert.match(html, /No affiliate links are included/);
+});

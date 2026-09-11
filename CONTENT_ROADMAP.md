@@ -1,30 +1,80 @@
 # CANOD Content Roadmap
 
-This file is the authoritative topic ledger. Check it before creating an article. Do not create a separate article for a topic marked **Covered** unless the existing coverage is first shown to be materially incomplete.
+This is the authoritative topic ledger. Check it before creating a page. Do not create a separate page for a completed topic unless the recorded coverage is first shown to be materially incomplete.
 
-## Site sections
+## Site sections and clusters
 
-1. Connect
-2. Power
-3. Store & Protect
-4. Work Anywhere
-5. Understand
+1. Connect — Home Wi-Fi and networking; USB-C and computer connectivity
+2. Power — Charging and portable power
+3. Store & Protect — Storage, backup and protection
+4. Work Anywhere — Workstation and portable-work compatibility
+5. Understand — Canadian electrical safety and standards
 
-## Approved article queue
+## Publication limits
 
-| Order | Topic | Section | Status | Canonical coverage |
-| --- | --- | --- | --- | --- |
-| 1 | Why is my Wi-Fi slow in one room? | Connect | Published | `/guides/wifi-slow-in-one-room/` |
-| 2 | Do I need a router or mesh system? | Connect | Published | `/guides/router-or-mesh-system/` |
-| 3 | Will this USB-C hub support two monitors? | Connect | Covered | `/guides/seven-things-usb-c-dock/#displays` and `/tools/usb-c-dock-checker/` |
-| 4 | Can this charger safely power my laptop? | Power | Covered | `/guides/charger-safety-canada/#output` and `/guides/charger-safety-canada/#usb-c` |
-| 5 | What electrical approval marks should Canadians check? | Understand | Covered | `/guides/charger-safety-canada/#approval` and `/tools/canadian-electrical-safety-checklist/` |
-| 6 | How much backup storage do I need? | Store & Protect | Published | `/guides/how-much-backup-storage/` |
-| 7 | Why does one USB-C cable work while another does not? | Connect | Published | `/guides/why-usb-c-cables-work-differently/` |
+- The original seven-topic queue is complete. Its items do not count against the post-queue rolling limit.
+- Post-queue substantial items published in the rolling seven days ending 2026-09-11: **1 of 3**.
+- Search Console check on 2026-09-11: unavailable to the signed-in account for the `canod.ca` property; no Search Console figures are claimed.
+- Google Trends figures below are relative interest for Canadian Web Search, not monthly search volume.
 
-## Publishing rules
+## Original queue item records
 
-- Work through the approved queue in order, skipping topics already marked Covered or Published.
-- Assign new work to one of the five site sections above.
-- Keep each article practical, concise, research-based and supported by primary or authoritative Canadian sources.
-- Do not add affiliate links without program approval and an exact compliant tracking URL.
+| Title | Type | Section | Primary Canadian search intent | Related search terms | Demand evidence and research date | Canadian value | Related content cluster | Authoritative sources | Status | Live URL | Publication or update date |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Why is my Wi-Fi slow in one room? | article | Connect | Diagnose weak or slow Wi-Fi in one room | Wi-Fi dead zone; slow Wi-Fi bedroom; router placement | Original approved queue; research reviewed 2026-09-11 | Canadian home construction, ISP equipment and ISED radio context | Home Wi-Fi and networking | ISED Canada; Wi-Fi Alliance; CRTC; primary platform support | completed | `/guides/wifi-slow-in-one-room/` | 2026-09-11 |
+| Do I need a router, Wi-Fi extender or mesh system? | article | Connect | Choose a router, extender, mesh or wired access point | mesh vs extender; router coverage; wired backhaul | Original approved queue; research reviewed 2026-09-11 | Canadian home layouts, ISP gateways and spectrum context | Home Wi-Fi and networking | ISED Canada; Wi-Fi Alliance; CRTC; primary vendor documentation | completed | `/guides/router-or-mesh-system/` | 2026-09-11 |
+| Will this USB-C hub or dock support two monitors? | article | Connect | Check dual-monitor support before buying a hub or dock | USB-C two monitors; MST; DisplayPort Alt Mode | Original queue; existing coverage audit 2026-09-11 | Avoids incompatible Canadian purchases and return friction | USB-C and computer connectivity | USB-IF; VESA; Microsoft; Apple | completed | `/guides/seven-things-usb-c-dock/#displays` | 2026-09-11 |
+| Can this charger safely power my laptop? | article | Power | Match charger output and safety information to a laptop | laptop charger wattage; USB-C PD charger | Original queue; existing coverage audit 2026-09-11 | Canadian electrical approval and recall checks | Charging and portable power | Health Canada; Ontario ESA; USB-IF; device makers | completed | `/guides/charger-safety-canada/#output` | 2026-09-11 |
+| What electrical approval marks should Canadians check? | article | Understand | Identify Canadian electrical approval information | CSA mark; cUL; cETL; Canada charger certification | Original queue; existing coverage audit 2026-09-11 | Direct Canadian regulatory and safety relevance | Canadian electrical safety and standards | Health Canada; Ontario ESA; Standards Council of Canada | completed | `/guides/charger-safety-canada/#approval` | 2026-09-11 |
+| How much backup storage do I need? | article | Store & Protect | Estimate backup capacity for personal files | backup drive size; Time Machine storage; cloud backup quota | Original approved queue; research reviewed 2026-09-11 | Canadian cyber-safety guidance and practical capacity planning | Storage, backup and protection | Get Cyber Safe; Canadian Centre for Cyber Security; NIST; Apple; Microsoft; Google | completed | `/guides/how-much-backup-storage/` | 2026-09-11 |
+| Why does one USB-C cable work while another does not? | article | Connect | Diagnose different USB-C cable capabilities | USB-C cable video; cable wattage; USB data speed | Original approved queue; research reviewed 2026-09-11 | Reduces incompatible purchases using Canadian safety context | USB-C and computer connectivity | USB-IF; VESA; Health Canada; Microsoft; Apple | completed | `/guides/why-usb-c-cables-work-differently/` | 2026-09-11 |
+
+## Demand-driven expansion item records
+
+Re-check demand immediately before changing any proposed item to researched or in progress.
+
+| Title | Type | Section | Primary Canadian search intent | Related search terms | Demand evidence and research date | Canadian value | Related content cluster | Authoritative sources | Status | Live URL | Publication or update date |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| What Size Power Bank Do I Need? | article | Power | Choose a power-bank capacity for phones, tablets or laptops | power bank size; 10,000 mAh; portable charger capacity; power bank Wh | Google Trends Canada Web Search comparison checked 2026-09-11: “power bank” averaged 37 over five years and 63 over 12 months, versus 19/20 for “ethernet cable”, 9/10 for “surge protector” and 7/10 for “external SSD”; relative interest, not volume. Search Console unavailable. Editorial score: 92/100 (30 demand, 23 intent, 16 competitiveness, 13 Canadian value, 10 tool opportunity). | CATSA air-travel limits, Canadian recall checks and lithium-ion safety | Charging and portable power | CATSA; Transport Canada; Health Canada; USB-IF | completed | `/guides/what-size-power-bank-do-i-need/` | 2026-09-11 |
+| Why Is My Phone Charging Slowly? | article | Power | Diagnose slow phone charging | charging slowly all of a sudden; slow USB-C charging; charger wattage | Queue-approved; Google Trends re-check required. In the 2026-09-11 five-year comparison the exact phrase had low average interest but related Canadian queries were rising; no volume claimed. | Canadian charger safety and replacement guidance | Charging and portable power | Health Canada; USB-IF; Apple; Google; device makers | proposed | — | — |
+| Power Bar or Surge Protector: What Should Canadians Check? | article | Understand | Choose a power bar or surge protector safely | surge protector joules; power strip Canada; extension cord safety | Queue-approved; demand re-check required. “Surge protector” averaged 9 over five years and 10 over 12 months in the 2026-09-11 comparison; relative interest only. | Canadian approvals, load ratings, recalls and provincial safety context | Canadian electrical safety and standards | Health Canada; provincial electrical-safety authorities; Standards Council of Canada | proposed | — | — |
+| Which Ethernet Cable Do I Need: Cat5e, Cat6 or Cat6a? | article | Connect | Select an Ethernet category for a network link | Cat5e vs Cat6; Cat6 vs Cat6a; Ethernet cable speed | Queue-approved; demand re-check required. “Ethernet cable” averaged 19 over five years and 20 over 12 months in the 2026-09-11 comparison; related “cat 6 vs cat 6a” appeared among rising Canadian queries. Relative interest only. | Canadian homes, in-wall installation questions and practical network speeds | Home Wi-Fi and networking | IEEE; Telecommunications Industry Association; device makers; provincial code authorities where applicable | proposed | — | — |
+| External Hard Drive or SSD: Which Technology Fits My Use? | article | Store & Protect | Choose external HDD or SSD by use case | portable SSD vs hard drive; backup drive; external storage | Queue-approved; demand re-check required. “External SSD” averaged 7 over five years and 10 over 12 months in the 2026-09-11 comparison; relative interest only. | Canadian pricing, warranties and backup planning | Storage, backup and protection | NIST; Canadian Centre for Cyber Security; interface standards; platform makers | proposed | — | — |
+| Which microSD Card Will Work With My Device? | article | Store & Protect | Match microSD capacity and speed class to a device | SDHC vs SDXC; UHS; V30; A2 microSD | Queue-approved; demand re-check pending | Prevents capacity, file-system and speed-class mismatches | Storage, backup and protection | SD Association; device makers | proposed | — | — |
+| How Do I Choose a Docking Station? | article | Work Anywhere | Choose a dock from host, display, power and OS requirements | USB-C dock compatibility; Thunderbolt dock; dual monitors | Queue-approved; demand re-check pending; existing dock guide must be audited for duplication first | Avoids incompatible Canadian purchases and return friction | USB-C and computer connectivity | USB-IF; VESA; Microsoft; Apple; Thunderbolt documentation | proposed | — | — |
+| How Do I Choose a Laptop Charger? | article | Power | Match a replacement charger to a laptop | USB-C laptop charger; laptop charger wattage; PD profiles | Queue-approved; demand re-check pending; existing charger guide must be audited for duplication first | Canadian approval marks and compatible replacement guidance | Charging and portable power | Health Canada; provincial electrical-safety authorities; USB-IF; device makers | proposed | — | — |
+| How Should I Position a Router or Mesh Node? | article | Connect | Improve Wi-Fi through router or mesh placement | router placement; mesh node distance; Wi-Fi dead zones | Queue-approved; demand re-check pending; existing Wi-Fi guides must be audited for duplication first | Canadian home layouts and ISED spectrum context | Home Wi-Fi and networking | ISED Canada; Wi-Fi Alliance; primary platform documentation | proposed | — | — |
+| What Should I Check Before Buying a Monitor Arm? | article | Work Anywhere | Check monitor-arm size, weight and mount fit | VESA mount size; monitor weight; desk clamp | Queue-approved; demand re-check pending | Canadian purchase, warranty and safe-installation context | Workstation and portable-work compatibility | VESA; monitor and arm makers; workplace ergonomics authorities | proposed | — | — |
+| What Should Canadians Check Before Buying a Travel Adapter? | article | Power | Match plug shape, voltage and equipment needs for travel | travel plug adapter Canada; voltage converter; grounded adapter | Queue-approved; demand re-check pending | Canadian departure context, electrical approval and destination-voltage checks | Charging and portable power | Government of Canada travel guidance; Health Canada; IEC; device makers | proposed | — | — |
+| How Much NAS or Backup Capacity Do I Need? | article | Store & Protect | Estimate usable NAS and backup capacity | NAS RAID capacity; backup history; drive bays | Queue-approved; demand re-check pending; existing NAS and backup guides must be audited for duplication first | Canadian household backup and cyber-safety planning | Storage, backup and protection | Canadian Centre for Cyber Security; NIST; platform and NAS makers | proposed | — | — |
+
+## Interactive tool item records
+
+| Title | Type | Section | Primary Canadian search intent | Related search terms | Demand evidence and research date | Canadian value | Related content cluster | Authoritative sources | Status | Live URL | Publication or update date |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Power-Bank Capacity and Device-Charge Estimator | calculator | Power | Estimate rated power-bank Wh for a device and charge count | power bank calculator; mAh to Wh; portable charger size | Tool opportunity confirmed by power-bank research 2026-09-11; separate demand re-check required before build | Can surface CATSA thresholds and Canadian recall checks | Charging and portable power | CATSA; Transport Canada; Health Canada; USB-IF | proposed | — | — |
+| Laptop-Charger Wattage Compatibility Checker | checker | Power | Compare device input with charger and cable output | charger wattage checker; USB-C PD laptop | Approved tool queue; demand re-check pending | Canadian approval and compatible-replacement context | Charging and portable power | Health Canada; USB-IF; device makers | proposed | — | — |
+| Router-versus-Extender-versus-Mesh Decision Tool | selector | Connect | Choose a Wi-Fi coverage approach | mesh vs extender; router coverage | Approved tool queue; demand re-check pending | Canadian home and ISP-gateway context | Home Wi-Fi and networking | ISED Canada; Wi-Fi Alliance; primary platform documentation | proposed | — | — |
+| Wi-Fi Placement Troubleshooting Checklist | checker | Connect | Diagnose placement-related Wi-Fi problems | router location; mesh node placement | Approved tool queue; demand re-check pending | Canadian home layouts and spectrum context | Home Wi-Fi and networking | ISED Canada; Wi-Fi Alliance | proposed | — | — |
+| USB-C Dock and Dual-Monitor Compatibility Checker | checker | Connect | Check dock, host and display requirements | USB-C dock checker; two monitors | Existing tool coverage audited 2026-09-11 | Avoids incompatible Canadian purchases | USB-C and computer connectivity | USB-IF; VESA; Microsoft; Apple | completed | `/tools/usb-c-dock-checker/` | 2026-09-11 |
+| Ethernet Cable Selector | selector | Connect | Choose an Ethernet category and construction | Cat5e vs Cat6; in-wall Ethernet | Approved tool queue; demand re-check pending | Canadian home-network and installation context | Home Wi-Fi and networking | IEEE; Telecommunications Industry Association; applicable provincial authorities | proposed | — | — |
+| Backup-Storage Capacity Calculator | calculator | Store & Protect | Estimate backup destination capacity | backup calculator; drive size; retention | Approved tool queue; demand re-check pending | Canadian cyber-safety planning | Storage, backup and protection | Canadian Centre for Cyber Security; NIST; platform makers | proposed | — | — |
+| External HDD-versus-SSD Use-Case Selector | selector | Store & Protect | Choose external storage technology by use | HDD vs SSD; portable storage | Approved tool queue; demand re-check pending | Canadian buying and warranty context | Storage, backup and protection | Interface standards; platform and drive makers | proposed | — | — |
+| Canadian Electrical-Approval-Mark Checklist | checker | Understand | Record electrical approval and product-safety checks | CSA mark checker; cUL; cETL | Existing tool coverage audited 2026-09-11 | Direct Canadian safety and authority routing | Canadian electrical safety and standards | Health Canada; Ontario ESA; other provincial authorities | completed | `/tools/canadian-electrical-safety-checklist/` | 2026-09-11 |
+| Power-Bar and Surge-Protector Safety Checklist | checker | Understand | Check approval, ratings, use and recalls | power bar safety Canada; surge protector checklist | Approved tool queue; demand re-check pending | Direct Canadian approval and recall context | Canadian electrical safety and standards | Health Canada; provincial electrical-safety authorities | proposed | — | — |
+| USB-C Cable Capability Checker | checker | Connect | Match a cable to power, data and video needs | USB-C cable checker; 60W vs 240W | Approved tool queue; demand re-check pending | Canadian charger-safety context | USB-C and computer connectivity | USB-IF; VESA; device makers | proposed | — | — |
+| microSD Compatibility and Speed-Class Selector | selector | Store & Protect | Match a card to device capacity and write-speed needs | SDXC; UHS; V30; A2 | Approved tool queue; demand re-check pending | Reduces incompatible purchases | Storage, backup and protection | SD Association; device makers | proposed | — | — |
+
+## Post-original-queue publication ledger
+
+| Date | Item | Type | Section and cluster | Live URL | Rolling seven-day count after publication |
+| --- | --- | --- | --- | --- | --- |
+| 2026-09-11 | What Size Power Bank Do I Need? | article | Power — Charging and portable power | `/guides/what-size-power-bank-do-i-need/` | 1 of 3 |
+
+## Operating rules
+
+- Complete at most one substantial item per run and no more than three post-queue substantial items in any rolling seven-day period.
+- A tool and its explanatory article are separate roadmap items.
+- Change a status through `proposed` → `researched` → `in progress` → `completed`, or record `blocked` or `rejected` with a reason.
+- Do not add affiliate links without approval for the exact program and an exact compliant tracking URL.
+- Do not create a new visual system or change global design, navigation or architecture without Kam&apos;s approval.

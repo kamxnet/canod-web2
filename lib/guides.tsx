@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { PillarId } from "./editorial";
 import { backupStorageGuide } from "./backup-storage-guide";
 import { dockGuide } from "./dock-guide";
+import { powerBankGuide } from "./power-bank-guide";
 import { routerMeshGuide } from "./router-mesh-guide";
 import { safetyGuide } from "./safety-guide";
 import { usbCCableGuide } from "./usb-c-cable-guide";
@@ -130,4 +131,5 @@ export const guides: Guide[] = [
   wifiRoomGuide,
   routerMeshGuide,
   usbCCableGuide,
+  powerBankGuide,
 ];

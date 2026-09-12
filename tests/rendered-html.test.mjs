@@ -51,3 +51,14 @@ test("exports the slow-phone-charging guide with its required structure", async 
   assert.match(html, /note the battery percentage after 15 minutes/);
   assert.match(html, /No affiliate links are included/);
 });
+
+test("exports the Canadian power-bar and surge-protector guide with its required structure", async () => {
+  const html = await readFile(new URL("../out/guides/power-bar-or-surge-protector-canada/index.html", import.meta.url), "utf8");
+  assert.match(html, /Power Bar or Surge Protector: What Should Canadians Check\?/);
+  assert.match(html, /https:\/\/canod\.ca\/guides\/power-bar-or-surge-protector-canada\//);
+  for (const heading of ["The problem", "The 30-second answer", "What to check", "Step-by-step solution", "Common mistakes", "Canadian compatibility or safety note", "Recommended specifications", "Where to check suitable products"]) {
+    assert.ok(html.includes(heading), heading);
+  }
+  assert.match(html, /minimum 14 AWG copper conductor/);
+  assert.match(html, /No product or retailer link in this guide is an affiliate recommendation/);
+});

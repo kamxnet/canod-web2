@@ -3,6 +3,7 @@ import type { PillarId } from "./editorial";
 import { backupStorageGuide } from "./backup-storage-guide";
 import { dockGuide } from "./dock-guide";
 import { powerBankGuide } from "./power-bank-guide";
+import { powerBarSurgeProtectorGuide } from "./power-bar-surge-protector-guide";
 import { routerMeshGuide } from "./router-mesh-guide";
 import { safetyGuide } from "./safety-guide";
 import { slowPhoneChargingGuide } from "./slow-phone-charging-guide";
@@ -134,4 +135,5 @@ export const guides: Guide[] = [
   usbCCableGuide,
   powerBankGuide,
   slowPhoneChargingGuide,
+  powerBarSurgeProtectorGuide,
 ];

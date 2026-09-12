@@ -5,6 +5,7 @@ import { dockGuide } from "./dock-guide";
 import { powerBankGuide } from "./power-bank-guide";
 import { routerMeshGuide } from "./router-mesh-guide";
 import { safetyGuide } from "./safety-guide";
+import { slowPhoneChargingGuide } from "./slow-phone-charging-guide";
 import { usbCCableGuide } from "./usb-c-cable-guide";
 import { wifiRoomGuide } from "./wifi-room-guide";
 
@@ -132,4 +133,5 @@ export const guides: Guide[] = [
   routerMeshGuide,
   usbCCableGuide,
   powerBankGuide,
+  slowPhoneChargingGuide,
 ];

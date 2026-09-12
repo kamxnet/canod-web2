@@ -42,6 +42,7 @@ export const usbCCableGuide: Guide = {
   scope: "A practical guide to USB-C-to-USB-C cables used for charging, data, displays and docks. The devices and cable all affect the result; CANOD has not tested the products mentioned.",
   methodology: "We reviewed current USB-IF certification and power guidance, primary Apple and Microsoft support documents, VESA display guidance and Health Canada electrical-safety advice. Advertised maximums are capability ceilings, not promised real-world performance.",
   related: [
+    { title: "Diagnose slow phone charging", href: "/guides/why-is-my-phone-charging-slowly/" },
     { title: "Check a USB-C dock before buying", href: "/tools/usb-c-dock-checker/" },
     { title: "Check laptop charger safety in Canada", href: "/guides/charger-safety-canada/#usb-c" },
   ],

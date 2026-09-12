@@ -39,6 +39,7 @@ export const powerBankGuide: Guide = {
   scope: "A planning guide for personal electronics, not a battery-life, charging-speed, compatibility or safety guarantee. Conversion losses, temperature, cable losses, battery condition and device use all affect the result; CANOD has not tested the products mentioned.",
   methodology: "We reviewed current CATSA and Transport Canada air-travel guidance, Health Canada lithium-ion safety advice and USB-IF power documentation. The 65% to 80% usable-energy range is a conservative CANOD planning assumption, not a manufacturer rating or measured result for a particular power bank.",
   related: [
+    { title: "Diagnose slow phone charging", href: "/guides/why-is-my-phone-charging-slowly/" },
     { title: "Check charger safety in Canada", href: "/guides/charger-safety-canada/" },
     { title: "Match a USB-C cable to charging power", href: "/guides/why-usb-c-cables-work-differently/#specifications" },
   ],

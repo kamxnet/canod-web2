@@ -22,7 +22,24 @@ test("exports the public homepage without development-only metadata", async () =
 });
 
 test("keeps the existing GitHub Pages routes and domain", async () => {
-  for (const route of ["about", "contact", "interests", "partners", "guides", "privacy", "editorial-standards", "affiliate-disclosure", "tools", "tools/usb-c-dock-checker", "guides/seven-things-usb-c-dock", "guides/choosing-a-tech-organizer", "guides/choosing-a-home-nas"]) {
+  for (const route of [
+    "shop",
+    "learn",
+    "solutions",
+    "about",
+    "contact",
+    "interests",
+    "partners",
+    "guides",
+    "privacy",
+    "editorial-standards",
+    "affiliate-disclosure",
+    "tools",
+    "tools/usb-c-dock-checker",
+    "guides/seven-things-usb-c-dock",
+    "guides/choosing-a-tech-organizer",
+    "guides/choosing-a-home-nas",
+  ]) {
     const html = await readFile(new URL(`../out/${route}/index.html`, import.meta.url), "utf8");
     assert.match(html, /<h1\b/, route);
     assert.ok(html.includes(`https://canod.ca/${route}/`), route);
@@ -62,3 +79,30 @@ test("exports the Canadian power-bar and surge-protector guide with its required
   assert.match(html, /minimum 14 AWG copper conductor/);
   assert.match(html, /No product or retailer link in this guide is an affiliate recommendation/);
 });
+
+test("exports curated product pages, intent-based learn routes, and support pages with valid HTML and single h1", async () => {
+  const newRoutes = [
+    "shop/tb4-dual-display-dock",
+    "shop/compact-travel-usb-c-hub",
+    "shop/gan-100w-multiport-charger",
+    "learn/how-to",
+    "learn/buying-guides",
+    "learn/tech-explained",
+    "learn/canada",
+    "support",
+    "support/contact",
+    "support/shipping",
+    "support/returns",
+    "support/track-order",
+    "support/faq",
+    "support/warranty",
+  ];
+
+  for (const route of newRoutes) {
+    const html = await readFile(new URL(`../out/${route}/index.html`, import.meta.url), "utf8");
+    const h1Count = (html.match(/<h1\b/g) || []).length;
+    assert.equal(h1Count, 1, `Expected exactly 1 h1 in ${route}, found ${h1Count}`);
+    assert.ok(html.includes(`https://canod.ca/${route}/`), `Missing canonical in ${route}`);
+  }
+});
+

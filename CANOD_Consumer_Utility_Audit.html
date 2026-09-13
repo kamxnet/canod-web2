@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CANOD Consumer Utility Audit</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 10mm 12mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.38;
+    font-size: 8.5pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: 16pt;
+    margin-bottom: 2px;
+  }
+
+  h2 {
+    font-size: 11.5pt;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin-top: 0;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 9.5pt;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .header-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    margin-bottom: 8px;
+  }
+
+  .header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7.5pt;
+    color: #64748b;
+    margin-top: 6px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 5px;
+  }
+
+  .summary-box {
+    background-color: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    border-radius: 0 5px 5px 0;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    font-size: 7.8pt;
+    line-height: 1.35;
+  }
+
+  .summary-box strong {
+    color: #1d4ed8;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7.2pt;
+    margin-bottom: 8px;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  th, td {
+    padding: 3.5px 5px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  th {
+    background-color: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 6.8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 1.5px 4.5px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 6.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .badge-keep { background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+  .badge-simplify { background-color: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
+  .badge-rewrite { background-color: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
+  .badge-remove { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .badge-build { background-color: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+  .badge-live { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .badge-soon { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+
+  .score {
+    display: inline-block;
+    font-weight: 700;
+    padding: 1px 3px;
+    border-radius: 3px;
+  }
+  .score-high { color: #15803d; }
+  .score-med { color: #b45309; }
+  .score-low { color: #b91c1c; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .card {
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 6px 8px;
+    background-color: #ffffff;
+    page-break-inside: avoid;
+  }
+
+  .card-title {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 7.8pt;
+    margin-bottom: 2px;
+  }
+
+  .card-query {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 6.8pt;
+    color: #0284c7;
+    background-color: #f0f9ff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 2px;
+  }
+
+  .card-desc {
+    font-size: 7pt;
+    color: #475569;
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .card-monetize {
+    font-size: 6.8pt;
+    color: #059669;
+    font-weight: 600;
+  }
+
+  .jargon-tag {
+    display: inline-block;
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 6.5pt;
+    font-weight: 600;
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+
+  .page-container {
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+
+  .break-page {
+    page-break-before: always;
+  }
+
+  .recommendation-banner {
+    background-color: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 5px;
+    padding: 7px 10px;
+    margin-bottom: 6px;
+    page-break-inside: avoid;
+  }
+
+  .recommendation-banner h4 {
+    margin: 0 0 3px 0;
+    color: #6b21a8;
+    font-size: 8.5pt;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 14px;
+  }
+
+  li {
+    margin-bottom: 2.5px;
+    font-size: 7.3pt;
+    line-height: 1.3;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 7.2pt;
+    color: #94a3b8;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 4px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER & ALL 11 ARTICLES TABLE + JARGON BOX -->
+<div class="header-card">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <div>
+      <span style="font-size:7pt; font-weight:700; color:#2563eb; letter-spacing:0.08em; text-transform:uppercase;">Editorial & Engineering Audit</span>
+      <h1>CANOD Consumer Utility Audit</h1>
+      <p style="color:#475569; margin:0; font-size:8.5pt;">Comprehensive Evaluation of Articles, Tools, Technical Jargon, and Content Gaps for Everyday Consumers</p>
+    </div>
+    <div style="text-align:right;">
+      <span style="font-size:11pt; font-weight:800; color:#0f172a;">CANOD.CA</span><br>
+      <span class="badge badge-keep">Audit Report</span>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div><strong>Target Audience:</strong> Everyday Consumers (Homeowners, Remote Workers, Families)</div>
+    <div><strong>Date:</strong> September 2026</div>
+    <div><strong>Scope:</strong> 11 Published Guides • 8 Interactive Tools • 20 Content Gaps</div>
+  </div>
+</div>
+
+<div class="summary-box">
+  <strong>Executive Finding:</strong> CANOD's engineering foundation is exceptionally rigorous—its computational permutation engines, Canadian regulatory compliance references (CSA, ESA, Health Canada, CATSA), and technical accuracy are best-in-class. However, several existing articles and tools suffer from <em>cognitive friction and protocol-first framing</em> (e.g. demanding users identify "DisplayPort Alt Mode" or calculate RAID parity). CANOD must pivot from an "engineer's compliance manual" into an <strong>"instant problem solver"</strong> where technical terminology strictly follows simple, 30-second answers.
+</div>
+
+<h2>PART 1 — ARTICLES AUDIT (All 11 Published Guides)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:17%;">Article Title & Slug</th>
+      <th style="width:19%;">Main Search Question Answered</th>
+      <th style="width:11%;">Audience</th>
+      <th style="width:5%; text-align:center;">Tech</th>
+      <th style="width:5%; text-align:center;">Utility</th>
+      <th style="width:7%; text-align:center;">Fast?</th>
+      <th style="width:8%;">Commercial</th>
+      <th style="width:18%;">Product Categories</th>
+      <th style="width:10%; text-align:center;">Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Why Is My Phone Charging Slowly?</strong><br><span style="font-size:6.5pt; color:#64748b;">/why-is-my-phone-charging-slowly/</span></td>
+      <td>"Why is my phone taking forever to charge?"</td>
+      <td>Smartphone users</td>
+      <td style="text-align:center;"><span class="score score-high">3</span></td>
+      <td style="text-align:center;"><span class="score score-high">9.5</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>25W–45W GaN wall chargers, braided USB-C cables</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>Why Is My Wi-Fi Slow in One Room?</strong><br><span style="font-size:6.5pt; color:#64748b;">/wifi-slow-in-one-room/</span></td>
+      <td>"Why does Wi-Fi crawl in the bedroom upstairs?"</td>
+      <td>Homeowners, renters</td>
+      <td style="text-align:center;"><span class="score score-high">3</span></td>
+      <td style="text-align:center;"><span class="score score-high">9</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>Med-High</td>
+      <td>Wi-Fi 6 routers, mesh nodes, flat Ethernet cables</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>What Size Power Bank Do I Need?</strong><br><span style="font-size:6.5pt; color:#64748b;">/what-size-power-bank-do-i-need/</span></td>
+      <td>"What size portable battery should I buy for flights?"</td>
+      <td>Travelers, commuters</td>
+      <td style="text-align:center;"><span class="score score-high">4</span></td>
+      <td style="text-align:center;"><span class="score score-high">8</span></td>
+      <td style="text-align:center;">⚠️ Mod</td>
+      <td>High</td>
+      <td>10,000 mAh pocket power banks, 65W laptop banks</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>How Much Backup Storage Do I Need?</strong><br><span style="font-size:6.5pt; color:#64748b;">/how-much-backup-storage/</span></td>
+      <td>"What size external SSD do I need to back up files?"</td>
+      <td>Mac & Windows owners</td>
+      <td style="text-align:center;"><span class="score score-high">4</span></td>
+      <td style="text-align:center;"><span class="score score-high">8</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>1TB–2TB portable SSDs, desktop backup drives</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>Do I Need a Router or Mesh System?</strong><br><span style="font-size:6.5pt; color:#64748b;">/router-or-mesh-system/</span></td>
+      <td>"Should I buy a new router, extender, or mesh kit?"</td>
+      <td>Multi-floor owners</td>
+      <td style="text-align:center;"><span class="score score-high">4</span></td>
+      <td style="text-align:center;"><span class="score score-high">8</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>Whole-home mesh kits (Deco, Eero), Wi-Fi 6 routers</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>Why USB-C Cables Work Differently</strong><br><span style="font-size:6.5pt; color:#64748b;">/why-usb-c-cables-work-differently/</span></td>
+      <td>"Why doesn't my cable charge my laptop or run monitor?"</td>
+      <td>Everyday tech users</td>
+      <td style="text-align:center;"><span class="score score-med">5</span></td>
+      <td style="text-align:center;"><span class="score score-high">8</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>100W/240W charge cables, Thunderbolt 4 cables</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>Choosing a Tech Organizer</strong><br><span style="font-size:6.5pt; color:#64748b;">/choosing-a-tech-organizer/</span></td>
+      <td>"What is the best travel pouch for cables & chargers?"</td>
+      <td>Commuters, remote workers</td>
+      <td style="text-align:center;"><span class="score score-high">2</span></td>
+      <td style="text-align:center;"><span class="score score-med">7</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>Cable pouches, travel desk organizers, cord wraps</td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>Power Bar or Surge Protector: Canadian Guide</strong><br><span style="font-size:6.5pt; color:#64748b;">/power-bar-or-surge-protector-canada/</span></td>
+      <td>"Difference between power bar & surge protector?"</td>
+      <td>Home office & TV buyers</td>
+      <td style="text-align:center;"><span class="score score-med">6</span></td>
+      <td style="text-align:center;"><span class="score score-med">7</span></td>
+      <td style="text-align:center;">✅ Yes</td>
+      <td>High</td>
+      <td>Surge protectors with USB, heavy duty power bars</td>
+      <td style="text-align:center;"><span class="badge badge-simplify">SIMPLIFY</span></td>
+    </tr>
+    <tr>
+      <td><strong>Before Buying a Charger in Canada: Safety Checks</strong><br><span style="font-size:6.5pt; color:#64748b;">/charger-safety-canada/</span></td>
+      <td>"How do I know if an online charger is safe in Canada?"</td>
+      <td>Replacement charger buyers</td>
+      <td style="text-align:center;"><span class="score score-low">8</span></td>
+      <td style="text-align:center;"><span class="score score-med">5</span></td>
+      <td style="text-align:center;">❌ No</td>
+      <td>High</td>
+      <td>Certified GaN wall chargers, multi-port desk chargers</td>
+      <td style="text-align:center;"><span class="badge badge-simplify">SIMPLIFY</span></td>
+    </tr>
+    <tr>
+      <td><strong>Seven Things Before Buying a USB-C Dock</strong><br><span style="font-size:6.5pt; color:#64748b;">/seven-things-usb-c-dock/</span></td>
+      <td>"How to connect two monitors to laptop with 1 cable?"</td>
+      <td>Desk workers, multi-monitor</td>
+      <td style="text-align:center;"><span class="score score-low">9</span></td>
+      <td style="text-align:center;"><span class="score score-low">4</span></td>
+      <td style="text-align:center;">❌ No</td>
+      <td>High</td>
+      <td>Dual-monitor docks, Thunderbolt 4 hubs, DisplayLink</td>
+      <td style="text-align:center;"><span class="badge badge-rewrite">REWRITE</span></td>
+    </tr>
+    <tr>
+      <td><strong>Choosing a Home NAS: Storage & Backups</strong><br><span style="font-size:6.5pt; color:#64748b;">/choosing-a-home-nas/</span></td>
+      <td>"Should I get a NAS or just an external hard drive?"</td>
+      <td>Enthusiasts (alienates users)</td>
+      <td style="text-align:center;"><span class="score score-low">9</span></td>
+      <td style="text-align:center;"><span class="score score-low">3</span></td>
+      <td style="text-align:center;">❌ No</td>
+      <td>Medium</td>
+      <td>2-bay NAS enclosures, 3.5" NAS drives, external drives</td>
+      <td style="text-align:center;"><span class="badge badge-rewrite">REWRITE</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="display:flex; gap:8px; margin-top:4px;">
+  <div style="flex:1; border:1px solid #e2e8f0; border-radius:5px; padding:6px 8px; background:#fafafa;">
+    <h4 style="margin:0 0 3px 0; font-size:7.5pt; color:#b91c1c;">Flagged Acronyms & Engineering Jargon</h4>
+    <div>
+      <span class="jargon-tag">DP Alt Mode</span>
+      <span class="jargon-tag">MST</span>
+      <span class="jargon-tag">USB4/TB4</span>
+      <span class="jargon-tag">EPR (240W)</span>
+      <span class="jargon-tag">DisplayLink</span>
+      <span class="jargon-tag">DSC</span>
+      <span class="jargon-tag">RAID 0/1</span>
+      <span class="jargon-tag">Diskless</span>
+      <span class="jargon-tag">1GbE</span>
+      <span class="jargon-tag">ESA Rule 2-024</span>
+      <span class="jargon-tag">CATSA</span>
+    </div>
+    <p style="font-size:6.8pt; color:#64748b; margin:2px 0 0 0;"><strong>Rule:</strong> Never lead with these terms in headlines or intro paragraphs. A consumer must be told <em>"Charging cords do not carry video"</em> before any mention of DP Alt Mode.</p>
+  </div>
+  <div style="flex:1; border:1px solid #e2e8f0; border-radius:5px; padding:6px 8px; background:#fafafa;">
+    <h4 style="margin:0 0 3px 0; font-size:7.5pt; color:#0369a1;">Title Optimization for Natural Search</h4>
+    <table style="font-size:6.8pt; margin:0;">
+      <thead>
+        <tr><th>Current Editorial Title</th><th>Recommended Natural Search Title</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Seven Things to Check Before Buying a USB-C Dock</td><td><strong>How to Connect Two Monitors to a Laptop (Mac & PC)</strong></td></tr>
+        <tr><td>Before Buying a Charger in Canada: Seven Safety Checks</td><td><strong>Is This Charger Safe to Buy in Canada? (Look for These 3 Logos)</strong></td></tr>
+        <tr><td>Power Bar or Surge Protector: What Should Canadians Check?</td><td><strong>Power Bar vs Surge Protector: Which Do You Actually Need?</strong></td></tr>
+        <tr><td>Choosing a Home NAS: Storage, Backups & Compatibility</td><td><strong>External Hard Drive, Cloud, or NAS: Which Do You Need?</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer-note">CANOD Editorial & Technology Audit • Practical Technology for Canada (canod.ca)</div>
+
+<div class="break-page"></div>
+
+<!-- PAGE 2: TOOLS AUDIT & CODE INSPECTION -->
+<h2>PART 2 — TOOLS AUDIT (Calculators & Interactive Checkers)</h2>
+<p style="font-size:7.5pt; color:#64748b; margin-bottom:5px;">Inspection of all 8 active and planned tools in <code>lib/tools-data.ts</code>, including code-level inspection of <code>dock-checker.ts</code> and <code>safety-checker.ts</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:18%;">Tool Name & Slug</th>
+      <th style="width:8%; text-align:center;">Status</th>
+      <th style="width:21%;">Consumer Problem Solved</th>
+      <th style="width:16%;">Inputs Required</th>
+      <th style="width:16%;">Outputs Provided</th>
+      <th style="width:5%; text-align:center;">Tech</th>
+      <th style="width:5%; text-align:center;">Utility</th>
+      <th style="width:11%; text-align:center;">Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>USB-C Dock & Dual Monitor Checker</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/usb-c-dock-checker/</span></td>
+      <td style="text-align:center;"><span class="badge badge-live">Live</span></td>
+      <td>"Will this dock run two extended monitors and charge my laptop?"</td>
+      <td>Device, OS, Port type (DP Alt Mode, USB4), Monitors, Res, Watts</td>
+      <td>Compatibility report, Mac MST warning, DisplayLink alert, power check</td>
+      <td style="text-align:center;"><span class="score score-low">8</span></td>
+      <td style="text-align:center;"><span class="score score-med">6</span></td>
+      <td style="text-align:center;"><span class="badge badge-simplify">SIMPLIFY</span></td>
+    </tr>
+    <tr>
+      <td><strong>Canadian Electrical Safety Checklist</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/canadian-electrical-safety-checklist/</span></td>
+      <td style="text-align:center;"><span class="badge badge-live">Live</span></td>
+      <td>"Is this unbranded charger or power bar a fire hazard?"</td>
+      <td>Product type, Mains power, Approval marks, Specs, Seller, Recall</td>
+      <td>Confirmed/Verify/Concern status, safety warnings, registry links</td>
+      <td style="text-align:center;"><span class="score score-med">5</span></td>
+      <td style="text-align:center;"><span class="score score-med">5</span></td>
+      <td style="text-align:center;"><span class="badge badge-simplify">SIMPLIFY</span></td>
+    </tr>
+    <tr>
+      <td><strong>Dual Monitor Hub & Bandwidth Calculator</strong><br><span style="font-size:6.5pt; color:#64748b;">Active via Dock Suite</span></td>
+      <td style="text-align:center;"><span class="badge badge-live">Live</span></td>
+      <td>"Can my laptop run two 4K screens at 60 Hz without lagging?"</td>
+      <td>Processor (Mac/PC), Target resolution, Refresh rate (60/120 Hz)</td>
+      <td>Display lane allocation assessment, Mac warning, port sequence</td>
+      <td style="text-align:center;"><span class="score score-med">7</span></td>
+      <td style="text-align:center;"><span class="score score-med">6</span></td>
+      <td style="text-align:center;"><span class="badge badge-keep">MERGE</span></td>
+    </tr>
+    <tr>
+      <td><strong>Charger Wattage Calculator</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/#charger-wattage-calculator</span></td>
+      <td style="text-align:center;"><span class="badge badge-soon">Soon</span></td>
+      <td>"What wattage charger do I need for my phone & laptop together?"</td>
+      <td>Laptop model, Phone model, Tablet, Simultaneous devices, Travel/Desk</td>
+      <td>Recommended total wattage (65W/100W GaN), port splitting preview</td>
+      <td style="text-align:center;"><span class="score score-high">4</span></td>
+      <td style="text-align:center;"><span class="score score-high">10</span></td>
+      <td style="text-align:center;"><span class="badge badge-build">BUILD NEXT</span></td>
+    </tr>
+    <tr>
+      <td><strong>USB-C Cable Capability Checker</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/#usbc-cable-checker</span></td>
+      <td style="text-align:center;"><span class="badge badge-soon">Soon</span></td>
+      <td>"Will the cable in my drawer charge my laptop or run a monitor?"</td>
+      <td>Intended task (power, data, monitor), Cable tip markings, Length</td>
+      <td>Verdict: Full power / Slow charging / No video + shopping guidance</td>
+      <td style="text-align:center;"><span class="score score-high">4</span></td>
+      <td style="text-align:center;"><span class="score score-high">9</span></td>
+      <td style="text-align:center;"><span class="badge badge-build">BUILD NEXT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Wi-Fi Coverage & Node Calculator</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/#wifi-coverage-calculator</span></td>
+      <td style="text-align:center;"><span class="badge badge-soon">Soon</span></td>
+      <td>"Do I need a single router, an extender, or a 2/3-pack mesh kit?"</td>
+      <td>Home size (sq ft), Floors/basement, Wall material, Modem location</td>
+      <td>Verdict: Router vs 2-pack Mesh, node placement map, wiring tips</td>
+      <td style="text-align:center;"><span class="score score-med">5</span></td>
+      <td style="text-align:center;"><span class="score score-high">9.5</span></td>
+      <td style="text-align:center;"><span class="badge badge-build">BUILD NEXT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Backup Storage Capacity Calculator</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/#backup-storage-calculator</span></td>
+      <td style="text-align:center;"><span class="badge badge-soon">Soon</span></td>
+      <td>"What size external SSD should I buy so it doesn't fill up in 6 mo?"</td>
+      <td>Computer drive size, Annual photo/video growth, Desired history years</td>
+      <td>Recommended drive size (1TB/2TB/4TB), 3-2-1 backup checklist</td>
+      <td style="text-align:center;"><span class="score score-high">3</span></td>
+      <td style="text-align:center;"><span class="score score-high">8</span></td>
+      <td style="text-align:center;"><span class="badge badge-keep">KEEP</span></td>
+    </tr>
+    <tr>
+      <td><strong>NAS Capacity & RAID Calculator</strong><br><span style="font-size:6.5pt; color:#64748b;">/tools/#nas-capacity-calculator</span></td>
+      <td style="text-align:center;"><span class="badge badge-soon">Soon</span></td>
+      <td>"How much usable space do I get after RAID mirroring?"</td>
+      <td>Bays count (2/4), Drive capacity (4TB/8TB), Mirroring safety</td>
+      <td>Usable space vs parity drive space vs filesystem formatting loss</td>
+      <td style="text-align:center;"><span class="score score-med">6</span></td>
+      <td style="text-align:center;"><span class="score score-low">3</span></td>
+      <td style="text-align:center;"><span class="badge badge-remove">REMOVE</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="display:flex; gap:8px; margin-top:4px;">
+  <div style="flex:1; border:1px solid #e2e8f0; border-radius:5px; padding:6px 8px; background:#ffffff;">
+    <h4 style="margin:0 0 2px 0; font-size:7.8pt; color:#0f172a;">1. USB-C Dock Compatibility Engine (<code>lib/dock-checker.ts</code>)</h4>
+    <p style="font-size:7pt; color:#475569; margin:0;"><strong>Assessment:</strong> 25,200 permutations. Technically brilliant: accurately flags Mac MST mirror limitations and DisplayLink permissions. <strong>Flaw:</strong> Asks users to choose "DP Alt Mode" vs "USB4". <em>Must replace with a simple laptop brand/model picker.</em></p>
+  </div>
+  <div style="flex:1; border:1px solid #e2e8f0; border-radius:5px; padding:6px 8px; background:#ffffff;">
+    <h4 style="margin:0 0 2px 0; font-size:7.8pt; color:#0f172a;">2. Canadian Electrical Safety Engine (<code>lib/safety-checker.ts</code>)</h4>
+    <p style="font-size:7pt; color:#475569; margin:0;"><strong>Assessment:</strong> 183,708 permutations. Safely enforces dependency checks. <strong>Flaw:</strong> 10 self-reported form fields asking users to read tiny embossed text and search federal databases. <em>Must rebuild into a 3-step visual "Safe or Scam" screener.</em></p>
+  </div>
+</div>
+
+<div class="footer-note">CANOD Editorial & Technology Audit • Practical Technology for Canada (canod.ca)</div>
+
+<div class="break-page"></div>
+
+<!-- PAGE 3: CONTENT GAPS (PROBLEMS 1-10) -->
+<h2>PART 3 — CONTENT GAPS: 20 Everyday Consumer Problems (Part I)</h2>
+<p style="font-size:7.5pt; color:#64748b; margin-bottom:6px;">High-intent consumer search problems CANOD should prioritize over engineering topics (Items 1 to 10).</p>
+
+<div class="card-grid">
+  <div class="card">
+    <div class="card-title">1. Laptop Won't Charge Over USB-C</div>
+    <div class="card-query">Search: "laptop plugged in not charging usb-c"</div>
+    <div class="card-desc">User tries charging a 65W laptop with a 15W phone charger or unrated cable; laptop shows warning icon or slowly drains under load.</div>
+    <div class="card-monetize">Monetize: 65W–100W GaN chargers, 100W/240W USB-C cables</div>
+  </div>
+  <div class="card">
+    <div class="card-title">2. Laptop Won't Detect External Monitor ("No Signal")</div>
+    <div class="card-query">Search: "laptop not detecting monitor hdmi usb-c"</div>
+    <div class="card-desc">User plugs HDMI or USB-C into a monitor and gets a black screen. Diagnosing cable mismatch, input source, and display driver settings.</div>
+    <div class="card-monetize">Monetize: Certified USB-C to HDMI/DP cables, HDMI 2.1 cords</div>
+  </div>
+  <div class="card">
+    <div class="card-title">3. How to Connect Two Monitors to a Laptop (Mac vs PC)</div>
+    <div class="card-query">Search: "how to connect two monitors to macbook air"</div>
+    <div class="card-desc">Explains why standard docks mirror both screens on Apple Silicon Macs (MST limitation) and shows the exact dock/adapter to get two extended screens.</div>
+    <div class="card-monetize">Monetize: Dual-display docks, DisplayLink adapters</div>
+  </div>
+  <div class="card">
+    <div class="card-title">4. Which Charger Do I Need for My Phone and Laptop?</div>
+    <div class="card-query">Search: "one charger for phone and laptop"</div>
+    <div class="card-desc">How to replace 3 bulky power bricks with one compact travel charger. Explains simultaneous wattage splitting in simple English.</div>
+    <div class="card-monetize">Monetize: Multi-port 65W–100W GaN travel plugs</div>
+  </div>
+  <div class="card">
+    <div class="card-title">5. Which HDMI Cable Do I Actually Need for My TV / Monitor?</div>
+    <div class="card-query">Search: "difference between hdmi cables 4k 120hz"</div>
+    <div class="card-desc">Saves consumers from buying $80 "gold-plated 8K" cables when a $14 certified Premium or Ultra High Speed HDMI cable does the job.</div>
+    <div class="card-monetize">Monetize: Certified 18Gbps (HDMI 2.0) and 48Gbps (HDMI 2.1) cables</div>
+  </div>
+  <div class="card">
+    <div class="card-title">6. External SSD vs Portable Hard Drive: Which Should You Buy?</div>
+    <div class="card-query">Search: "external ssd vs hard drive for backup"</div>
+    <div class="card-desc">Explains why SSDs cost more but survive drops, transfer photos 5× faster, and don't fail when bumped during a vacation backup.</div>
+    <div class="card-monetize">Monetize: Rugged portable SSDs (Samsung T7, Crucial X9)</div>
+  </div>
+  <div class="card">
+    <div class="card-title">7. How to Back Up Phone Photos Without Paying for Cloud Storage</div>
+    <div class="card-query">Search: "backup iphone photos to external drive no icloud"</div>
+    <div class="card-desc">How to move thousands of photos from an iPhone or Android to a portable SSD or flash drive to escape recurring $4–$15 monthly cloud fees.</div>
+    <div class="card-monetize">Monetize: Dual USB-C flash drives, portable backup SSDs</div>
+  </div>
+  <div class="card">
+    <div class="card-title">8. USB-C Cable Won't Display Video on My Monitor</div>
+    <div class="card-query">Search: "usb c cable not working with monitor"</div>
+    <div class="card-desc">Demystifies why a charging cable that charges a phone fine gives a black screen on a monitor (charging vs high-speed video wiring).</div>
+    <div class="card-monetize">Monetize: Certified USB-C Video and Thunderbolt 4 cables</div>
+  </div>
+  <div class="card">
+    <div class="card-title">9. Travel Chargers for Canadians: Adapters vs Converters</div>
+    <div class="card-query">Search: "canadian plug adapter for europe voltage"</div>
+    <div class="card-desc">Explains plug shape vs voltage conversion so travelers don't melt hair curlers or fry phone chargers in Europe, Asia, or the UK.</div>
+    <div class="card-monetize">Monetize: Universal all-in-one travel adapters with USB-C</div>
+  </div>
+  <div class="card">
+    <div class="card-title">10. Cable Organization for a Clean Desk: The Beginner's Setup</div>
+    <div class="card-query">Search: "how to hide cables under desk home office"</div>
+    <div class="card-desc">Practical step-by-step guide to routing power bricks, monitor cables, and laptop cords for an uncluttered, single-cable workspace.</div>
+    <div class="card-monetize">Monetize: Under-desk wire trays, velcro ties, cable boxes</div>
+  </div>
+</div>
+
+<div class="footer-note">CANOD Editorial & Technology Audit • Practical Technology for Canada (canod.ca)</div>
+
+<div class="break-page"></div>
+
+<!-- PAGE 4: CONTENT GAPS (PROBLEMS 11-20) -->
+<h2>PART 3 (Cont'd) — CONTENT GAPS: 20 Everyday Consumer Problems (Part II)</h2>
+<p style="font-size:7.5pt; color:#64748b; margin-bottom:6px;">High-intent consumer search problems CANOD should prioritize over engineering topics (Items 11 to 20).</p>
+
+<div class="card-grid">
+  <div class="card">
+    <div class="card-title">11. Why Does My Wi-Fi Drop or Freeze During Zoom / Teams Calls?</div>
+    <div class="card-query">Search: "video calls lag but internet speed test is fast"</div>
+    <div class="card-desc">Explains bufferbloat, jitter, and microwave/Bluetooth interference when download speeds are fine but live audio and video stutter.</div>
+    <div class="card-monetize">Monetize: Wi-Fi 6 routers with QoS, flat Ethernet cables</div>
+  </div>
+  <div class="card">
+    <div class="card-title">12. Why Is My Phone Getting Unusually Hot While Charging?</div>
+    <div class="card-query">Search: "phone gets hot while charging fast"</div>
+    <div class="card-desc">When heat is normal during fast charging vs when thick cases, direct sunlight, or failing batteries cause thermal throttling.</div>
+    <div class="card-monetize">Monetize: Ventilated wireless charging stands, optimized chargers</div>
+  </div>
+  <div class="card">
+    <div class="card-title">13. Why Is My Bluetooth Mouse or Keyboard Stuttering / Lagging?</div>
+    <div class="card-query">Search: "wireless mouse cursor lagging stuttering"</div>
+    <div class="card-desc">Reveals how USB 3.0 ports radiate RF interference that jams 2.4 GHz wireless mouse dongles, and how a short extension fixes it.</div>
+    <div class="card-monetize">Monetize: Short USB extender cords, reliable Bluetooth mice</div>
+  </div>
+  <div class="card">
+    <div class="card-title">14. How to Connect Old USB Flash Drives to a New USB-C Laptop</div>
+    <div class="card-query">Search: "how to plug normal usb into macbook"</div>
+    <div class="card-desc">A plain-English guide to cheap 2-pack USB-A to USB-C adapters and small travel hubs for users whose new laptop has only oval ports.</div>
+    <div class="card-monetize">Monetize: Compact USB-C to USB-A adapters, mini hubs</div>
+  </div>
+  <div class="card">
+    <div class="card-title">15. Why Won't My Power Bank Charge My Laptop?</div>
+    <div class="card-query">Search: "can power bank charge my macbook laptop"</div>
+    <div class="card-desc">Explains why a portable battery that charges an iPhone easily does nothing when plugged into a laptop (requires 45W–65W USB Power Delivery).</div>
+    <div class="card-monetize">Monetize: 65W+ laptop-capable power banks (Anker 737, Baseus)</div>
+  </div>
+  <div class="card">
+    <div class="card-title">16. Why Is My External Hard Drive "Read-Only" on Mac?</div>
+    <div class="card-query">Search: "cannot copy files to external hard drive mac"</div>
+    <div class="card-desc">Explains Windows NTFS vs Mac APFS vs cross-platform exFAT so users can share drives between Windows and Mac without losing files.</div>
+    <div class="card-monetize">Monetize: ExFAT pre-formatted cross-platform portable drives</div>
+  </div>
+  <div class="card">
+    <div class="card-title">17. How to Clean a Dirty USB-C Charging Port Safely</div>
+    <div class="card-query">Search: "charging cable loose falls out of phone"</div>
+    <div class="card-desc">How compressed pocket lint prevents cables from clicking in, and how to safely clean the port with non-conductive tools without damaging pins.</div>
+    <div class="card-monetize">Monetize: Anti-static cleaning tools, port dust plugs</div>
+  </div>
+  <div class="card">
+    <div class="card-title">18. Why Is Wireless Charging So Slow (or Stopping at 80%)?</div>
+    <div class="card-query">Search: "magsafe wireless charging slow iphone"</div>
+    <div class="card-desc">Explains thermal throttling, coil misalignment, thick cases, and why wireless charging is inherently slower and hotter than a cable.</div>
+    <div class="card-monetize">Monetize: Certified MagSafe / Qi2 15W stands with active cooling</div>
+  </div>
+  <div class="card">
+    <div class="card-title">19. Why Won't My Smart Bulb or Robot Vacuum Connect to Wi-Fi?</div>
+    <div class="card-query">Search: "smart plug won't connect to 5ghz wifi mesh router"</div>
+    <div class="card-desc">The 2.4 GHz vs 5 GHz single-SSID mesh trap that breaks smart home pairing, and how to temporarily split bands or use an IoT guest network.</div>
+    <div class="card-monetize">Monetize: Dual-band routers with dedicated IoT network support</div>
+  </div>
+  <div class="card">
+    <div class="card-title">20. Is It Safe to Leave Laptops and Phones Plugged in Overnight?</div>
+    <div class="card-query">Search: "does leaving laptop plugged in damage battery"</div>
+    <div class="card-desc">Debunks charging myths, explains modern charge-controller circuits, and shows how 80% charge limits help long-term battery health.</div>
+    <div class="card-monetize">Monetize: Certified Canadian power bars with thermal cutoff</div>
+  </div>
+</div>
+
+<div class="footer-note">CANOD Editorial & Technology Audit • Practical Technology for Canada (canod.ca)</div>
+
+<div class="break-page"></div>
+
+<!-- PAGE 5: FINAL STRATEGIC RECOMMENDATIONS & ACTION PLAN -->
+<h2>PART 4 — FINAL STRATEGIC RECOMMENDATIONS</h2>
+
+<div class="card-grid">
+  <div class="card">
+    <h3 style="color:#15803d; margin-top:0;">A. Best 5 Existing Articles</h3>
+    <ul>
+      <li><strong>1. Why Is My Phone Charging Slowly?</strong> Flagship article. 15-minute diagnostic test, room-temp checks, lint inspection. Absolute benchmark for the site.</li>
+      <li><strong>2. Why Is My Wi-Fi Slow in One Room?</strong> Isolates single-device issues from building layout and router placement before pushing hardware.</li>
+      <li><strong>3. What Size Power Bank Do I Need?</strong> Solves the 10,000 mAh vs real watt-hours dilemma and clarifies Canadian airport 100 Wh rules.</li>
+      <li><strong>4. Why USB-C Cables Work Differently:</strong> Demystifies identical cables using the relatable Apple charge cable vs Thunderbolt comparison.</li>
+      <li><strong>5. Do I Need a Router or Mesh System?</strong> Saves families hundreds of dollars by helping them avoid unnecessary 3-pack mesh systems.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="color:#b91c1c; margin-top:0;">B. Worst 5 Existing Articles</h3>
+    <ul>
+      <li><strong>1. Choosing a Home NAS:</strong> Reads like an enterprise IT guide (RAID parity, diskless bays, 1GbE ceilings). Completely misaligned with ordinary consumers.</li>
+      <li><strong>2. Seven Things Before Buying a USB-C Dock:</strong> Paralyzes users with DP Alt Mode, MST, and DisplayLink permissions before solving their monitor setup.</li>
+      <li><strong>3. Before Buying a Charger in Canada:</strong> Valuable safety points, but reads like an ESA compliance brief citing Ontario rules.</li>
+      <li><strong>4. Power Bar or Surge Protector:</strong> Gets bogged down in joule clamping voltages and provincial bulletins rather than simple buying rules.</li>
+      <li><strong>5. Choosing a Tech Organizer:</strong> Good advice, but lowest consumer problem urgency and thinnest search volume on the site.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card-grid">
+  <div class="card">
+    <h3 style="color:#0284c7; margin-top:0;">C. Best Existing Tool</h3>
+    <p><strong>USB-C Dock Compatibility Checker</strong> (<code>/tools/usb-c-dock-checker/</code>)</p>
+    <p style="font-size:7.2pt; color:#475569; margin:0;">Its 25,200-permutation client-side engine in <code>lib/dock-checker.ts</code> is technically flawless. It accurately diagnoses Apple Silicon Mac dual-monitor mirroring and DisplayLink screen-recording permissions. <em>Once protocol dropdowns are replaced by a simple laptop selector, it will be CANOD's most valuable tool.</em></p>
+  </div>
+
+  <div class="card">
+    <h3 style="color:#991b1b; margin-top:0;">D. Tools to Remove or Rebuild</h3>
+    <ul>
+      <li><strong>REMOVE: NAS Capacity Calculator:</strong> Everyday consumers do not buy 4-bay NAS enclosures or configure RAID. Synology already provides a free RAID calculator. Replace with a <em>Photo & Cloud Storage Cost Calculator</em>.</li>
+      <li><strong>REBUILD: Canadian Electrical Safety Checklist:</strong> Rebuild the 10-question self-report form into a 3-step visual <em>"Safe or Scam Screener"</em> with photos of genuine vs fake CSA marks.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="recommendation-banner" style="margin-top:6px;">
+  <h4>E. The FIRST 10 Articles CANOD Should Improve / Create</h4>
+  <table style="font-size:7.2pt; margin:0;">
+    <thead>
+      <tr>
+        <th style="width:8%;">Priority</th>
+        <th style="width:12%;">Action</th>
+        <th style="width:38%;">Working Title</th>
+        <th style="width:42%;">Core Objective</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>#1</strong></td><td><span class="badge badge-rewrite">REWRITE</span></td><td><strong>How to Connect Two Monitors to a Laptop (Mac & PC)</strong></td><td>Solve the dual extended display puzzle without confusing users with MST jargon.</td></tr>
+      <tr><td><strong>#2</strong></td><td><span class="badge badge-simplify">SIMPLIFY</span></td><td><strong>Is This Charger Safe to Buy in Canada? (Look for These 3 Logos)</strong></td><td>Visual guide showing genuine CSA/cUL logos vs fake CE stamps on Amazon/Temu.</td></tr>
+      <tr><td><strong>#3</strong></td><td><span class="badge badge-simplify">SIMPLIFY</span></td><td><strong>Power Bar vs Surge Protector: Which Do You Actually Need?</strong></td><td>Distinguish outlet expansion from surge suppression; keep the space heater warning prominent.</td></tr>
+      <tr><td><strong>#4</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>My Laptop Won't Charge Over USB-C: Quick Fixes</strong></td><td>Diagnose underpowered phone bricks, loose lint in ports, and bad cables in 5 minutes.</td></tr>
+      <tr><td><strong>#5</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>Which Charger Do I Need for My Phone and Laptop?</strong></td><td>The definitive guide to buying one multi-port GaN travel plug for all devices.</td></tr>
+      <tr><td><strong>#6</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>Laptop Won't Detect External Monitor: How to Fix "No Signal"</strong></td><td>Step-by-step diagnostic workflow for HDMI, DisplayPort, and USB-C display blackouts.</td></tr>
+      <tr><td><strong>#7</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>Which HDMI Cable Do I Actually Need for My TV or Monitor?</strong></td><td>Demystify HDMI 2.0 vs 2.1 without getting tricked by $80 overpriced retailer cords.</td></tr>
+      <tr><td><strong>#8</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>External SSD vs Portable Hard Drive: Which Should You Buy?</strong></td><td>Speed, durability, and reliability compared for backing up photos and computers.</td></tr>
+      <tr><td><strong>#9</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>How to Back Up Photos from Your Phone Without Monthly Cloud Fees</strong></td><td>Save hundreds of dollars by moving photos directly to a dual-drive or portable SSD.</td></tr>
+      <tr><td><strong>#10</strong></td><td><span class="badge badge-build">CREATE</span></td><td><strong>Travel Chargers for Canadians: Adapters vs Converters Explained</strong></td><td>Prevent fried curling irons and dead laptops when traveling to Europe, UK, and Asia.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="recommendation-banner" style="background-color:#f0fdf4; border-color:#bbf7d0; margin-top:6px;">
+  <h4 style="color:#166534;">F. The FIRST 3 Tools CANOD Should Perfect</h4>
+  <div style="display:flex; gap:6px; margin-top:4px;">
+    <div style="flex:1; background:#ffffff; border:1px solid #bbf7d0; border-radius:5px; padding:6px 8px;">
+      <span class="badge badge-build">Tool 1: Build Next</span>
+      <h4 style="margin:2px 0 1px 0; font-size:7.6pt; color:#0f172a;">Charger Wattage Calculator</h4>
+      <p style="font-size:6.8pt; color:#475569; margin:0;">Calculates total watts and simultaneous port splitting (e.g. 65W laptop + 30W phone = 100W GaN). Solves the universal single-charger shopping dilemma. Highest affiliate monetization potential.</p>
+    </div>
+    <div style="flex:1; background:#ffffff; border:1px solid #bbf7d0; border-radius:5px; padding:6px 8px;">
+      <span class="badge badge-simplify">Tool 2: Simplify Existing</span>
+      <h4 style="margin:2px 0 1px 0; font-size:7.6pt; color:#0f172a;">USB-C Dock Compatibility Checker</h4>
+      <p style="font-size:6.8pt; color:#475569; margin:0;">Keep the brilliant 25,200 permutation engine, but remove protocol dropdowns ("DP Alt Mode"). Replace with a simple laptop brand/model picker. Solves the #1 desk setup headache for Mac & Windows.</p>
+    </div>
+    <div style="flex:1; background:#ffffff; border:1px solid #bbf7d0; border-radius:5px; padding:6px 8px;">
+      <span class="badge badge-build">Tool 3: Build Next</span>
+      <h4 style="margin:2px 0 1px 0; font-size:7.6pt; color:#0f172a;">Wi-Fi Coverage & Placement Calculator</h4>
+      <p style="font-size:6.8pt; color:#475569; margin:0;">Takes home square footage, floor count, and wall materials to deliver a clear verdict: "Single router vs 2-pack mesh", with interactive node placement advice that eliminates dead zones.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">CANOD Editorial & Technology Audit • Practical Technology for Canada (canod.ca)</div>
+
+</body>
+</html>

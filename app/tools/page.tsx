@@ -6,6 +6,8 @@ import {
   Clock,
   Wrench,
   Sparkles,
+  Zap,
+  Wifi,
 } from "lucide-react";
 import { PageIntro } from "@/components/page-intro";
 import { pageMetadata } from "@/lib/metadata";
@@ -15,8 +17,8 @@ import { canodToolsList } from "@/lib/tools-data";
 import "@/app/tools.css";
 
 export const metadata = pageMetadata(
-  "CANOD Interactive Tools & Calculators",
-  "Browser-based engineering tools for technology decisions: USB-C dock compatibility, charger wattage curves, Wi-Fi placement, and Canadian electrical safety checklists.",
+  "CANOD Interactive Tools & Calculators — Everyday Tech Problem Solvers",
+  "Simple, browser-based tools for everyday technology questions: charger wattage, dual monitor laptop compatibility, and Wi-Fi coverage.",
   "/tools/",
 );
 
@@ -26,7 +28,7 @@ export default function ToolsPage() {
     "@type": "CollectionPage",
     name: "CANOD Tools: Practical Technology Calculators",
     description:
-      "Browser-based educational compatibility and safety tools for Canadian technology buyers.",
+      "Browser-based educational compatibility, charging, and Wi-Fi tools for Canadian technology buyers.",
     url: "https://canod.ca/tools/",
     publisher: {
       "@type": "Organization",
@@ -37,32 +39,65 @@ export default function ToolsPage() {
 
   return (
     <div className="publication-page tools-page">
-      <PageIntro label="CANOD / Tools Suite" title="A clearer starting point.">
+      <PageIntro label="CANOD / Tools Suite" title="Tech problems, solved in seconds.">
         <p>
-          Small, practical tools for the engineering details worth checking before you buy.
+          Free, interactive tools to answer your everyday questions before you buy.
           Our calculators run entirely client-side in your browser with zero tracking, account requirements, or data collection.
         </p>
       </PageIntro>
 
-      {/* Primary Live Tools Spotlight */}
+      {/* Primary Flagship Tools Spotlight */}
       <section className="section-space">
         <div className="site-container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow text-maple">Interactive Rule Engines</p>
-              <h2>Active Functional Tools</h2>
+              <p className="eyebrow text-maple">Flagship Problem Solvers</p>
+              <h2>Instant Browser Tools</h2>
             </div>
             <p>
-              Fully functioning browser-based evaluators. Tested against thousands of hardware permutations.
+              Fully functioning browser-based evaluators. Fast answers with zero sales pressure.
             </p>
           </div>
 
           <div className="tools-featured-stack">
-            {/* Live Tool 1: Dock Checker */}
+            {/* Live Tool 1: Charger Calculator */}
             <div className="tool-featured-card">
               <div className="tool-featured-art" aria-hidden="true">
-                <Cable size={48} strokeWidth={1} />
+                <Zap size={44} strokeWidth={1.25} color="#2563eb" />
                 <span className="tool-featured-num">01</span>
+              </div>
+              <div className="tool-featured-content">
+                <div className="tool-status-row">
+                  <span className="tool-active-badge">Free Instant Calculator</span>
+                  <span className="tool-category-badge">Power &amp; Charging</span>
+                </div>
+                <h3>Which charger do I need for my phone and laptop?</h3>
+                <p className="eyebrow text-muted" style={{ marginBottom: "0.75rem", fontSize: "0.8rem" }}>
+                  Charger Wattage &amp; Fast-Charging Calculator
+                </p>
+                <p>
+                  Find out exactly how many watts your charger needs so your laptop stays charged during heavy use while simultaneously fast-charging your phone without slowing down.
+                </p>
+                <div className="tool-inputs-summary">
+                  <strong>What it calculates:</strong> Single vs multi-port wattage splitting, GaN size tiers (30W, 65W, 100W, 140W), and cable wattage limits (60W vs 100W/240W).
+                </div>
+                <div className="actions">
+                  <Link className="button button-dark" href="/tools/charger-wattage-calculator/">
+                    Calculate Charger Size Now <ArrowRight size={18} aria-hidden="true" />
+                  </Link>
+                  <Link className="text-link" href="/guides/which-charger-do-i-need/">
+                    Read Charger Guide <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+                <p className="tool-featured-note">Client-side calculator. Solves the multi-device travel charger dilemma.</p>
+              </div>
+            </div>
+
+            {/* Live Tool 2: Dock Checker */}
+            <div className="tool-featured-card">
+              <div className="tool-featured-art" aria-hidden="true">
+                <Cable size={44} strokeWidth={1.25} color="#2563eb" />
+                <span className="tool-featured-num">02</span>
               </div>
               <div className="tool-featured-content">
                 <div className="tool-status-row">
@@ -74,34 +109,66 @@ export default function ToolsPage() {
                   USB-C Dock &amp; Dual Monitor Compatibility Checker
                 </p>
                 <p>
-                  Answer a few simple questions about your laptop model, operating system, and screens.
-                  Our rule engine checks 25,200 hardware combinations in seconds to tell you whether two screens will work before you buy adapters.
+                  Select your laptop model and monitors to immediately see whether your computer can show two different extended screens, whether DisplayLink is required on a Mac, and if your laptop will charge at full speed.
                 </p>
                 <div className="tool-inputs-summary">
-                  <strong>What it checks:</strong> Mac vs. Windows dual screen limits, DisplayPort speeds, whether your laptop will charge at full speed, and required cable types.
+                  <strong>What it checks:</strong> Apple Silicon MacBook single-screen limits, Windows MST dual extended display support, and laptop power delivery.
                 </div>
                 <div className="actions">
                   <Link className="button button-dark" href={dockToolPath}>
-                    Run 30-Second Compatibility Check <ArrowRight size={18} aria-hidden="true" />
+                    Check Monitor Compatibility <ArrowRight size={18} aria-hidden="true" />
                   </Link>
                   <Link className="text-link" href="/guides/seven-things-usb-c-dock/">
-                    Read Companion Guide <ArrowRight size={16} aria-hidden="true" />
+                    Read Dual Monitor Guide <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="tool-featured-note">Runs locally in your browser. Includes a printable pre-purchase checklist.</p>
+                <p className="tool-featured-note">Updated with consumer laptop presets (MacBook Air, Pro, Dell, Lenovo, Surface).</p>
               </div>
             </div>
 
-            {/* Live Tool 2: Safety Checklist */}
+            {/* Live Tool 3: Wi-Fi Calculator */}
             <div className="tool-featured-card">
               <div className="tool-featured-art" aria-hidden="true">
-                <ClipboardList size={48} strokeWidth={1} />
-                <span className="tool-featured-num">02</span>
+                <Wifi size={44} strokeWidth={1.25} color="#059669" />
+                <span className="tool-featured-num">03</span>
+              </div>
+              <div className="tool-featured-content">
+                <div className="tool-status-row">
+                  <span className="tool-active-badge">Free Instant Tool</span>
+                  <span className="tool-category-badge">Home Wi-Fi</span>
+                </div>
+                <h3>How can I improve my Wi-Fi coverage?</h3>
+                <p className="eyebrow text-muted" style={{ marginBottom: "0.75rem", fontSize: "0.8rem" }}>
+                  Wi-Fi Coverage &amp; Node Placement Tool
+                </p>
+                <p>
+                  Find out whether repositioning your existing router, upgrading to Wi-Fi 6, or investing in a 2-node mesh system will eliminate dead zones upstairs and in the basement.
+                </p>
+                <div className="tool-inputs-summary">
+                  <strong>What it checks:</strong> Home square footage, floor penetration, modem location, and the golden node placement rule to avoid dead zone traps.
+                </div>
+                <div className="actions">
+                  <Link className="button button-dark" href="/tools/wifi-coverage-calculator/">
+                    Check My Wi-Fi Coverage <ArrowRight size={18} aria-hidden="true" />
+                  </Link>
+                  <Link className="text-link" href="/guides/wifi-slow-in-one-room/">
+                    Read Wi-Fi Guide <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </div>
+                <p className="tool-featured-note">Diagnoses the real wireless bottleneck before you spend money on equipment.</p>
+              </div>
+            </div>
+
+            {/* Live Tool 4: Safety Checklist */}
+            <div className="tool-featured-card">
+              <div className="tool-featured-art" aria-hidden="true">
+                <ClipboardList size={44} strokeWidth={1.25} />
+                <span className="tool-featured-num">04</span>
               </div>
               <div className="tool-featured-content">
                 <div className="tool-status-row">
                   <span className="tool-active-badge">Free Safety Audit</span>
-                  <span className="tool-category-badge">Canadian Safety &amp; Electrical</span>
+                  <span className="tool-category-badge">Canadian Electrical Safety</span>
                 </div>
                 <h3>Is my charger or power bar safe to plug in?</h3>
                 <p className="eyebrow text-muted" style={{ marginBottom: "0.75rem", fontSize: "0.8rem" }}>
@@ -122,14 +189,14 @@ export default function ToolsPage() {
                     Read Canadian Safety Guide <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="tool-featured-note">Educational only. Does not physically test hardware or authenticate marks.</p>
+                <p className="tool-featured-note">Educational checklist. Does not physically test hardware or authenticate marks.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Complete CANOD Tools Suite Grid (Live + Coming Soon) */}
+      {/* Complete Tools Suite Grid */}
       <section className="section-space bg-paper">
         <div className="site-container">
           <div className="section-heading">
@@ -169,7 +236,6 @@ export default function ToolsPage() {
                   <p className="suite-tool-tagline">{tool.tagline}</p>
                   <p className="suite-tool-desc">{tool.description}</p>
 
-                  {/* Planned Inputs & Outputs Preview */}
                   <div className="suite-preview-box">
                     <div className="preview-column">
                       <span className="preview-label">Input Parameters:</span>
@@ -199,7 +265,7 @@ export default function ToolsPage() {
                     ) : (
                       <div className="suite-coming-soon-notice">
                         <Clock size={16} className="text-muted" aria-hidden="true" />
-                        <span>Architecture planned. Coming soon — no calculation faked.</span>
+                        <span>Coming soon — verified calculation engine in development.</span>
                       </div>
                     )}
 

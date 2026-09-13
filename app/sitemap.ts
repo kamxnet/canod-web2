@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...guides.map(({ slug }) => `/guides/${slug}/`),
     "/tools/",
     "/tools/usb-c-dock-checker/",
+    "/tools/charger-wattage-calculator/",
+    "/tools/wifi-coverage-calculator/",
     safetyToolPath,
     "/support/",
     "/support/contact/",

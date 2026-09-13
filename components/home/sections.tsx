@@ -12,9 +12,8 @@ import {
 } from "lucide-react";
 import { KineticHero } from "@/components/kinetic-hero";
 import { DockChecker } from "@/components/dock-checker";
-import { EditorialScene } from "@/components/editorial-scene";
 import { guides } from "@/lib/guides";
-import { dockGuidePath, dockToolPath } from "@/lib/dock-sources";
+import { dockToolPath } from "@/lib/dock-sources";
 import { readingMinutes } from "@/lib/guide-reading";
 import { solutionBlueprints } from "@/lib/solutions-data";
 import { shopItems, shopCategoryDescriptions } from "@/lib/shop-data";
@@ -340,7 +339,12 @@ export function HomeDockTool() {
 }
 
 export function HomeGuides() {
-  const guide = guides.find((item) => item.slug === "seven-things-usb-c-dock")!;
+  const popularGuides = [
+    guides.find((g) => g.slug === "why-is-my-phone-charging-slowly"),
+    guides.find((g) => g.slug === "wifi-slow-in-one-room"),
+    guides.find((g) => g.slug === "my-laptop-wont-charge"),
+  ].filter(Boolean) as typeof guides;
+
   return (
     <section
       id="buying-guides"
@@ -348,54 +352,41 @@ export function HomeGuides() {
       data-story-chapter="guides"
       aria-labelledby="guides-heading"
     >
-      <div className="site-container featured-layout">
-        <div className="featured-intro">
-          <ChapterLabel number="03">Popular simple guides</ChapterLabel>
-          <h2 id="guides-heading">
-            One cable.<br />
-            Seven things to check.
-          </h2>
-          <p>
-            7 Things to Check Before Connecting Dual Monitors. Plain-English guidance on ports, charging, and display adapters that product listings leave out.
-          </p>
+      <div className="site-container">
+        <div className="home-section-heading">
+          <div>
+            <ChapterLabel number="03">Popular guides</ChapterLabel>
+            <h2 id="guides-heading">
+              Straight answers.<br />
+              No jargon.
+            </h2>
+          </div>
+          <div className="tool-heading-copy">
+            <p>
+              Plain-English solutions written for real everyday problems — not for engineers. Each guide answers your question in the first paragraph.
+            </p>
+            <Link href="/guides/" className="text-link">
+              Browse all guides <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
-        <article className="featured-story">
-          <div className="featured-art">
-            <EditorialScene kind="work" id="featured-dock" />
-            <span className="featured-seven" aria-hidden="true">
-              07
-            </span>
-          </div>
-          <div className="featured-meta">
-            <span>Work &amp; connectivity</span>
-            <span>~{readingMinutes(guide.sections)} min read</span>
-            <span>Research-based</span>
-          </div>
-          <h3>
-            <Link href={dockGuidePath}>{guide.title}</Link>
-          </h3>
-          <p>{guide.description}</p>
-          <nav
-            className="featured-topics"
-            aria-label="Topics in this guide"
-          >
-            {[
-              ["Computer & ports", "computer-and-port"],
-              ["Connecting screens", "displays"],
-              ["Laptop charging", "power-delivery"],
-              ["Cables & adapters", "ports-and-cables"],
-              ["Windows vs. Mac", "operating-system"],
-              ["Display adapters", "displaylink"],
-              ["Buying in Canada", "canadian-purchase"],
-            ].map(([label, anchor], index) => (
-              <Link key={anchor} href={dockGuidePath + "#" + anchor}>
-                <span aria-hidden="true">0{index + 1}</span>
-                {label}
-                <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
-            ))}
-          </nav>
-        </article>
+        <div className="reading-grid">
+          {popularGuides.map((guide) => (
+            <article className="reading-card" key={guide.slug}>
+              <p className="eyebrow">
+                {guide.category}
+                <span>~{readingMinutes(guide.sections)} min</span>
+              </p>
+              <h3>
+                <Link href={"/guides/" + guide.slug + "/"}>
+                  {guide.title}
+                  <ArrowUpRight size={22} aria-hidden="true" />
+                </Link>
+              </h3>
+              <p style={{ fontSize: "0.875rem", marginTop: "0.5rem", opacity: 0.75, lineHeight: 1.5 }}>{guide.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -580,6 +571,20 @@ export function HomePerspective() {
 }
 
 export function HomeReading() {
+  const curatedSlugs = [
+    "which-charger-do-i-need",
+    "which-hdmi-cable-do-i-need",
+    "laptop-wont-detect-monitor",
+    "external-ssd-vs-hard-drive",
+    "backup-photos-without-cloud",
+    "power-bar-or-surge-protector-canada",
+    "charger-safety-canada",
+    "travel-chargers-adapters-converters",
+  ];
+  const curatedGuides = curatedSlugs
+    .map((slug) => guides.find((g) => g.slug === slug))
+    .filter(Boolean) as typeof guides;
+
   return (
     <section
       className="home-reading home-light home-section"
@@ -589,7 +594,7 @@ export function HomeReading() {
       <div className="site-container">
         <div className="home-section-heading">
           <div>
-            <ChapterLabel number="09">Keep following your curiosity</ChapterLabel>
+            <ChapterLabel number="09">More useful reads</ChapterLabel>
             <h2 id="reading-heading">
               Useful now.<br />
               More to explore.
@@ -597,15 +602,15 @@ export function HomeReading() {
           </div>
           <div className="tool-heading-copy">
             <p>
-              Practical reading on fit, trade-offs, and the details worth checking before you buy.
+              Practical answers on cables, chargers, storage, and everyday tech decisions — written for real people, not IT departments.
             </p>
-            <Link href="/learn/" className="text-link">
-              Visit the Learn Hub <ArrowRight size={17} aria-hidden="true" />
+            <Link href="/guides/" className="text-link">
+              Browse all guides <ArrowRight size={17} aria-hidden="true" />
             </Link>
           </div>
         </div>
         <div className="reading-grid">
-          {guides.map((guide) => (
+          {curatedGuides.map((guide) => (
             <article className="reading-card" key={guide.slug}>
               <p className="eyebrow">
                 {guide.category}

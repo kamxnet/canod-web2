@@ -4,49 +4,153 @@ import { dockSources as sources, dockSourceCheckDate, dockToolPath } from "./doc
 
 export const dockGuide: Guide = {
   slug: "seven-things-usb-c-dock",
-  related: [{ title: "Before Buying a Charger in Canada: Seven Safety Checks", href: "/guides/charger-safety-canada/" }, { title: "Canadian Electrical Product Safety Checklist", href: "/tools/canadian-electrical-safety-checklist/" }],
-  title: "Seven Things to Check Before Buying a USB-C Dock",
-  category: "Work & connectivity",
+  related: [
+    { title: "Diagnose a laptop that won't charge over USB-C", href: "/guides/my-laptop-wont-charge/" },
+    { title: "Why does one USB-C cable work while another does not?", href: "/guides/why-usb-c-cables-work-differently/" },
+    { title: "USB-C Dock & Dual Monitor Compatibility Checker", href: dockToolPath },
+  ],
+  title: "How to Connect Two Monitors to a Laptop (Mac & PC)",
+  category: "Monitors & Docks",
   pillar: "work",
-  description: "One cable is the idea. Compatibility is the detail. Check your displays, charging and operating system before choosing a dock.",
+  description:
+    "Connect two external screens with one cable. How to get independent extended desktops on Mac and Windows without duplicate mirrored screens.",
   date: dockSourceCheckDate,
   sections: [
-    { id: "computer-and-port", title: "1. Start with the computer, not the dock", content: <>
-      <p>Write down your computer&apos;s exact model and the port you intend to use. A connector that fits does not establish which data, display or charging features are available. <a href={sources.windows.url}>Microsoft&apos;s USB-C guidance</a> identifies mismatches between the host, cable and connected device as common causes of limited functionality.</p>
-      <p>Look for the manufacturer&apos;s port specification: USB data speed, DisplayPort Alt Mode, USB4 or the Thunderbolt generation, as applicable. If a feature is not stated, treat it as unverified. Ask the dock maker about that exact host and port rather than relying on a broad &ldquo;USB-C compatible&rdquo; label.</p>
-      <p>A dock can simplify a setup, but a direct monitor connection and a small hub may already cover your needs. Start with the missing function, not the largest port count.</p>
-    </> },
-    { id: "displays", title: "2. Plan the complete display arrangement", content: <>
-      <p>Record the number of external screens, the resolution and refresh rate of each, and whether you need separate desktops or mirrored content. A statement such as &ldquo;4K support&rdquo; does not answer all of those questions.</p>
-      <p>Check the computer&apos;s total external-display limit as well as the dock&apos;s simultaneous-output table. <a href={sources.mac.url}>Apple&apos;s MacBook Pro guidance</a> makes clear that supported display combinations depend on the model, resolution and refresh rate; a supported Thunderbolt hub does not raise the computer&apos;s native maximum. Other Mac models need their own specification page.</p>
-      <p>For a dock that uses DisplayPort Multi-Stream Transport (MST), ask whether the exact computer and operating system support the desired extended-display arrangement. Count the built-in screen too when the manufacturer&apos;s instructions require it. Do not assume that two sockets mean two independent desktops.</p>
-    </> },
-    { id: "power-delivery", title: "3. Check the power that reaches the computer", content: <>
-      <p>Compare your computer&apos;s USB-C charging requirements with the dock&apos;s stated power delivery <em>to the host</em>, not just a number printed on its power adapter. Confirm whether the required adapter is included. Ask about operation under your normal workload, not just charging while idle.</p>
-      <p>The computer, charger and cable must support the needed charging standard and power level. <a href={sources.windows.url}>Microsoft explains why insufficient power or the wrong charging port can prevent charging or cause slow charging</a>. Keep the original power supply available if the manufacturer requires it.</p>
-    </> },
-    { id: "ports-and-cables", title: "4. Trace every cable and shared connection", content: <>
-      <p>List the connections you actually need: monitor inputs, USB devices, Ethernet, storage and audio. Separate upstream ports that connect to the computer from downstream ports for peripherals. Check which ports carry video or power; a USB-C socket may have a different job from the one beside it.</p>
-      <p><a href={sources.displayport.url}>VESA describes how DisplayPort, USB data and power can share USB-C</a>. Ask the dock maker which simultaneous display and USB-data combinations it supports. One port&apos;s maximum is not a promise that every port can run at its maximum together.</p>
-      <p>Use the specified host cable and check any replacement cable&apos;s data and power capabilities. <a href={sources.usb.url}>USB-IF notes that a certified cable does not add capabilities to the products it connects</a>. Include the cost and length of the cables you will actually use.</p>
-    </> },
-    { id: "operating-system", title: "5. Verify the operating system and daily behaviour", content: <>
-      <p>Check the dock maker&apos;s support page for your operating system, version, computer architecture and firmware requirements. Read any model-specific notes for display outputs, Ethernet and audio.</p>
-      <p>For a managed work computer, ask IT whether required software and permissions are allowed. Request confirmation of the everyday behaviours you need: waking screens, reconnecting after sleep, lid-closed use and switching between computers. These are verification questions, not promises this guide can make for an unspecified dock.</p>
-    </> },
-    { id: "displaylink", title: "6. Know when DisplayLink is involved", content: <>
-      <p>DisplayLink is USB graphics technology, not another name for DisplayPort Alt Mode or Thunderbolt. <a href={sources.displaylink.url}>Synaptics describes its display-expansion approach and supported platforms</a>. A dock may mix different display paths, so find out which output uses which technology.</p>
-      <p>Confirm the exact dock, operating system and required software before buying. On macOS, <a href={sources.permissions.url}>DisplayLink Manager requires Screen Recording permission to access the pixels used for connected displays</a>. That can matter on a work-managed computer.</p>
-      <p>There are trade-offs to check. <a href={sources.protectedVideo.url}>DisplayLink documents restrictions on some protected video on macOS while DisplayLink screens are connected</a>. Ask about your applications, content and performance needs instead of treating software-driven displays as an unconditional substitute for native video.</p>
-    </> },
-    { id: "canadian-purchase", title: "7. Check the Canadian purchase, not just the price", content: <>
-      <p>Compare the total in Canadian dollars, including applicable tax, delivery, any import charges, missing cables and a required power adapter. Confirm who is selling the dock and who handles support.</p>
-      <p>Read the seller&apos;s return window, opened-package conditions, restocking fees and return-shipping terms before purchase. Request written confirmation of your intended setup. Keep that response and the exact listing you ordered from. A practical return route matters when the remaining uncertainty can only be resolved with your equipment.</p>
-    </> },
-    { id: "your-checklist", title: "Turn the questions into your checklist", content: <>
-      <p>Gather the computer model, port specification, operating system, display arrangement and charging requirement. Then compare the same requirements against each dock&apos;s official documentation.</p>
-      <p>The <Link href={dockToolPath}>CANOD USB-C Dock Compatibility Checker</Link> turns those broad choices into an educational checklist. It does not inspect your hardware, compare a specific dock, recommend a product or guarantee compatibility.</p>
-    </> },
+    {
+      id: "problem",
+      title: "The Problem",
+      content: (
+        <>
+          <p>
+            You plug two monitors into a USB-C hub or dock expecting two separate screens, but both monitors display the exact same duplicate image. Or one monitor works while the second remains black.
+          </p>
+          <p>
+            A hub having two HDMI or DisplayPort sockets does not mean your computer can send two different video signals through one cable. Macs and Windows PCs handle multi-monitor video completely differently.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "answer",
+      title: "The 30-Second Answer",
+      content: (
+        <>
+          <p>
+            <strong>If you have a Windows laptop:</strong> Any standard dual-display USB-C dock will work. Windows natively supports extending two different screens over one USB-C cable (using Multi-Stream Transport), provided your laptop port supports video output.
+          </p>
+          <p>
+            <strong>If you have a Mac:</strong> Base Apple Silicon laptops (MacBook Air M1, M2, or M3, and base 13&quot;/14&quot; MacBook Pro) natively support only <em>one</em> external monitor. Plugging into a standard hub will only mirror the second screen. To run two independent extended monitors on a MacBook Air, you must use a dock equipped with <strong>DisplayLink</strong> software, or use two separate video cables on a MacBook Pro with an M-Pro or M-Max chip.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "try-first",
+      title: "Try This First",
+      content: (
+        <ol>
+          <li>
+            <strong>Check your display settings:</strong> On Windows, press <kbd>Windows Key + P</kbd> and select <strong>Extend</strong> (not Duplicate). On Mac, open <strong>System Settings &gt; Displays</strong> and ensure the secondary screen is set to &ldquo;Extended Display&rdquo;.
+          </li>
+          <li>
+            <strong>Test each monitor individually:</strong> Plug Monitor 1 directly into your laptop. Then unplug it and test Monitor 2. This confirms both screens and cables work before testing the dock.
+          </li>
+          <li>
+            <strong>Plug in the laptop charger:</strong> Running dual 4K screens consumes significant graphics power. If your dock does not supply at least 65W to your laptop, connect your laptop&apos;s original wall charger.
+          </li>
+        </ol>
+      ),
+    },
+    {
+      id: "still-not-working",
+      title: "Still Not Working?",
+      content: (
+        <ul>
+          <li>
+            <strong>Both screens show the same picture on a Mac:</strong> Your dock uses standard PC Multi-Stream Transport (MST), which macOS does not support over USB-C. You need a dock with DisplayLink technology or a certified Thunderbolt 4 dock on an M-Pro/Max Mac.
+          </li>
+          <li>
+            <strong>One screen flickers or is stuck at 30 Hz:</strong> Your laptop&apos;s USB-C port or dock does not have enough bandwidth for dual 4K at 60 Hz. Lower the resolution to 1080p or 1440p in display settings to test if 60 Hz returns.
+          </li>
+          <li>
+            <strong>Second screen says &ldquo;No Signal&rdquo;:</strong> Check that the input source on the monitor itself is set to HDMI 1 or DisplayPort, and ensure the cable between the dock and monitor is a high-speed video cable.
+          </li>
+        </ul>
+      ),
+    },
+    {
+      id: "what-you-need",
+      title: "What You May Need",
+      content: (
+        <ul>
+          <li>
+            <strong>For MacBook Air (dual screens):</strong> A <em>DisplayLink-certified docking station</em> (or a DisplayLink USB-to-HDMI adapter) plus the free DisplayLink Manager app for macOS.
+          </li>
+          <li>
+            <strong>For MacBook Pro (M-Pro or M-Max):</strong> A true <em>Thunderbolt 4 dock</em> (e.g. CalDigit, OWC, Kensington) that carries two native Thunderbolt display channels.
+          </li>
+          <li>
+            <strong>For Windows Laptops:</strong> A standard <em>USB-C dual-display hub</em> with two HDMI 2.0 or DisplayPort outputs.
+          </li>
+          <li>
+            <strong>Cables:</strong> Certified HDMI 2.0/2.1 or DisplayPort 1.4 cables. Avoid using passive VGA or DVI converters.
+          </li>
+        </ul>
+      ),
+    },
+    {
+      id: "optional-tool",
+      title: "Check Your Laptop (Free Tool)",
+      content: (
+        <p>
+          Not sure what your laptop supports? Run your setup through our free{" "}
+          <Link href={dockToolPath} style={{ fontWeight: "700", textDecoration: "underline" }}>
+            USB-C Dock &amp; Dual Monitor Compatibility Checker
+          </Link>
+          . Select your laptop model to instantly see whether you need a standard dock, a Thunderbolt 4 dock, or DisplayLink software.
+        </p>
+      ),
+    },
+    {
+      id: "why-this-happens",
+      title: "Why This Happens",
+      content: (
+        <>
+          <p>
+            Sending two video feeds down a single small cable requires the computer and the dock to divide high-speed data lanes.
+          </p>
+          <p>
+            Windows PCs support an industry standard called DisplayPort Multi-Stream Transport (MST), which daisy-chains multiple display signals through one connection. Apple chose not to support MST over standard USB-C in macOS. Instead, macOS requires each native monitor to have its own independent Thunderbolt pipeline—or uses software compression (DisplayLink) to send video as standard USB data.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "technical-details",
+      title: "Technical Details: DP Alt Mode, MST, and DisplayLink",
+      content: (
+        <>
+          <p>
+            <strong>DisplayPort Alt Mode (DP Alt Mode):</strong> Uses the physical USB-C pins to transmit native DisplayPort video packets directly from your laptop&apos;s graphics card. High performance, zero lag.
+          </p>
+          <p>
+            <strong>Multi-Stream Transport (MST):</strong> A DisplayPort feature that splits one video signal into multiple independent streams. Supported on Windows and Linux; not supported on macOS over USB-C.
+          </p>
+          <p>
+            <strong>DisplayLink:</strong> A proprietary USB graphics chip and driver that compresses your screen image on the CPU and sends it over ordinary USB data lanes. It bypasses Apple&apos;s single-display limit, but requires &ldquo;Screen Recording&rdquo; permissions on macOS and is not ideal for competitive fast-motion gaming.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "canadian-note",
+      title: "Canadian Purchase Note",
+      content: (
+        <p>
+          When buying docks online in Canada, verify whether the seller accepts open-box returns without a 15% restocking fee. Compatibility quirks with dual displays and workplace-managed laptops are common, so choose retailers with clear return policies. Ensure any mains-powered desktop dock includes a power brick with an accredited Canadian safety mark (cUL, CSA, or cETL).
+        </p>
+      ),
+    },
   ],
   sources: Object.values(sources),
 };

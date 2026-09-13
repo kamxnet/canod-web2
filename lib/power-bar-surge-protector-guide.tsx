@@ -15,8 +15,7 @@ const sources = {
     url: "https://esasafe.com/electrical-products/recognized-certification-marks/",
   },
   esaCordBulletin: {
-    title:
-      "Ontario ESA: hazards from misuse of extension cords and power bars (PDF)",
+    title: "Ontario ESA: hazards from misuse of extension cords and power bars (PDF)",
     url: "https://esasafe.com/assets/files/esasafe/pdf/Electrical_Safety_Products/Flash_Notices/19-19-FL.pdf",
   },
   esaIndoorSafety: {
@@ -36,371 +35,210 @@ const sources = {
     url: "https://recalls-rappels.canada.ca/en",
   },
   recallExample: {
-    title:
-      "Health Canada: 2026 power-strip recall involving missing overcurrent protection",
+    title: "Health Canada: power-strip recall involving missing overcurrent protection",
     url: "https://recalls-rappels.canada.ca/en/alert-recall/annquan-brand-power-strips-recalled-due-fire-hazard",
   },
 } as const;
 
 export const powerBarSurgeProtectorGuide: Guide = {
   slug: "power-bar-or-surge-protector-canada",
-  title: "Power Bar or Surge Protector: What Should Canadians Check?",
+  title: "Power Bar vs Surge Protector: Which Do You Actually Need?",
   category: "Safety & standards",
   pillar: "safety",
-  description:
-    "Tell basic outlet expansion from surge protection, then check Canadian approval information, load, cord and protection ratings before buying.",
+  description: "They look identical, but only one protects your expensive electronics from power spikes. Here is how to choose the right one and avoid a house fire.",
   date: "2026-09-11",
-  reviewed: "2026-09-11",
-  scope:
-    "A practical pre-purchase and use guide, not a product certification, electrical inspection or guarantee against fire, shock, equipment damage, lightning or every power disturbance. CANOD cannot inspect your product, outlet, wiring or load. Follow the exact product instructions and use a qualified electrician for permanent wiring or unresolved electrical concerns.",
-  methodology:
-    "We reviewed current Health Canada electrical-product guidance and compliance findings, Government of Canada outage and recall information, Ontario Electrical Safety Authority guidance, and UL Solutions' technical explanation of power strips and surge protectors. Ontario guidance is identified as provincial. Recommendations are conservative selection checks, not laboratory test results or a substitute for requirements in your jurisdiction.",
+  reviewed: "2026-09-13",
+  scope: "A practical consumer buying and safety guide, not an electrical inspection or guarantee against lightning strikes or utility-grade power anomalies. Follow manufacturer guidelines and consult a licensed electrician for permanent home wiring.",
+  methodology: "We reviewed Health Canada electrical-product safety compliance data, Ontario Electrical Safety Authority bulletins, UL Solutions technical standards (UL 1449 and UL 1363), and Canadian Fire Prevention recommendations.",
   related: [
-    {
-      title: "Check electrical approval information in Canada",
-      href: "/guides/charger-safety-canada/#approval",
-    },
-    {
-      title: "Use the Canadian electrical-product safety checklist",
-      href: "/tools/canadian-electrical-safety-checklist/",
-    },
-    {
-      title: "Choose a safe laptop or phone charger",
-      href: "/guides/charger-safety-canada/",
-    },
+    { title: "Is This Charger Safe to Buy in Canada?", href: "/guides/charger-safety-canada/" },
+    { title: "Canadian Electrical Product Safety Checklist", href: "/tools/canadian-electrical-safety-checklist/" },
+    { title: "Charger Wattage Calculator", href: "/tools/charger-wattage-calculator/" },
   ],
   sections: [
     {
-      id: "problem",
-      title: "The problem",
+      id: "the-problem",
+      title: "The Problem",
       content: (
         <>
           <p>
-            A power bar and a surge protector can have the same row of outlets,
-            switch and indicator light, but those features do not prove they do
-            the same job. A basic power bar distributes one outlet among several
-            plugs. A surge protector adds components intended to limit short
-            voltage surges before they reach connected equipment.
+            You walk down the aisle at Canadian Tire, Walmart, or Home Depot, and you see rows of long plastic strips with six outlets and a power switch. Some cost $12; others cost $45.
           </p>
           <p>
-            <a href={sources.ulGuide.url}>
-              UL Solutions describes a power strip as an extension cord with
-              multiple outlets and a surge protector as adding a clamping
-              element
-            </a>
-            . Neither name tells you whether the exact model is approved for use
-            in Canada, suitable for your total load or intended for the place
-            you plan to use it.
+            From the outside, a basic <strong>power bar</strong> and a true <strong>surge protector</strong> look identical. But plugging your $2,000 gaming PC, MacBook, or OLED TV into a cheap basic power bar provides zero protection against lightning strikes, utility transformer blowouts, or household voltage spikes.
           </p>
         </>
       ),
     },
     {
-      id: "answer",
-      title: "The 30-second answer",
+      id: "quick-answer",
+      title: "The 30-Second Answer",
+      content: (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+            <div className="p-4 rounded-xl border bg-muted/30">
+              <p className="font-bold text-base text-foreground mb-1">Basic Power Bar (Power Strip)</p>
+              <p className="text-sm text-muted-foreground mb-2"><strong>What it is:</strong> Just an extension cord with multiple plugs.</p>
+              <p className="text-sm text-muted-foreground mb-2"><strong>Does it protect your devices?</strong> No. Zero surge defense.</p>
+              <p className="text-sm text-foreground"><strong>Use for:</strong> Desk lamps, phone chargers, fans, alarm clocks.</p>
+            </div>
+            <div className="p-4 rounded-xl border border-primary/40 bg-primary/5">
+              <p className="font-bold text-base text-primary mb-1">Surge Protector</p>
+              <p className="text-sm text-muted-foreground mb-2"><strong>What it is:</strong> Multiple outlets PLUS sacrificial surge-diverting components (MOVs).</p>
+              <p className="text-sm text-muted-foreground mb-2"><strong>Does it protect your devices?</strong> Yes. Absorbs harmful voltage spikes.</p>
+              <p className="text-sm text-foreground"><strong>Use for:</strong> TVs, computers, game consoles, monitors, audio systems, routers.</p>
+            </div>
+          </div>
+          <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200">
+            <p className="font-bold text-sm">Critical Life-Safety Rule:</p>
+            <p className="text-xs mt-1">
+              <strong>NEVER plug a portable electric space heater, portable air conditioner, microwave, or kettle into any power bar or surge protector.</strong> High-draw heating appliances draw 1,500W continuously, overheating strip terminals and causing house fires. Plug heaters directly into dedicated wall outlets.
+            </p>
+          </div>
+        </>
+      ),
+    },
+    {
+      id: "try-this-first",
+      title: "Try This First: How to Tell What You Have",
+      content: (
+        <>
+          <p>Check the underside label of the unit you currently own:</p>
+          <ul className="list-disc pl-5 space-y-2 mt-2">
+            <li>
+              <strong>Look for a Joule rating:</strong> If the box or back sticker says &ldquo;1,080 Joules&rdquo; or &ldquo;Surge Protective Device (SPD)&rdquo;, it is a surge protector. If it only says &ldquo;Relocatable Power Tap&rdquo; or lists only volts and amps (e.g. 125V, 15A), it is a plain power strip with no protection.
+            </li>
+            <li>
+              <strong>Check the &ldquo;Protected&rdquo; light:</strong> Most real surge protectors have two small LED lights: &ldquo;Grounded&rdquo; and &ldquo;Protected&rdquo;. If the &ldquo;Protected&rdquo; light is off, the internal surge components have absorbed their limit and sacrificed themselves. The outlets still provide electricity, but your equipment is now completely exposed.
+            </li>
+            <li>
+              <strong>Look for Canadian safety marks:</strong> Ensure the bottom has a <strong>cULus</strong>, <strong>CSA</strong>, or <strong>cETLus</strong> stamp. Health Canada regularly issues recalls on cheap marketplace power bars lacking internal circuit breakers.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "warning-signs",
+      title: "Surge Protectors Expire: The 3-to-5 Year Rule",
       content: (
         <>
           <p>
-            Choose a basic power bar only when you need more outlets for
-            suitable low-draw devices and do not need surge protection. Choose a
-            surge-protecting power bar for electronics when the exact model
-            explicitly states surge protection and gives protection ratings—not
-            merely a switch, breaker or light.
+            Many people don&apos;t realize that surge protectors have an expiration date.
           </p>
           <p>
-            In either case, require a recognized Canadian certification mark on
-            the product, confirm the exact model in the certification
-            body&apos;s listing when possible, keep the combined load within the
-            product rating, plug it directly into a suitable wall outlet, and
-            follow the maker&apos;s indoor/outdoor and replacement instructions.
-            Do not use a power bar for a portable heater.
+            Inside every surge protector are components called <strong>Metal Oxide Varistors (MOVs)</strong>. Every time your refrigerator compressor kicks on, or a nearby lightning storm strikes the power grid, the MOVs absorb a tiny bit of that energy. Over 3 to 5 years, their capacity degrades until they can no longer clamp voltage.
+          </p>
+          <p>
+            <strong>When to replace:</strong>
+          </p>
+          <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
+            <li>If the &ldquo;Protected&rdquo; light turns off or flashes.</li>
+            <li>If your home survived a major neighbourhood power outage, transformer blowout, or lightning strike.</li>
+            <li>If the unit is older than 5 years.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "what-you-need",
+      title: "What Joules Rating Do You Actually Need?",
+      content: (
+        <>
+          <p>
+            When shopping for a new surge protector, buy based on the value of the equipment you are protecting:
+          </p>
+          <div className="space-y-3 my-3">
+            <div className="p-3 rounded-lg border bg-card">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-sm">Entry Level: 1,000 – 1,500 Joules</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded font-mono">~$20–$30 CAD</span>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Good for: Desktop computer peripherals, basic Wi-Fi routers, home office lamps, printers, and phone docks.
+              </p>
+            </div>
+            <div className="p-3 rounded-lg border bg-card">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-sm">High Protection: 2,000 – 4,000+ Joules</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded font-mono">~$35–$65 CAD</span>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Good for: 4K OLED TVs, home theater AV receivers, gaming PCs, console setups (PS5 / Xbox Series X), and network storage devices.
+              </p>
+            </div>
+          </div>
+          <p className="text-sm">
+            <strong>Recommended Brands:</strong> APC (Schneider Electric), Tripp Lite (Eaton), CyberPower, Belkin, and Anker.
           </p>
         </>
       ),
     },
     {
-      id: "checks",
-      title: "What to check",
+      id: "safety-checklist-link",
+      title: "Check Your Whole Setup for Electrical Safety",
       content: (
-        <ul>
-          <li>
-            <strong>Actual function:</strong> look for the words “surge
-            protector” or “surge protective device” plus protection ratings. A
-            switch, breaker or light does not establish which kind of protection
-            the product provides; read the label and manual.
-          </li>
-          <li>
-            <strong>Canadian approval:</strong> inspect the mark and model on
-            the physical product, not only a marketplace image.{" "}
-            <a href={sources.healthCanada.url}>
-              Health Canada names CSA, cUL and cETL as examples of recognized
-              Canadian certification marks
-            </a>
-            .
-          </li>
-          <li>
-            <strong>Electrical rating:</strong> record the product&apos;s volts,
-            amps and/or watts, then add the nameplate loads of everything you
-            plan to connect. Outlet count is not load capacity.
-          </li>
-          <li>
-            <strong>Cord and location:</strong> check cord length, conductor
-            gauge, grounding, damage and whether the product is intended for
-            indoor or outdoor use. A longer cord or a rug over it is not a safe
-            substitute for permanent wiring.
-          </li>
-          <li>
-            <strong>Overcurrent protection:</strong> look for the exact
-            model&apos;s resettable breaker or other stated overload protection.{" "}
-            <a href={sources.recallExample.url}>
-              A 2026 Health Canada recall identified a fire risk in specified
-              power strips that lacked overcurrent protection
-            </a>
-            .
-          </li>
-          <li>
-            <strong>Surge information:</strong> for a surge model, look for a
-            voltage-protection or suppressed-voltage rating, an energy rating in
-            joules when provided, and clear instructions for any protection or
-            replacement indicator.
-          </li>
-          <li>
-            <strong>Recall and support:</strong> keep the exact model number,
-            check Canadian recalls and confirm who provides warranty support in
-            Canada.
-          </li>
-        </ul>
+        <>
+          <p>
+            Ensure your extension cords, power bricks, and outlet strips comply with Canadian residential safety codes:
+          </p>
+          <div className="mt-3">
+            <Link
+              href="/tools/canadian-electrical-safety-checklist/"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
+            >
+              Open Canadian Electrical Safety Checklist →
+            </Link>
+          </div>
+        </>
       ),
     },
     {
-      id: "solution",
-      title: "Step-by-step solution",
+      id: "why-this-happens",
+      title: "Why Power Spikes Happen Inside Your House",
       content: (
-        <ol>
-          <li>
-            List the exact devices that will share the bar. Copy each
-            device&apos;s input amps or watts from its label or manual; do not
-            estimate from plug size.
-          </li>
-          <li>
-            Remove portable heaters and other equipment whose instructions call
-            for a wall outlet.{" "}
-            <a href={sources.healthCanada.url}>
-              Health Canada says never to plug a portable electric heater into
-              an extension cord or power bar
-            </a>
-            .
-          </li>
-          <li>
-            Decide whether you need only outlet distribution or also surge
-            protection. For a computer, television or similar electronics, the{" "}
-            <a href={sources.outagePreparation.url}>
-              Government of Canada recommends a surge-protecting power bar
-            </a>
-            .
-          </li>
-          <li>
-            Check the actual product label for a recognized Canadian approval
-            mark, exact model and electrical rating. Search the certification
-            body&apos;s public database or ask it to confirm the exact model
-            when the listing is unclear.
-          </li>
-          <li>
-            Add the intended loads and keep the total within the lower of the
-            bar&apos;s rating and any limit in its instructions. If device
-            labels use mixed units or the load is uncertain, ask the
-            manufacturer or a qualified electrician rather than improvising a
-            conversion.
-          </li>
-          <li>
-            For a surge model, compare protection information among otherwise
-            suitable products.{" "}
-            <a href={sources.ulGuide.url}>
-              UL Solutions says a lower suppressed-voltage rating indicates
-              better protection against surges
-            </a>
-            . Treat joules as an energy-handling specification, not a promise
-            about protection life or every event, and do not use it as the only
-            selection criterion.
-          </li>
-          <li>
-            Put the bar where its cord will remain visible, dry and uncrushed.
-            Plug it directly into the wall outlet; do not connect power bars in
-            series.{" "}
-            <a href={sources.esaCordBulletin.url}>
-              Ontario&apos;s ESA does not recommend daisy-chaining power bars
-            </a>
-            .
-          </li>
-          <li>
-            Search the exact model in the Canadian recalls database. After
-            installation, stop using a bar with heat, arcing, a loose plug,
-            cracked housing, damaged cord or an indicator that the instructions
-            say means protection is no longer active.
-          </li>
-        </ol>
+        <>
+          <p>
+            Most people think power surges only happen during dramatic lightning storms. In reality, up to 80% of power disturbances are generated <em>inside your own home</em>.
+          </p>
+          <p>
+            Every time high-draw motor loads turn on and off — your refrigerator compressor, air conditioner, furnace blower motor, or washing machine — they introduce small inductive voltage spikes into your home wiring. Over months and years, these micro-spikes weaken delicate semiconductor chips inside computers and TVs until they suddenly stop turning on.
+          </p>
+        </>
       ),
     },
     {
-      id: "mistakes",
-      title: "Common mistakes",
+      id: "technical-details",
+      title: "Technical Details: Clamping Voltage Explained",
       content: (
-        <ul>
-          <li>Assuming every power bar includes surge protection.</li>
-          <li>
-            Counting free outlets instead of adding the connected electrical
-            loads.
-          </li>
-          <li>
-            Treating a breaker switch as proof of surge protection, or a surge
-            light as proof of overload capacity.
-          </li>
-          <li>
-            Plugging a portable heater, kettle or other high-draw appliance into
-            a bar without the appliance maker explicitly permitting it.
-          </li>
-          <li>
-            Daisy-chaining bars, using an indoor bar outdoors or running the
-            cord under a rug, through a doorway or beside heat or water.
-          </li>
-          <li>
-            Trusting a certification logo in a listing without checking the
-            physical product and exact model.
-          </li>
-          <li>
-            Treating a large joule number as a guarantee against lightning or
-            assuming surge protection lasts forever without reading the
-            replacement guidance.
-          </li>
-          <li>
-            Resetting a repeatedly tripped breaker without finding and reducing
-            the load or addressing the underlying electrical problem.
-          </li>
-        </ul>
+        <>
+          <p>
+            If you look at detailed specifications for a quality surge protector (under standard <strong>UL 1449</strong>), you may see a specification called <strong>VPR (Voltage Protection Rating)</strong> or <strong>Clamping Voltage</strong>.
+          </p>
+          <p>
+            Canadian household power runs at 120 volts AC. Clamping voltage is the threshold where the surge protector starts diverting extra electricity into the ground wire:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
+            <li><strong>330V VPR:</strong> Excellent response. Diverts spikes very early.</li>
+            <li><strong>400V – 500V VPR:</strong> Good standard consumer performance.</li>
+            <li><strong>600V+ VPR:</strong> Weak protection; allows too much excess voltage to reach your device before reacting.</li>
+          </ul>
+          <p className="text-xs text-muted-foreground mt-2">
+            <em>Rule of thumb: Lower clamping voltage numbers mean tighter, better protection.</em>
+          </p>
+        </>
       ),
     },
     {
       id: "canadian-note",
-      title: "Canadian compatibility or safety note",
+      title: "Canadian Note: Daisy Chaining & Insurance",
       content: (
         <>
           <p>
-            <a href={sources.complianceReview.url}>
-              Health Canada says plug-in electrical products, including power
-              bars, must be certified to the applicable Canadian national safety
-              standard by an accredited certification body and carry that
-              body&apos;s recognized mark
-            </a>
-            . In its 2021–2022 compliance project, inspectors checked documents
-            and certification-body records as well as the visible mark. That is
-            why a familiar-looking logo alone should not end your check.
+            Under the Canadian Electrical Code and provincial safety rules, &ldquo;daisy chaining&rdquo; (plugging one power bar or extension cord into another) is a direct fire hazard violation.
           </p>
           <p>
-            Provincial and territorial requirements apply. For Ontario, use the{" "}
-            <a href={sources.esaMarks.url}>
-              ESA&apos;s recognized approval-mark reference
-            </a>
-            ; elsewhere, consult the relevant electrical safety authority. CANOD
-            cannot authenticate a mark or decide whether a particular product,
-            installation or exception complies.
-          </p>
-          <p>
-            Search the exact brand, model and other identifiers in the{" "}
-            <a href={sources.recalls.url}>
-              Government of Canada recalls and safety alerts database
-            </a>
-            . Follow any matching notice. No search result is not proof that a
-            product is safe.
-          </p>
-        </>
-      ),
-    },
-    {
-      id: "specifications",
-      title: "Recommended specifications",
-      content: (
-        <>
-          <p>
-            For any model, require a recognized Canadian certification mark on
-            the product; an exact model number; clearly stated voltage and
-            current or wattage limits; grounding that matches the intended
-            equipment; a resettable overcurrent device or other documented
-            overload protection; a cord rated for the intended load and
-            location; and clear warranty, indicator and replacement
-            instructions.
-          </p>
-          <p>
-            <a href={sources.esaCordBulletin.url}>
-              Ontario&apos;s ESA recommends a minimum 14 AWG copper conductor
-              for power bars
-            </a>
-            . Treat that as a conservative Ontario selection preference, not a
-            universal declaration that every smaller-number or differently
-            designed product is acceptable in every jurisdiction. The complete
-            certified product and its stated rating still matter.
-          </p>
-          <p>
-            For surge protection, additionally require an explicit surge claim,
-            a voltage-protection or suppressed-voltage rating, a joule rating
-            when the maker provides one, and an indicator or documented method
-            for knowing when protection is no longer active. Among products that
-            already pass the approval, load and fit checks, prefer a lower
-            protection-voltage rating. Do not use joules as a stand-alone score
-            or compare either number across products using different test
-            methods, and do not treat any rating as a guarantee.
-          </p>
-          <p>
-            A plug-in bar has limits. The{" "}
-            <a href={sources.outagePreparation.url}>
-              Government of Canada says a whole-home surge protector offers
-              significantly more protection than a typical surge-protecting
-              power bar
-            </a>
-            . Whole-home equipment and permanent wiring require professional
-            advice and are outside this buying guide.
-          </p>
-        </>
-      ),
-    },
-    {
-      id: "products",
-      title: "Where to check suitable products",
-      content: (
-        <>
-          <p>
-            Start with the connected equipment manuals. Record anything that
-            must plug directly into a wall outlet, plus the total intended load.
-            Then compare the exact power-bar model on the maker&apos;s Canadian
-            page or manual—not a family name or a visually similar listing.
-          </p>
-          <p>
-            At a Canadian retailer, inspect a clear image of the product label
-            and confirm the model, approval mark, electrical rating, conductor
-            gauge, cord length, indoor/outdoor use, overload device and, when
-            needed, surge ratings and protection-status instructions. Verify the
-            approval listing and recall status independently; save the manual
-            and receipt.
-          </p>
-          <p>
-            If you repeatedly need several bars or a breaker trips,{" "}
-            <a href={sources.esaIndoorSafety.url}>
-              Ontario&apos;s ESA recommends permanent wiring and outlets for
-              ongoing power needs
-            </a>
-            . Ask a qualified electrician about the installation instead of
-            expanding it with more temporary connections.
-          </p>
-          <p>
-            No product or retailer link in this guide is an affiliate
-            recommendation. Continue with CANOD&apos;s{" "}
-            <Link href="/guides/charger-safety-canada/#approval">
-              Canadian electrical approval checks
-            </Link>{" "}
-            or the{" "}
-            <Link href="/tools/canadian-electrical-safety-checklist/">
-              Canadian electrical-product safety checklist
-            </Link>
-            .
+            Connecting multiple strips in series increases electrical resistance, causes terminal contacts to overheat under normal loads, and voids manufacturer equipment-protection warranties. If you do not have enough outlets or the cord cannot reach comfortably, have a licensed electrician add a wall outlet rather than stringing power strips together.
           </p>
         </>
       ),

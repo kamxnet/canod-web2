@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { approvedAffiliateUrl, type AffiliateEntry } from "@/lib/commercial-links";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 export function AffiliateDisclosure({ links }: { links: readonly AffiliateEntry[] }) {
   if (!links.some(link => approvedAffiliateUrl(link))) return null;
@@ -9,5 +12,20 @@ export function AffiliateDisclosure({ links }: { links: readonly AffiliateEntry[
 export function AffiliateLink({ entry }: { entry: AffiliateEntry }) {
   const href = approvedAffiliateUrl(entry);
   if (!href) return null;
-  return <a href={href} rel="sponsored nofollow">{entry.label} <span className="commercial-link-label">(affiliate link)</span></a>;
+  return (
+    <a
+      href={href}
+      rel="sponsored nofollow"
+      onClick={() =>
+        trackAffiliateClick({
+          destination: href,
+          label: entry.label,
+          program: entry.program,
+        })
+      }
+    >
+      {entry.label} <span className="commercial-link-label">(affiliate link)</span>
+    </a>
+  );
 }
+

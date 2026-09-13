@@ -5,6 +5,7 @@ import { useRef, useState, useId, useEffect } from "react";
 import { ArrowRight, ArrowUpRight, Download, RotateCcw, Cable, Monitor, Laptop, Info } from "lucide-react";
 import { checkDock, defaultDockAnswers, dockChecklistText, dockOptions, type DockAnswers } from "@/lib/dock-checker";
 import { dockGuidePath, dockSources } from "@/lib/dock-sources";
+import { trackToolStarted, trackToolCompleted } from "@/lib/analytics";
 
 const labels: Record<keyof DockAnswers, string> = { device: "Computer or device", os: "Operating system", port: "Port on the computer", monitors: "External monitors", resolution: "Resolution & refresh rate", charging: "Charging through the dock" };
 const order: (keyof DockAnswers)[] = ["device", "os", "port", "monitors", "resolution", "charging"];
@@ -14,20 +15,30 @@ export function DockChecker() {
   const [answers, setAnswers] = useState<DockAnswers>(defaultDockAnswers);
   const [submitted, setSubmitted] = useState<DockAnswers | null>(null);
   const [downloadStatus, setDownloadStatus] = useState("");
+  const hasStartedRef = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const result = submitted ? checkDock(submitted) : null;
 
   useEffect(() => { if (submitted) heading.current?.focus(); }, [submitted]);
 
+  function notifyStart() {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      trackToolStarted({ tool_name: "usb_c_dock_checker" });
+    }
+  }
+
   function reset() {
     setAnswers(defaultDockAnswers);
     setSubmitted(null);
     setDownloadStatus("");
+    hasStartedRef.current = false;
     form.current?.querySelector("select")?.focus();
   }
   function download() {
     if (!submitted) return;
+    trackToolCompleted({ tool_name: "usb_c_dock_checker", result_summary: "checklist_downloaded" });
     const url = URL.createObjectURL(new Blob([dockChecklistText(submitted)], { type: "text/plain;charset=utf-8" }));
     const link = document.createElement("a");
     link.href = url;
@@ -43,12 +54,22 @@ export function DockChecker() {
     <noscript><style>{".dock-checker .dock-form{display:none}.dock-checker .dock-layout{grid-template-columns:1fr}.dock-checker .dock-result{border:0}"}</style><p className="dock-noscript">The interactive checker needs JavaScript. The complete <a href={`${dockGuidePath}#your-checklist`}>dock buying checklist</a> is available without it.</p></noscript>
     <div className="dock-toolbar"><span><Cable size={17} aria-hidden="true" />CANOD tools <span aria-hidden="true">/</span> 01</span><span>No account. No data collection by this tool.</span></div>
     <div className="dock-layout">
-      <form ref={form} className="dock-form" onSubmit={event => { event.preventDefault(); setSubmitted({ ...answers }); setDownloadStatus(""); }}>
+      <form ref={form} className="dock-form" onSubmit={event => {
+        event.preventDefault();
+        setSubmitted({ ...answers });
+        setDownloadStatus("");
+        trackToolCompleted({ tool_name: "usb_c_dock_checker", result_summary: "checklist_built" });
+      }}>
         <fieldset>
           <legend className="sr-only">Your device and dock requirements</legend>
           {order.map((key, index) => <div className="dock-field" key={key}>
             <label htmlFor={`${id}-${key}`}><span aria-hidden="true">0{index + 1}</span>{labels[key]}</label>
-            <select id={`${id}-${key}`} name={key} value={answers[key]} disabled={key === "resolution" && answers.monitors === "0"} onChange={event => { setAnswers(previous => ({ ...previous, [key]: event.target.value })); setSubmitted(null); setDownloadStatus(""); }}>
+            <select id={`${id}-${key}`} name={key} value={answers[key]} disabled={key === "resolution" && answers.monitors === "0"} onChange={event => {
+              notifyStart();
+              setAnswers(previous => ({ ...previous, [key]: event.target.value }));
+              setSubmitted(null);
+              setDownloadStatus("");
+            }}>
               {dockOptions[key].map(([value, label]) => <option key={value} value={value}>{label}</option>)}
             </select>
             {key === "resolution" && answers.monitors === "0" && <p className="dock-field-note">Not needed without external monitors.</p>}

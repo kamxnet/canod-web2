@@ -21,6 +21,7 @@ import { shopItems, shopCategoryDescriptions } from "@/lib/shop-data";
 import { ProblemSolver } from "@/components/problem-solver";
 import { RecommendationProcess } from "./recommendation-process";
 import { TrustContours } from "./illustrations";
+import { ProductClickLink, SolutionClickLink } from "@/components/analytics-trackers";
 
 function ChapterLabel({
   number,
@@ -437,16 +438,24 @@ export function HomeSolutions() {
                 </span>
               </div>
               <h3>
-                <Link href={`/solutions/#${item.id}`}>{item.consumerTitle}</Link>
+                <SolutionClickLink
+                  solutionName={item.consumerTitle}
+                  solutionId={item.id}
+                  destination={`/solutions/#${item.id}`}
+                >
+                  {item.consumerTitle}
+                </SolutionClickLink>
               </h3>
               <p className="home-solution-tagline">{item.tagline}</p>
               <div className="home-solution-links">
-                <Link
-                  href={`/solutions/#${item.id}`}
+                <SolutionClickLink
+                  solutionName={item.consumerTitle}
+                  solutionId={item.id}
+                  destination={`/solutions/#${item.id}`}
                   className="button button-light"
                 >
                   View Setup Details <ArrowRight size={15} aria-hidden="true" />
-                </Link>
+                </SolutionClickLink>
               </div>
             </article>
           ))}
@@ -503,9 +512,15 @@ export function HomeSelectedProducts() {
                 {item.badge && <span className="rel-badge">{item.badge}</span>}
               </div>
               <h3 className="rel-name">
-                <Link href={`/shop/${item.slug}/`} style={{ color: "inherit", textDecoration: "none" }}>
+                <ProductClickLink
+                  productName={item.name}
+                  productId={item.slug}
+                  category={item.category}
+                  destination={`/shop/${item.slug}/`}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
                   {item.name}
-                </Link>
+                </ProductClickLink>
               </h3>
               <p className="rel-tagline">{item.tagline}</p>
 
@@ -514,9 +529,15 @@ export function HomeSelectedProducts() {
               </div>
 
               <div className="rel-footer">
-                <Link href={`/shop/${item.slug}/`} className="rel-action">
+                <ProductClickLink
+                  productName={item.name}
+                  productId={item.slug}
+                  category={item.category}
+                  destination={`/shop/${item.slug}/`}
+                  className="rel-action"
+                >
                   View Specs &amp; Compatibility
-                </Link>
+                </ProductClickLink>
                 <ArrowRight size={16} aria-hidden="true" />
               </div>
             </article>

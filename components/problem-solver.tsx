@@ -22,6 +22,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { customerProblems } from "@/lib/problems-data";
+import { trackProductClick } from "@/lib/analytics";
 
 const iconMap = {
   Wifi: Wifi,
@@ -156,6 +157,16 @@ export function ProblemSolver() {
                   <Link
                     href={`/shop/${activeProblem.featuredProductSlug}/`}
                     className="button button-dark"
+                    onClick={() =>
+                      trackProductClick({
+                        product_name:
+                          activeProblem.featuredProductName ??
+                          `${activeProblem.shopCategory} Gear`,
+                        product_id: activeProblem.featuredProductSlug,
+                        category: activeProblem.shopCategory,
+                        destination: `/shop/${activeProblem.featuredProductSlug}/`,
+                      })
+                    }
                   >
                     <span>View Tested Hardware</span>
                     <ArrowRight size={15} aria-hidden="true" />

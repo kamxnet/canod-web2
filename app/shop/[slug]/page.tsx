@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { shopItems, type ShopItem } from "@/lib/shop-data";
 import { pageMetadata } from "@/lib/metadata";
+import { ProductClickLink } from "@/components/analytics-trackers";
 import "@/app/shop.css";
 
 export const dynamicParams = false;
@@ -346,9 +347,12 @@ export default async function ProductDetailPage({
 
             <div className="related-products-grid">
               {relatedProducts.map((relItem) => (
-                <Link
+                <ProductClickLink
                   key={relItem.slug}
-                  href={`/shop/${relItem.slug}/`}
+                  productName={relItem.name}
+                  productId={relItem.slug}
+                  category={relItem.category}
+                  destination={`/shop/${relItem.slug}/`}
                   className="related-product-card"
                 >
                   <div className="related-card-category-strip">
@@ -361,7 +365,7 @@ export default async function ProductDetailPage({
                     <span className="rel-action">View Specifications &amp; Compatibility</span>
                     <ArrowRight size={16} aria-hidden="true" />
                   </div>
-                </Link>
+                </ProductClickLink>
               ))}
             </div>
           </div>

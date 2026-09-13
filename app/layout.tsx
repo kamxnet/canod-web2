@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { EB_Garamond, Instrument_Sans, Manrope } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { GoogleAnalytics } from "@/components/google-analytics";
+import { GoogleAnalyticsTracker } from "@/components/google-analytics-tracker";
 import "./globals.css";
 import "./editorial.css";
 
@@ -62,5 +65,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ],
   };
 
-  return <html lang="en"><body className={`${manrope.variable} ${ebGaramond.variable} ${instrumentSans.variable} antialiased`}><a className="skip-link" href="#main-content">Skip to content</a><Header /><main id="main-content" tabIndex={-1}>{children}</main><Footer /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} /></body></html>;
+  return (
+    <html lang="en">
+      <body className={`${manrope.variable} ${ebGaramond.variable} ${instrumentSans.variable} antialiased`}>
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalyticsTracker />
+        </Suspense>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <Header />
+        <main id="main-content" tabIndex={-1}>{children}</main>
+        <Footer />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+      </body>
+    </html>
+  );
 }

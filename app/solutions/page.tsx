@@ -11,6 +11,7 @@ import {
 import { PageIntro } from "@/components/page-intro";
 import { solutionBlueprints } from "@/lib/solutions-data";
 import { pageMetadata } from "@/lib/metadata";
+import { TrackSolutionView } from "@/components/analytics-trackers";
 import "@/app/solutions.css";
 
 export const metadata = pageMetadata(
@@ -36,6 +37,7 @@ export default function SolutionsPage() {
 
   return (
     <div className="publication-page solutions-page">
+      <TrackSolutionView solutionName="All Setup Solutions" solutionId="solutions-hub" />
       <PageIntro
         label="CANOD / Setup Solutions"
         title="Tested setups. Zero guesswork."

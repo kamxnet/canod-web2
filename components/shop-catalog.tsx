@@ -19,6 +19,7 @@ import {
   shopCategoryDescriptions,
   type ShopCategory,
 } from "@/lib/shop-data";
+import { trackProductClick } from "@/lib/analytics";
 
 const consumerNeeds = [
   { id: "all", label: "Show all products", category: "All" as const, search: "" },
@@ -234,7 +235,18 @@ export function ShopCatalog() {
                   )}
                 </div>
                 <h2 className="shop-card-title">
-                  <Link href={`/shop/${item.slug}/`} className="shop-card-title-link">
+                  <Link
+                    href={`/shop/${item.slug}/`}
+                    className="shop-card-title-link"
+                    onClick={() =>
+                      trackProductClick({
+                        product_name: item.name,
+                        product_id: item.slug,
+                        category: item.category,
+                        destination: `/shop/${item.slug}/`,
+                      })
+                    }
+                  >
                     {item.name}
                   </Link>
                 </h2>
@@ -288,6 +300,14 @@ export function ShopCatalog() {
                 <Link
                   href={`/shop/${item.slug}/`}
                   className="shop-action-link view-details-link"
+                  onClick={() =>
+                    trackProductClick({
+                      product_name: item.name,
+                      product_id: item.slug,
+                      category: item.category,
+                      destination: `/shop/${item.slug}/`,
+                    })
+                  }
                 >
                   <span>View Product &amp; Compatibility</span>
                   <ArrowRight size={15} aria-hidden="true" />

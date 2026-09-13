@@ -38,7 +38,17 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       </nav></aside>
       <div className="article-body">
         {guide.scope && <p className="article-note">{guide.scope}</p>}
-        {guide.sections.map((section) => <section key={section.id} id={section.id}><h2>{section.title}</h2>{section.content}</section>)}
+        {guide.sections.map((section) => {
+          const isQuickAnswer = section.id === "answer" || section.title.toLowerCase().includes("30-second answer");
+          const isStepSolution = section.id === "solution" || section.title.toLowerCase().includes("step-by-step");
+          const className = isQuickAnswer ? "article-quick-answer-card" : isStepSolution ? "article-step-solution-card" : undefined;
+          return (
+            <section key={section.id} id={section.id} className={className}>
+              <h2>{section.title}</h2>
+              {section.content}
+            </section>
+          );
+        })}
         <section id="sources" className="article-sources">
           <h2>Sources & editorial note</h2>
           <div className="article-note"><p>{guide.methodology ?? <>This guide combines CANOD&apos;s practical buying considerations with official sources checked on {date}. It is research-based; CANOD has not hands-on tested products for this article. Manufacturer references support specific facts and do not imply a retail relationship or endorsement.</>}</p>{guide.methodology && <p>Sources checked on {reviewed}. Manufacturer references support specific facts, not a recommendation or commercial relationship.</p>}</div>

@@ -34,10 +34,10 @@ export default function Home() {
     <HomeJourney>
       <SignalPath />
       <HomeHero />
-      <HomeShopCategories />
       <HomeProblemSolver />
       <HomeDockTool />
       <HomeGuides />
+      <HomeShopCategories />
       <HomeSolutions />
       <HomeSelectedProducts />
       <HomeSafety />

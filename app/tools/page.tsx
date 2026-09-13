@@ -66,26 +66,29 @@ export default function ToolsPage() {
               </div>
               <div className="tool-featured-content">
                 <div className="tool-status-row">
-                  <span className="tool-active-badge">Active Tool</span>
-                  <span className="tool-category-badge">Connectivity &amp; Displays</span>
+                  <span className="tool-active-badge">Free Instant Checker</span>
+                  <span className="tool-category-badge">Monitors &amp; Docks</span>
                 </div>
-                <h3>USB-C Dock &amp; Dual Monitor Compatibility Checker</h3>
+                <h3>Will two monitors work with my laptop?</h3>
+                <p className="eyebrow text-muted" style={{ marginBottom: "0.75rem", fontSize: "0.8rem" }}>
+                  USB-C Dock &amp; Dual Monitor Compatibility Checker
+                </p>
                 <p>
-                  Describe your device, operating system, host port, and monitor setup.
-                  Our rule engine evaluates 25,200 hardware combinations to generate an instant compatibility report of requirements, limitations, and questions to verify.
+                  Answer a few simple questions about your laptop model, operating system, and screens.
+                  Our rule engine checks 25,200 hardware combinations in seconds to tell you whether two screens will work before you buy adapters.
                 </p>
                 <div className="tool-inputs-summary">
-                  <strong>Evaluates:</strong> Apple Silicon vs Intel/AMD GPU limits, DisplayPort 1.2 vs 1.4 bandwidth, macOS MST vs Thunderbolt dual display requirements, and 45W to 100W+ charging headroom.
+                  <strong>What it checks:</strong> Mac vs. Windows dual screen limits, DisplayPort speeds, whether your laptop will charge at full speed, and required cable types.
                 </div>
                 <div className="actions">
                   <Link className="button button-dark" href={dockToolPath}>
-                    Launch Dock Compatibility Checker <ArrowRight size={18} aria-hidden="true" />
+                    Run 30-Second Compatibility Check <ArrowRight size={18} aria-hidden="true" />
                   </Link>
                   <Link className="text-link" href="/guides/seven-things-usb-c-dock/">
-                    Read Companion Research Guide <ArrowRight size={16} aria-hidden="true" />
+                    Read Companion Guide <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="tool-featured-note">Runs locally in your browser. Downloadable .txt verification report included.</p>
+                <p className="tool-featured-note">Runs locally in your browser. Includes a printable pre-purchase checklist.</p>
               </div>
             </div>
 
@@ -97,26 +100,29 @@ export default function ToolsPage() {
               </div>
               <div className="tool-featured-content">
                 <div className="tool-status-row">
-                  <span className="tool-active-badge">Active Tool</span>
-                  <span className="tool-category-badge">Canadian Standards &amp; Safety</span>
+                  <span className="tool-active-badge">Free Safety Audit</span>
+                  <span className="tool-category-badge">Canadian Safety &amp; Electrical</span>
                 </div>
-                <h3>Canadian Electrical Product Safety Checklist</h3>
+                <h3>Is my charger or power bar safe to plug in?</h3>
+                <p className="eyebrow text-muted" style={{ marginBottom: "0.75rem", fontSize: "0.8rem" }}>
+                  Canadian Electrical Product Safety Checklist
+                </p>
                 <p>
-                  Record what you know about a charger, power bar, cord, or battery before purchasing.
-                  Evaluates 183,708 product inspection permutations to separate confirmed SCC-accredited marks (cUL, CSA, cETL), missing specifications, and potential fire red flags.
+                  Record what you see on the back of any charger, power bar, or battery before plugging it in.
+                  Separates legitimate Canadian electrical marks (cUL, CSA, cETL) from uncertified imports and dangerous fire hazards.
                 </p>
                 <div className="tool-inputs-summary">
-                  <strong>Evaluates:</strong> SCC accredited test laboratory markings, genuine manufacturer model transparency, Canadian 120V mains ratings, and provincial electrical code requirements.
+                  <strong>What it checks:</strong> Recognized Canadian safety approval marks, 3-prong grounding, proper cord thickness, and provincial electrical regulations.
                 </div>
                 <div className="actions">
                   <Link className="button button-dark" href={safetyToolPath}>
-                    Create Electrical Safety Checklist <ArrowRight size={18} aria-hidden="true" />
+                    Check Product Safety Now <ArrowRight size={18} aria-hidden="true" />
                   </Link>
                   <Link className="text-link" href="/guides/charger-safety-canada/">
-                    Read Canadian Charger Safety Guide <ArrowRight size={16} aria-hidden="true" />
+                    Read Canadian Safety Guide <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </div>
-                <p className="tool-featured-note">Educational only. Does not inspect hardware, authenticate marks, or query recall databases.</p>
+                <p className="tool-featured-note">Educational only. Does not physically test hardware or authenticate marks.</p>
               </div>
             </div>
           </div>
@@ -128,12 +134,11 @@ export default function ToolsPage() {
         <div className="site-container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow text-maple">CANOD Engineering Architecture</p>
-              <h2>Hardware Calculators &amp; Checkers</h2>
+              <p className="eyebrow text-maple">Problem-Solving Tools</p>
+              <h2>Simple questions.<br />Accurate answers.</h2>
             </div>
             <p>
-              Purpose-built tools designed to solve specific Canadian technology problems.
-              We never fake calculator results — tools in development are marked clearly as &quot;Coming Soon&quot;.
+              We build free tools to answer normal everyday tech questions without confusing jargon or marketing bias.
             </p>
           </div>
 
@@ -157,7 +162,10 @@ export default function ToolsPage() {
                     <span className="suite-category-label">{tool.category}</span>
                   </div>
 
-                  <h3 className="suite-tool-name">{tool.name}</h3>
+                  <h3 className="suite-tool-name">{tool.question}</h3>
+                  <p className="eyebrow text-muted" style={{ fontSize: "0.75rem", marginBottom: "0.6rem" }}>
+                    {tool.name}
+                  </p>
                   <p className="suite-tool-tagline">{tool.tagline}</p>
                   <p className="suite-tool-desc">{tool.description}</p>
 

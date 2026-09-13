@@ -8,10 +8,31 @@ import {
   BookOpen,
   Wrench,
   ShoppingBag,
-  HelpCircle,
+  Zap,
+  Wifi,
+  BatteryCharging,
+  Monitor,
+  Cable,
+  HardDrive,
+  Plane,
+  Laptop,
+  ShieldCheck,
   CheckCircle2,
+  ChevronDown,
+  Sparkles,
 } from "lucide-react";
 import { customerProblems } from "@/lib/problems-data";
+
+const iconMap = {
+  Wifi: Wifi,
+  BatteryCharging: BatteryCharging,
+  Monitor: Monitor,
+  Cable: Cable,
+  HardDrive: HardDrive,
+  Plane: Plane,
+  Laptop: Laptop,
+  ShieldCheck: ShieldCheck,
+};
 
 export function ProblemSolver() {
   const [selectedId, setSelectedId] = useState<string>(customerProblems[0].id);
@@ -20,138 +41,182 @@ export function ProblemSolver() {
     customerProblems.find((p) => p.id === selectedId) ?? customerProblems[0];
 
   return (
-    <div className="problem-solver-widget">
-      {/* Problem Selection Pills */}
+    <div className="problem-solver-experience" id="how-we-help">
+      {/* 8 Large Friendly Problem Cards */}
       <div
-        className="problem-selector-tabs"
+        className="popular-problems-grid"
         role="tablist"
-        aria-label="Common tech problems"
+        aria-label="Common technology problems"
       >
         {customerProblems.map((problem) => {
+          const Icon = iconMap[problem.iconName] || Zap;
           const isSelected = problem.id === activeProblem.id;
+
           return (
             <button
               key={problem.id}
               type="button"
               role="tab"
               aria-selected={isSelected}
-              id={`problem-tab-${problem.id}`}
-              aria-controls={`problem-panel-${problem.id}`}
-              className={`problem-tab-btn ${isSelected ? "is-active" : ""}`}
+              id={`problem-card-${problem.id}`}
+              aria-controls={`problem-solution-${problem.id}`}
+              className={`problem-card-btn ${isSelected ? "is-selected" : ""}`}
               onClick={() => setSelectedId(problem.id)}
             >
-              <span className="problem-tab-tag">{problem.tag}</span>
-              <span className="problem-tab-title">{problem.title}</span>
+              <div className="problem-card-icon-wrapper">
+                <Icon size={28} strokeWidth={1.5} className="problem-icon" aria-hidden="true" />
+              </div>
+              <div className="problem-card-content">
+                <span className="problem-card-tag">{problem.tag}</span>
+                <h3 className="problem-card-title">{problem.title}</h3>
+              </div>
+              <span className="problem-card-action">
+                {isSelected ? "Showing solution" : "Get answer"}
+                <ArrowRight size={14} aria-hidden="true" />
+              </span>
             </button>
           );
         })}
       </div>
 
-      {/* Active Problem Resolution Card */}
+      {/* Progressive Disclosure Resolution Panel */}
       <div
-        className="problem-resolution-panel"
+        className="problem-solution-card"
         role="tabpanel"
-        id={`problem-panel-${activeProblem.id}`}
-        aria-labelledby={`problem-tab-${activeProblem.id}`}
+        id={`problem-solution-${activeProblem.id}`}
+        aria-labelledby={`problem-card-${activeProblem.id}`}
       >
-        <div className="resolution-header">
-          <div className="resolution-title-row">
-            <span className="resolution-tag">{activeProblem.tag}</span>
-            <span className="resolution-step-badge">CANOD Diagnosis &amp; Solution</span>
+        {/* Header with Problem Title */}
+        <div className="solution-hero-header">
+          <div className="solution-meta-badge">
+            <span className="solution-tag">{activeProblem.tag}</span>
+            <span className="solution-indicator">Step-by-step help</span>
           </div>
-          <h3 className="resolution-heading">{activeProblem.title}</h3>
+          <h3 className="solution-main-heading">{activeProblem.title}</h3>
         </div>
 
-        <div className="resolution-body">
-          {/* Explanation & Practical Fix */}
-          <div className="resolution-narrative">
-            <div className="narrative-block">
-              <h4 className="block-label">
-                <HelpCircle size={16} className="text-maple" aria-hidden="true" />
-                <span>Why this happens:</span>
-              </h4>
-              <p className="narrative-text">{activeProblem.shortExplanation}</p>
-            </div>
-
-            <div className="narrative-block fix-block">
-              <h4 className="block-label">
-                <CheckCircle2 size={16} className="text-maple" aria-hidden="true" />
-                <span>Recommended practical fix:</span>
-              </h4>
-              <p className="narrative-text">{activeProblem.practicalFix}</p>
-            </div>
+        {/* Level 1: 30-Second Answer */}
+        <div className="level-box quick-answer-box">
+          <div className="level-badge">
+            <Sparkles size={16} className="text-maple" aria-hidden="true" />
+            <span>The 30-Second Answer</span>
           </div>
+          <p className="quick-answer-text">{activeProblem.simpleAnswer}</p>
+        </div>
 
-          {/* Three-Way Integration: Guide + Tool + Product */}
-          <div className="resolution-connections">
-            {/* 1. Research Guide */}
-            <div className="connection-card guide-connection">
-              <div className="connection-header">
-                <BookOpen size={16} className="text-maple" aria-hidden="true" />
-                <span className="eyebrow text-muted">1. Understand the Engineering</span>
+        {/* Level 2: Try This First (Actionable Steps) */}
+        <div className="level-box try-first-box">
+          <div className="level-badge">
+            <CheckCircle2 size={16} className="text-maple" aria-hidden="true" />
+            <span>Try This First</span>
+          </div>
+          <ol className="try-first-list">
+            {activeProblem.tryThisFirst.map((step, index) => (
+              <li key={index} className="try-first-item">
+                <span className="step-number" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <span className="step-text">{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Level 3: Guided Troubleshooting & Hardware */}
+        <div className="level-box next-steps-box">
+          <div className="next-steps-grid">
+            {/* Interactive Tool Check */}
+            <div className="next-step-card tool-card">
+              <div className="next-step-header">
+                <Wrench size={18} className="text-maple" aria-hidden="true" />
+                <span className="next-step-label">Interactive Checker</span>
               </div>
-              <h5 className="connection-title">{activeProblem.guideTitle}</h5>
-              <p className="connection-desc">
-                Review our comprehensive technical guide detailing pinouts, bandwidth, and standards.
+              <h4 className="next-step-title">{activeProblem.toolTitle}</h4>
+              <p className="next-step-desc">
+                Answer a few simple questions to verify your devices before spending money on new parts.
               </p>
-              <Link
-                href={`/guides/${activeProblem.guideSlug}/`}
-                className="connection-cta"
-              >
-                <span>Read Research Guide</span>
-                <ArrowRight size={14} aria-hidden="true" />
+              <Link href={activeProblem.toolPath} className="next-step-btn button button-light">
+                <span>Check My Setup</span>
+                <ArrowUpRight size={15} aria-hidden="true" />
               </Link>
             </div>
 
-            {/* 2. Interactive Tool */}
-            <div className="connection-card tool-connection">
-              <div className="connection-header">
-                <Wrench size={16} className="text-maple" aria-hidden="true" />
-                <span className="eyebrow text-muted">2. Verify Your Setup</span>
+            {/* Recommended Hardware */}
+            <div className="next-step-card gear-card">
+              <div className="next-step-header">
+                <ShoppingBag size={18} className="text-maple" aria-hidden="true" />
+                <span className="next-step-label">What You May Need</span>
               </div>
-              <h5 className="connection-title">{activeProblem.toolTitle}</h5>
-              <p className="connection-desc">
-                Run our interactive verification tool before buying cables, adapters, or docks.
-              </p>
-              <Link href={activeProblem.toolPath} className="connection-cta">
-                <span>Run Interactive Tool</span>
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </Link>
-            </div>
-
-            {/* 3. Curated Product & Shop Category */}
-            <div className="connection-card product-connection">
-              <div className="connection-header">
-                <ShoppingBag size={16} className="text-maple" aria-hidden="true" />
-                <span className="eyebrow text-muted">3. Vetted Hardware</span>
-              </div>
-              <h5 className="connection-title">
-                {activeProblem.featuredProductName ?? `${activeProblem.shopCategory} Category`}
-              </h5>
-              <p className="connection-desc">
-                Browse tested products certified for Canadian electrical standards.
-              </p>
-              <div className="connection-links-cluster">
+              <h4 className="next-step-title">
+                {activeProblem.featuredProductName ?? `${activeProblem.shopCategory} Gear`}
+              </h4>
+              <p className="next-step-desc">{activeProblem.productHelpText}</p>
+              <div className="gear-links">
                 {activeProblem.featuredProductSlug && (
                   <Link
                     href={`/shop/${activeProblem.featuredProductSlug}/`}
-                    className="connection-cta product-primary-cta"
+                    className="button button-dark"
                   >
-                    <span>View Product Details</span>
-                    <ArrowRight size={14} aria-hidden="true" />
+                    <span>View Tested Hardware</span>
+                    <ArrowRight size={15} aria-hidden="true" />
                   </Link>
                 )}
                 <Link
                   href={activeProblem.shopCategoryHref}
-                  className="connection-subcta"
+                  className="text-link"
                 >
                   <span>Browse all {activeProblem.shopCategory}</span>
                   <ArrowRight size={13} aria-hidden="true" />
                 </Link>
               </div>
             </div>
+
+            {/* In-Depth Guide */}
+            <div className="next-step-card guide-card">
+              <div className="next-step-header">
+                <BookOpen size={18} className="text-maple" aria-hidden="true" />
+                <span className="next-step-label">Free Plain-English Guide</span>
+              </div>
+              <h4 className="next-step-title">{activeProblem.guideTitle}</h4>
+              <p className="next-step-desc">
+                Step-by-step troubleshooting, common traps to avoid, and Canadian buying advice.
+              </p>
+              <Link
+                href={`/guides/${activeProblem.guideSlug}/`}
+                className="text-link read-guide-link"
+              >
+                <span>Read the simple guide</span>
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
+
+        {/* Level 4: Collapsible Deeper Technical Explanation */}
+        <details className="progressive-details">
+          <summary className="progressive-summary">
+            <span className="summary-title">
+              {activeProblem.technicalDetails.heading}
+            </span>
+            <span className="summary-hint">
+              <span>For enthusiasts &amp; engineers</span>
+              <ChevronDown size={16} className="chevron-icon" aria-hidden="true" />
+            </span>
+          </summary>
+          <div className="progressive-details-content">
+            <p className="tech-explanation-text">
+              {activeProblem.technicalDetails.explanation}
+            </p>
+            <div className="tech-standards-list">
+              <strong className="standards-label">Associated Engineering Standards:</strong>
+              <ul>
+                {activeProblem.technicalDetails.standards.map((std, i) => (
+                  <li key={i}>{std}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </details>
       </div>
     </div>
   );

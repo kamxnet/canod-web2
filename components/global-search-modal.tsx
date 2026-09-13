@@ -62,7 +62,7 @@ export function GlobalSearchModal({
     ? customerProblems.filter(
         (p) =>
           p.title.toLowerCase().includes(cleanQuery) ||
-          p.shortExplanation.toLowerCase().includes(cleanQuery) ||
+          p.simpleAnswer.toLowerCase().includes(cleanQuery) ||
           p.tag.toLowerCase().includes(cleanQuery),
       )
     : [];
@@ -80,6 +80,7 @@ export function GlobalSearchModal({
     ? canodToolsList.filter(
         (t) =>
           t.name.toLowerCase().includes(cleanQuery) ||
+          t.question.toLowerCase().includes(cleanQuery) ||
           t.description.toLowerCase().includes(cleanQuery) ||
           t.tagline.toLowerCase().includes(cleanQuery),
       )
@@ -98,6 +99,7 @@ export function GlobalSearchModal({
   const matchedSolutions = cleanQuery
     ? solutionBlueprints.filter(
         (s) =>
+          s.consumerTitle.toLowerCase().includes(cleanQuery) ||
           s.title.toLowerCase().includes(cleanQuery) ||
           s.problemSolved.toLowerCase().includes(cleanQuery) ||
           s.tagline.toLowerCase().includes(cleanQuery),
@@ -203,7 +205,7 @@ export function GlobalSearchModal({
                       <span className="result-badge problem-badge">{item.tag}</span>
                       <div className="result-content">
                         <h4>{item.title}</h4>
-                        <p>{item.shortExplanation}</p>
+                        <p>{item.simpleAnswer}</p>
                       </div>
                       <ArrowRight size={15} className="result-arrow" aria-hidden="true" />
                     </Link>

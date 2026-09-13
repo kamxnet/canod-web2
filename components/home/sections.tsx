@@ -8,6 +8,7 @@ import {
   Zap,
   HardDrive,
   Laptop,
+  Search,
 } from "lucide-react";
 import { KineticHero } from "@/components/kinetic-hero";
 import { DockChecker } from "@/components/dock-checker";
@@ -38,12 +39,12 @@ function ChapterLabel({
 
 export function HomeHero() {
   const chapters = [
-    ["Categories", "your-start"],
-    ["Solve a Problem", "solve-a-problem"],
-    ["CANOD Tools", "starting-point"],
-    ["Field Guide", "buying-guides"],
-    ["Blueprints", "home-solutions"],
-    ["Selected Gear", "selected-products"],
+    ["Common Problems", "how-we-help"],
+    ["Check Compatibility", "starting-point"],
+    ["Simple Guides", "buying-guides"],
+    ["Shop by Need", "your-start"],
+    ["Clean Setups", "home-solutions"],
+    ["Canadian Safety", "buy-safe-canada"],
   ];
 
   return (
@@ -77,27 +78,43 @@ export function HomeHero() {
       <KineticHero />
       <div className="site-container hero-content">
         <div className="hero-intro">
-          <p className="eyebrow">CANOD / Practical technology for Canada</p>
+          <p className="eyebrow">CANOD • Tech help for everyday life</p>
           <h1 id="home-heading">
-            Technology should <br />
-            work together.
+            Tech problems, <br />
+            made simple.
           </h1>
           <p className="hero-description">
-            Clear Canadian guidance, curated hardware, and practical engineering calculators for choosing compatible technology for work, storage, and life on the move.
+            Technology should work together. Simple answers for slow Wi-Fi, confusing chargers, cables, monitors, and backups.
           </p>
           <div className="actions">
-            <Link className="button button-dark" href="/shop/">
-              Explore Curated Shop <ArrowRight size={18} aria-hidden="true" />
-            </Link>
+            <a className="button button-dark" href="#how-we-help">
+              Find a solution <ArrowDown size={18} aria-hidden="true" />
+            </a>
             <Link className="button button-light" href="/learn/">
-              Learn &amp; Guides <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-            <Link className="text-link" href="#solve-a-problem">
-              Solve a problem <ArrowDown size={16} aria-hidden="true" />
+              Browse guides <ArrowRight size={18} aria-hidden="true" />
             </Link>
             <Link className="text-link" href="#starting-point">
               Try a CANOD tool <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
+          </div>
+
+          {/* Prominent Question / Search Bar */}
+          <div className="hero-search-container">
+            <div className="hero-search-input-wrapper">
+              <Search size={18} className="hero-search-icon" aria-hidden="true" />
+              <input
+                type="text"
+                placeholder="What do you need help with?"
+                aria-label="What do you need help with?"
+                className="hero-search-input"
+              />
+            </div>
+            <div className="hero-search-suggestions">
+              <span className="suggestions-label">Try asking:</span>
+              <a href="#how-we-help" className="suggestion-chip">Why is my Wi-Fi slow?</a>
+              <a href="#how-we-help" className="suggestion-chip">Which charger do I need?</a>
+              <a href="#how-we-help" className="suggestion-chip">How do I connect two monitors?</a>
+            </div>
           </div>
         </div>
       </div>
@@ -117,6 +134,14 @@ export function HomeHero() {
 }
 
 export function HomeShopCategories() {
+  const needs = [
+    { label: "I need to charge my laptop", href: "/shop/?category=Power" },
+    { label: "I need to connect a monitor", href: "/shop/?category=Connect" },
+    { label: "I need better Wi-Fi", href: "/shop/?category=Connect" },
+    { label: "I need more backup storage", href: "/shop/?category=Store+%26+Protect" },
+    { label: "I need travel tech", href: "/shop/?category=Store+%26+Protect" },
+  ];
+
   const categories = [
     {
       num: "01",
@@ -162,19 +187,44 @@ export function HomeShopCategories() {
       <div className="site-container">
         <div className="home-section-heading">
           <div>
-            <ChapterLabel number="01">Shop by Category</ChapterLabel>
+            <ChapterLabel number="04">Shop by what you need</ChapterLabel>
             <h2 id="categories-heading">
-              Four focused categories.<br />Zero generic clutter.
+              Practical tech.<br />Verified for Canada.
             </h2>
           </div>
           <div className="tool-heading-copy">
             <p>
-              We organize hardware by function and electrical compatibility. Every item is verified for Canadian voltage, accredited safety marks, and everyday durability.
+              Browse hardware by the problem you want to solve. Every item is verified for Canadian wall voltage, accredited safety marks, and everyday durability.
             </p>
             <Link href="/shop/" className="text-link">
               View all curated hardware <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
+        </div>
+
+        {/* Consumer Need Pills */}
+        <div style={{ marginBottom: "2rem", display: "flex", flexWrap: "wrap", gap: "0.6rem", alignItems: "center" }}>
+          <span style={{ fontSize: "0.8125rem", color: "var(--muted)", fontWeight: "600" }}>
+            Common needs:
+          </span>
+          {needs.map((need) => (
+            <Link
+              key={need.label}
+              href={need.href}
+              style={{
+                fontSize: "0.85rem",
+                padding: "0.4rem 0.85rem",
+                borderRadius: "999px",
+                border: "1px solid var(--line)",
+                background: "var(--surface)",
+                color: "var(--heading)",
+                textDecoration: "none",
+                transition: "all 0.2s ease",
+              }}
+            >
+              {need.label}
+            </Link>
+          ))}
         </div>
 
         <div className="category-overview" style={{ borderBottom: "none", marginBottom: "0" }}>
@@ -233,14 +283,14 @@ export function HomeProblemSolver() {
       <div className="site-container">
         <div className="home-section-heading">
           <div>
-            <ChapterLabel number="02">Solve a Problem</ChapterLabel>
+            <ChapterLabel number="01">How can we help?</ChapterLabel>
             <h2 id="problem-solver-heading">
-              Start with a problem.<br />Not a product catalog.
+              Got a tech problem?<br />Start here.
             </h2>
           </div>
           <div className="tool-heading-copy">
             <p>
-              Don&apos;t guess which adapter or spec you need. Select your everyday technology hurdle below to connect root-cause explanations with interactive tools and tested products.
+              Don&apos;t waste hours guessing which adapter, cord, or setting you need. Choose your problem below to get a 30-second answer, easy steps to try first, and tested hardware recommendations.
             </p>
           </div>
         </div>
@@ -262,22 +312,22 @@ export function HomeDockTool() {
       <div className="site-container">
         <div className="home-section-heading">
           <div>
-            <ChapterLabel number="03">A little clarity before you buy</ChapterLabel>
+            <ChapterLabel number="02">Free compatibility checker</ChapterLabel>
             <h2 id="dock-heading">
-              USB-C Dock <br />
-              Compatibility Checker
+              Will two monitors work <br />
+              with my laptop?
             </h2>
           </div>
           <div className="tool-heading-copy">
             <p>
-              Turn your device, display, and charging requirements into the questions worth asking before buying a dock.
+              USB-C Dock &amp; Dual Monitor Compatibility Checker. Answer 3 quick questions about your laptop and screens to check compatibility in 30 seconds before spending money on hubs.
             </p>
             <div className="actions" style={{ marginTop: "0.5rem" }}>
               <Link href={dockToolPath} className="button button-dark">
-                Standalone Dock Checker <ArrowUpRight size={16} aria-hidden="true" />
+                Run 30-Second Checker <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
               <Link href="/tools/" className="text-link">
-                Explore Full CANOD Tools Suite <ArrowRight size={16} aria-hidden="true" />
+                Explore all free CANOD tools <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
           </div>
@@ -299,13 +349,13 @@ export function HomeGuides() {
     >
       <div className="site-container featured-layout">
         <div className="featured-intro">
-          <ChapterLabel number="04">The CANOD field guide</ChapterLabel>
+          <ChapterLabel number="03">Popular simple guides</ChapterLabel>
           <h2 id="guides-heading">
             One cable.<br />
             Seven things to check.
           </h2>
           <p>
-            A clearer choice starts with the engineering details that product listings leave out.
+            7 Things to Check Before Connecting Dual Monitors. Plain-English guidance on ports, charging, and display adapters that product listings leave out.
           </p>
         </div>
         <article className="featured-story">
@@ -329,12 +379,12 @@ export function HomeGuides() {
             aria-label="Topics in this guide"
           >
             {[
-              ["Compatibility", "computer-and-port"],
-              ["Displays", "displays"],
-              ["Power delivery", "power-delivery"],
-              ["Ports & cables", "ports-and-cables"],
-              ["Operating systems", "operating-system"],
-              ["DisplayLink", "displaylink"],
+              ["Computer & ports", "computer-and-port"],
+              ["Connecting screens", "displays"],
+              ["Laptop charging", "power-delivery"],
+              ["Cables & adapters", "ports-and-cables"],
+              ["Windows vs. Mac", "operating-system"],
+              ["Display adapters", "displaylink"],
               ["Buying in Canada", "canadian-purchase"],
             ].map(([label, anchor], index) => (
               <Link key={anchor} href={dockGuidePath + "#" + anchor}>
@@ -362,7 +412,7 @@ export function HomeSolutions() {
       <div className="site-container">
         <div className="home-section-heading">
           <div>
-            <ChapterLabel number="05">Tested setup blueprints</ChapterLabel>
+            <ChapterLabel number="05">Clean setup blueprints</ChapterLabel>
             <h2 id="solutions-heading">
               Complete setups.<br />
               Planned to work together.
@@ -370,7 +420,7 @@ export function HomeSolutions() {
           </div>
           <div className="tool-heading-copy">
             <p>
-              We pair verified hardware with verification tools and deep-dive guides to eliminate return friction.
+              Turnkey desk and travel setups that take the guesswork out of cables, power, and monitors.
             </p>
             <Link href="/solutions/" className="text-link">
               Explore all blueprints <ArrowRight size={16} aria-hidden="true" />
@@ -387,7 +437,7 @@ export function HomeSolutions() {
                 </span>
               </div>
               <h3>
-                <Link href={`/solutions/#${item.id}`}>{item.title}</Link>
+                <Link href={`/solutions/#${item.id}`}>{item.consumerTitle}</Link>
               </h3>
               <p className="home-solution-tagline">{item.tagline}</p>
               <div className="home-solution-links">
@@ -395,7 +445,7 @@ export function HomeSolutions() {
                   href={`/solutions/#${item.id}`}
                   className="button button-light"
                 >
-                  View Blueprint <ArrowRight size={15} aria-hidden="true" />
+                  View Setup Details <ArrowRight size={15} aria-hidden="true" />
                 </Link>
               </div>
             </article>

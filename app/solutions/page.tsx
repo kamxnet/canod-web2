@@ -70,7 +70,10 @@ export default function SolutionsPage() {
 
               <div className="solution-card-main">
                 <div className="solution-heading-block">
-                  <h2>{blueprint.title}</h2>
+                  <h2>{blueprint.consumerTitle}</h2>
+                  <p className="eyebrow text-muted" style={{ fontSize: "0.85rem", marginBottom: "0.5rem" }}>
+                    Blueprint: {blueprint.title}
+                  </p>
                   <p className="solution-tagline">{blueprint.tagline}</p>
                 </div>
 

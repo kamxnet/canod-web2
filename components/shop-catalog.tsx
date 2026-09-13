@@ -20,14 +20,34 @@ import {
   type ShopCategory,
 } from "@/lib/shop-data";
 
+const consumerNeeds = [
+  { id: "all", label: "Show all products", category: "All" as const, search: "" },
+  { id: "charge-laptop", label: "I need to charge my laptop", category: "Power" as const, search: "laptop" },
+  { id: "connect-monitor", label: "I need to connect a monitor", category: "Connect" as const, search: "display" },
+  { id: "better-wifi", label: "I need better Wi-Fi", category: "Connect" as const, search: "cable" },
+  { id: "more-storage", label: "I need more storage & backups", category: "Store & Protect" as const, search: "ssd" },
+  { id: "organize-cables", label: "I need to organize my cables", category: "Store & Protect" as const, search: "organizer" },
+  { id: "travel-tech", label: "I need travel tech", category: "Store & Protect" as const, search: "travel" },
+];
+
 export function ShopCatalog() {
+  const [activeNeed, setActiveNeed] = useState("all");
   const [activeCategory, setActiveCategory] = useState<ShopCategory>("All");
   const [activeSubcategory, setActiveSubcategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const handleNeedChange = (need: typeof consumerNeeds[number]) => {
+    setActiveNeed(need.id);
+    setActiveCategory(need.category);
+    setActiveSubcategory("All");
+    setSearchQuery(need.search);
+  };
+
   const handleCategoryChange = (category: ShopCategory) => {
     setActiveCategory(category);
     setActiveSubcategory("All");
+    setActiveNeed("all");
+    setSearchQuery("");
   };
 
   const availableSubcategories =
@@ -44,6 +64,7 @@ export function ShopCatalog() {
       searchQuery.trim() === "" ||
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.bestFor.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.subcategory.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.specifications.some(
         (s) =>
@@ -55,7 +76,39 @@ export function ShopCatalog() {
 
   return (
     <div className="shop-catalog">
-      {/* Primary Category Switcher */}
+      {/* 1. Need-Driven Browsing Bar */}
+      <div className="shop-needs-bar" style={{ marginBottom: "1.5rem" }}>
+        <p className="eyebrow text-muted" style={{ marginBottom: "0.65rem", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          Browse by what you need:
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          {consumerNeeds.map((need) => {
+            const isSelected = activeNeed === need.id;
+            return (
+              <button
+                key={need.id}
+                type="button"
+                onClick={() => handleNeedChange(need)}
+                style={{
+                  padding: "0.45rem 0.9rem",
+                  fontSize: "0.85rem",
+                  borderRadius: "999px",
+                  border: isSelected ? "1px solid var(--maple)" : "1px solid var(--line)",
+                  background: isSelected ? "var(--maple)" : "var(--surface)",
+                  color: isSelected ? "var(--on-accent)" : "var(--heading)",
+                  fontWeight: isSelected ? "600" : "400",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                {need.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 2. Secondary Category Switcher */}
       <div className="shop-filter-bar">
         <div
           className="shop-categories"
@@ -81,10 +134,13 @@ export function ShopCatalog() {
         <div className="shop-search-wrapper">
           <input
             type="search"
-            aria-label="Filter products by name or spec"
-            placeholder="Search ports, wattage, standards..."
+            aria-label="Filter products by need or device"
+            placeholder="Search by device, need, or problem..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setActiveNeed("all");
+            }}
             className="shop-search-input"
           />
         </div>
@@ -186,6 +242,19 @@ export function ShopCatalog() {
               </div>
 
               <div className="shop-card-body">
+                <div style={{
+                  padding: "0.6rem 0.85rem",
+                  background: "var(--surface-hover)",
+                  borderRadius: "6px",
+                  border: "1px solid var(--line)",
+                  marginBottom: "1rem",
+                  fontSize: "0.85rem",
+                  color: "var(--heading)",
+                  lineHeight: 1.45
+                }}>
+                  <strong style={{ color: "var(--maple)" }}>What this solves:</strong> {item.bestFor}
+                </div>
+
                 <p className="shop-card-desc">{item.whyCanodRecommends}</p>
 
                 <div className="shop-card-specs">
@@ -220,7 +289,7 @@ export function ShopCatalog() {
                   href={`/shop/${item.slug}/`}
                   className="shop-action-link view-details-link"
                 >
-                  <span>View Specifications &amp; Compatibility</span>
+                  <span>View Product &amp; Compatibility</span>
                   <ArrowRight size={15} aria-hidden="true" />
                 </Link>
 

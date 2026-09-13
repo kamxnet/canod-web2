@@ -186,3 +186,54 @@
   .home-story .brief-layout { gap: 1rem; }
   .home-story .business-preview { margin-top: 2rem; }
 }
+
+/* ==================================================
+   Consumer Simplification: Article Quick Answers First
+   ================================================== */
+
+.publication-page .article-quick-answer-card {
+  background: rgba(204, 216, 200, 0.1);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--maple);
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin-block: 2rem;
+}
+
+.publication-page .article-quick-answer-card h2 {
+  font-size: 1.35rem;
+  color: var(--maple);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.publication-page .article-quick-answer-card p {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--heading);
+  margin: 0;
+}
+
+.publication-page .article-step-solution-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.75rem;
+  margin-block: 2rem;
+}
+
+.publication-page .article-step-solution-card ol {
+  padding-left: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.publication-page .article-step-solution-card li {
+  line-height: 1.6;
+}
+

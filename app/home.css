@@ -168,6 +168,421 @@
 .home-story .finale-signal circle { fill: #b94440; stroke: none; }
 main:has(.home-story) + .site-footer { background: #2e2e2e; border-top-color: #536157; }
 
+/* ==================================================
+   Consumer Simplification: Hero Search & Problem Solver
+   ================================================== */
+
+.home-story .hero-search-container {
+  margin-top: 2rem;
+  max-width: 520px;
+}
+
+.home-story .hero-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(204, 216, 200, 0.35);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  backdrop-filter: blur(8px);
+  transition: border-color var(--home-detail-duration) var(--home-ease), background var(--home-detail-duration) var(--home-ease);
+}
+
+.home-story .hero-search-input-wrapper:focus-within {
+  border-color: var(--maple);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(204, 216, 200, 0.2);
+}
+
+.home-story .hero-search-icon {
+  color: var(--maple);
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.home-story .hero-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-size: 1rem;
+  outline: none;
+}
+
+.home-story .hero-search-input::placeholder {
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+.home-story .hero-search-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.home-story .suggestions-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.home-story .suggestion-chip {
+  font-size: 0.78rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(204, 216, 200, 0.1);
+  border: 1px solid rgba(204, 216, 200, 0.2);
+  color: var(--heading);
+  text-decoration: none;
+  transition: all var(--home-detail-duration) var(--home-ease);
+}
+
+.home-story .suggestion-chip:hover {
+  background: rgba(204, 216, 200, 0.25);
+  border-color: var(--maple);
+  color: var(--maple-hover);
+  transform: translateY(-1px);
+}
+
+/* 8 Popular Problems Grid */
+.home-story .popular-problems-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.home-story .problem-card-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.5rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--home-detail-duration) var(--home-ease);
+}
+
+.home-story .problem-card-btn:hover {
+  border-color: var(--maple);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.home-story .problem-card-btn.is-selected {
+  border-color: var(--maple);
+  background: var(--surface-hover);
+  box-shadow: 0 0 0 2px var(--maple);
+}
+
+.home-story .problem-card-icon-wrapper {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(204, 216, 200, 0.12);
+  margin-bottom: 1rem;
+  color: var(--maple);
+  border: 1px solid rgba(204, 216, 200, 0.18);
+}
+
+.home-story .problem-card-btn.is-selected .problem-card-icon-wrapper {
+  background: var(--maple);
+  color: var(--on-accent);
+}
+
+.home-story .problem-card-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.home-story .problem-card-title {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--heading);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.home-story .problem-card-action {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: var(--maple);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+}
+
+/* Progressive Disclosure Card */
+.home-story .problem-solution-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 2.5rem;
+  background: var(--surface);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.home-story .solution-hero-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.25rem;
+}
+
+.home-story .solution-meta-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-story .solution-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.home-story .solution-indicator {
+  font-size: 0.72rem;
+  background: rgba(204, 216, 200, 0.15);
+  color: var(--maple);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+.home-story .solution-main-heading {
+  font-size: 1.85rem;
+  line-height: 1.25;
+  color: var(--heading);
+}
+
+.home-story .level-box {
+  margin-bottom: 2rem;
+}
+
+.home-story .level-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--maple);
+  margin-bottom: 0.85rem;
+}
+
+.home-story .quick-answer-box {
+  background: rgba(204, 216, 200, 0.08);
+  border-left: 4px solid var(--maple);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+}
+
+.home-story .quick-answer-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--heading);
+  margin: 0;
+}
+
+/* Try This First Checklist */
+.home-story .try-first-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.home-story .try-first-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.home-story .step-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--maple);
+  color: var(--on-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.home-story .step-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* Next Steps 3-Card Grid */
+.home-story .next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.home-story .next-step-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+
+.home-story .next-step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.home-story .next-step-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.home-story .next-step-title {
+  font-size: 1.1rem;
+  line-height: 1.35;
+  color: var(--heading);
+  margin-bottom: 0.65rem;
+  font-weight: 600;
+}
+
+.home-story .next-step-desc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.home-story .next-step-card .button {
+  margin-top: auto;
+  min-height: 42px;
+  font-size: 0.875rem;
+}
+
+.home-story .gear-links {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.home-story .gear-links .button {
+  min-height: 42px;
+  font-size: 0.875rem;
+}
+
+.home-story .read-guide-link {
+  margin-top: auto;
+  font-size: 0.875rem;
+}
+
+/* Collapsible Progressive Disclosure Details */
+.home-story .progressive-details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 0, 0, 0.05);
+  margin-top: 1.5rem;
+}
+
+.home-story .progressive-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.home-story .progressive-summary::-webkit-details-marker {
+  display: none;
+}
+
+.home-story .summary-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.home-story .summary-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.home-story .chevron-icon {
+  transition: transform var(--home-detail-duration) var(--home-ease);
+}
+
+.home-story .progressive-details[open] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.home-story .progressive-details-content {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.home-story .tech-explanation-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.home-story .tech-standards-list strong {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.home-story .tech-standards-list ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .home-story[data-document-hidden="true"] *,
 .home-story[data-document-hidden="true"] *::before,
 .home-story[data-document-hidden="true"] *::after { animation-play-state: paused !important; }
@@ -213,6 +628,9 @@ main:has(.home-story) + .site-footer { background: #2e2e2e; border-top-color: #5
   .home-story .intent-option > svg:not(.intent-check) { display: none; }
   .home-story .intent-option { grid-template-columns: 16px minmax(0, 1fr) 18px; }
   .home-story .intent-results { padding-inline: .75rem; min-height: 190px; }
+  .home-story .popular-problems-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .home-story .next-steps-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .home-story .problem-solution-card { padding: 1.75rem 1.5rem; }
   .home-story .home-section-heading { grid-template-columns: 1fr; gap: 1.5rem; }
   .home-story .home-section-heading > p { max-width: 650px; }
   .home-story .home-interest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -271,6 +689,12 @@ main:has(.home-story) + .site-footer { background: #2e2e2e; border-top-color: #5
   .home-story .intent-circuit { display: none; }
   .home-story .intent-option { min-height: 59px; font-size: .875rem; }
   .home-story .intent-results { min-height: 195px; }
+  .home-story .popular-problems-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .home-story .problem-card-btn { padding: 1.25rem 1rem; }
+  .home-story .problem-solution-card { padding: 1.5rem 1rem; border-radius: 8px; }
+  .home-story .solution-main-heading { font-size: 1.5rem; }
+  .home-story .quick-answer-box { padding: 1.25rem 1.25rem; }
+  .home-story .quick-answer-text { font-size: 1.05rem; }
   .home-story .home-section-heading { margin-bottom: 2rem; }
   .home-story .home-interest-grid { display: block; }
   .home-story .home-module { display: grid; grid-template-columns: minmax(0, 1fr) 100px; grid-template-rows: auto auto auto; gap: .75rem 1rem; min-height: 230px; padding: 1.4rem 1rem; border-left: 0; }
